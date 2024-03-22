@@ -7,7 +7,7 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: "npm"
+        cache: "pnpm"
 
     - name: Install pnpm
       run: npm install -g pnpm

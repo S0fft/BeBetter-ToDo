@@ -20,7 +20,7 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: Lint Application
-        run: cd client && npm run lint
+        run: cd client && pnpm lint
 
   type-check:
     name: Types
@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: Check Application Types
-        run: cd client && npm run type-check
+        run: cd client && pnpm type-check
         
   prettify:
     name: Prettier
@@ -48,4 +48,4 @@ jobs:
         uses: ./.github/actions/ci-setup
   
       - name: Check Application Types
-        run: cd client && npm run prettier:fix
+        run: cd client && pnpm prettier:fix
