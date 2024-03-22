@@ -3,15 +3,15 @@ description: "Cache Dependencies"
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-node@v3
+    - uses: pnpm/action-setup@v3
+      with:
+        version: 8
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: "pnpm"
-
-    - name: Install pnpm
-      run: npm install -g pnpm
-      shell: bash
 
     - name: Cache PNPM Dependencies
       uses: actions/cache@v3
