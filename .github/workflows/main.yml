@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Lint Application
-        run: cd client && npm i -g pnpm@latest && pnpm && pnpm lint
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm lint
 
   type-check:
     name: Types
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check Application Types
-        run: cd client && npm i -g pnpm@latest && pnpm && pnpm type-check
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm type-check
         
   prettify:
     name: Prettier
@@ -39,4 +39,4 @@ jobs:
         uses: actions/checkout@v3
   
       - name: Check Application Types
-        run: cd client && npm i -g pnpm@latest && pnpm && pnpm prettier:fix
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm prettier:fix
