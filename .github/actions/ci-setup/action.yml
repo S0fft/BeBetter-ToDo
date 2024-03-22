@@ -9,13 +9,17 @@ runs:
         node-version: ${{ env.NODE_VERSION }}
         cache: "npm"
 
-    - name: Cache NPM Dependencies
+    - name: Install pnpm
+      run: npm install -g pnpm
+      shell: bash
+
+    - name: Cache PNPM Dependencies
       uses: actions/cache@v3
       id: cache-primes
       with:
         path: ./client/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('./client/package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('./client/pnpm-lock.yaml') }}
 
     - name: Install Dependencies
-      run: cd client && npm ci
+      run: cd client && pnpm
       shell: bash
