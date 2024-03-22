@@ -16,11 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Continuous integration
-        uses: ./.github/actions/ci-setup
-
       - name: Lint Application
-        run: cd client && pnpm lint
+        run: cd client && npm i -g pnpm@latest && pnpm && pnpm lint
 
   type-check:
     name: Types
@@ -30,11 +27,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Continuous Integration
-        uses: ./.github/actions/ci-setup
-
       - name: Check Application Types
-        run: cd client && pnpm type-check
+        run: cd client && npm i -g pnpm@latest && pnpm && pnpm type-check
         
   prettify:
     name: Prettier
@@ -44,8 +38,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
   
-      - name: Setup Continuous Integration
-        uses: ./.github/actions/ci-setup
-
       - name: Check Application Types
-        run: cd client && pnpm prettier:fix
+        run: cd client && npm i -g pnpm@latest && pnpm && pnpm prettier:fix
