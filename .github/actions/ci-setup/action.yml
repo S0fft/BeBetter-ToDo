@@ -19,6 +19,7 @@ runs:
       with:
         path: ./client/node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('./client/pnpm-lock.yaml') }}
+        working-directory: './client'
 
     - name: Install Dependencies
       run: cd client && pnpm
