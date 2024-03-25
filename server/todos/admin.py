@@ -1,8 +1,9 @@
 from django.contrib import admin
-from todos.models import Todo, TrashBin
+from todos.models import Archive, Todo, TrashBin
 
 # admin.site.register(Todo)
 admin.site.register(TrashBin)
+admin.site.register(Archive)
 
 
 @admin.register(Todo)
