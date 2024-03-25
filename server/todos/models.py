@@ -14,6 +14,13 @@ class Todo(models.Model):
         return self.title
 
 
+class Archive(Todo, models.Model):
+    time_archived = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f'Archived: {self.title} at {self.time_archived}'
+
+
 class TrashBin(models.Model):
     title = models.ForeignKey(Todo, on_delete=models.CASCADE)
     category = models.CharField(max_length=128)
