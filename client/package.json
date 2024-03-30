@@ -13,15 +13,27 @@
     "precommit": "pnpm lint-staged && pnpm type-check"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@lit/react": "^1.0.4",
+    "@material/web": "^1.4.0",
+    "@reduxjs/toolkit": "^2.2.2",
     "clsx": "^2.1.0",
+    "overlayscrollbars": "^2.6.1",
+    "overlayscrollbars-react": "^0.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.2.2"
+    "react-hook-form": "^7.51.2",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3",
+    "react-toastify": "^10.0.5",
+    "tailwind-merge": "^2.2.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
+    "@types/react-redux": "^7.1.33",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "@vitejs/plugin-react": "^4.2.1",
