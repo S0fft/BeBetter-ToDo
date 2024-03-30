@@ -52,6 +52,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
+  '@types/dom-view-transitions':
+    specifier: ^1.0.4
+    version: 1.0.4
   '@types/node':
     specifier: ^20.11.30
     version: 20.11.30
@@ -910,6 +913,10 @@ packages:
     resolution: {integrity: sha512-WXCyOcRtH37HAUkpXhUduaxdm82b4GSlyTqajXviN4EfiuPgNYR109xMCKvpl6zPIpua0DGlMEDCq+g8EdoheQ==}
     dependencies:
       '@babel/types': 7.24.0
+    dev: true
+
+  /@types/dom-view-transitions@1.0.4:
+    resolution: {integrity: sha512-oDuagM6G+xPLrLU4KeCKlr1oalMF5mJqV5pDPMDVIEaa8AkUW00i6u+5P02XCjdEEUQJC9dpnxqSLsZeAciSLQ==}
     dev: true
 
   /@types/estree@1.0.5:

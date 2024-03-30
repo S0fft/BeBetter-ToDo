@@ -30,6 +30,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/dom-view-transitions": "^1.0.4",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
