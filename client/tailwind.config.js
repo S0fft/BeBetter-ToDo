@@ -8,6 +8,105 @@ export default {
         roboto: ['Roboto', 'system-ui'],
         sans: ['Roboto', 'system-ui'],
       },
+      transitionDuration: {
+        400: '400ms',
+      },
+      transitionTimingFunction: {
+        standard: 'cubic-bezier(0.2, 0.0, 0, 1.0)',
+        'standard-decelerate': 'cubic-bezier(0, 0, 0, 1)',
+        'standard-accelerate': 'cubic-bezier(0.3, 0, 1, 1)',
+        'emphasized-decelerate': 'cubic-bezier(0.05, 0.7, 0.1, 1.0)',
+        'emphasized-accelerate': 'cubic-bezier(0.3, 0.0, 0.8, 0.15)',
+        bounce: 'cubic-bezier(.25,1.55,.65,.97)',
+      },
+      keyframes: {
+        'fade-in': {
+          from: {
+            opacity: 0,
+            scale: 0,
+          },
+          to: {
+            opacity: 1,
+            scale: 1,
+          },
+        },
+        'fade-in-snackbar': {
+          from: {
+            opacity: 0,
+            scale: '1 0',
+          },
+          to: {
+            opacity: 1,
+            scaleY: '1',
+          },
+        },
+        'fade-in-snackbar-body': {
+          from: {
+            scale: '1 2',
+          },
+          to: {
+            scaleY: '1',
+          },
+        },
+        'fade-out-snackbar': {
+          to: {
+            opacity: 0,
+          },
+        },
+        'fade-in-settings': {
+          from: {
+            opacity: 0,
+            translate: '-50% 0',
+          },
+          to: {
+            opacity: 1,
+            translate: 0,
+          },
+        },
+        'fade-in-title': {
+          from: {
+            opacity: 0,
+            transform: 'scale(2)',
+          },
+          to: {
+            opacity: 1,
+            transform: 'scale(1)',
+          },
+        },
+        'fade-in-section': {
+          from: {
+            opacity: 0,
+            scale: '0.94',
+          },
+          to: {
+            opacity: 1,
+            scale: '1',
+          },
+        },
+        'fade-in-aside': {
+          from: {
+            opacity: 0,
+            scale: '0.8 1',
+          },
+          to: {
+            opacity: 1,
+            scale: '1',
+          },
+        },
+      },
+      animation: {
+        'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
+        'fade-out-screen': 'fade-in 200ms cubic-bezier(0.3, 0.0, 0.8, 0.15) forward reverse',
+        'fade-in-standard': 'fade-in 250ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-out-standard': 'fade-in 200ms cubic-bezier(0.3, 0, 1, 1) forward reverse',
+        'fade-in-snackbar': 'fade-in-snackbar 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-in-snackbar-body': 'fade-in-snackbar-body 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-out-snackbar': 'fade-out-snackbar 200ms cubic-bezier(0.3, 0, 1, 1) forwards',
+        'fade-in-settings': 'fade-in-settings 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        'fade-in-title': 'fade-in-title 250ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        'fade-in-section': 'fade-in-section 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        'fade-in-aside': 'fade-in-aside 700ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+      },
     },
     colors: {
       primary: 'var(--md-sys-color-primary)',
