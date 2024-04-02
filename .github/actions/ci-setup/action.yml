@@ -1,0 +1,26 @@
+name: "Setup Continuous Integration"
+description: "Cache Dependencies"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v3
+    - uses: pnpm/action-setup@v3
+      with:
+        version: 8
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: "pnpm"
+
+    - name: Cache PNPM Dependencies
+      uses: actions/cache@v3
+      id: cache-primes
+      with:
+        path: ./client/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('./client/pnpm-lock.yaml') }}
+        working-directory: './client'
+
+    - name: Install Dependencies
+      run: cd client && pnpm
+      shell: bash
