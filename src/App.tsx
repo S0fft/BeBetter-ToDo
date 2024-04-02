@@ -1,14 +1,8 @@
-import { useDarkMode } from '@features/AppTheme';
-import Switch from '@shared/ui/Switch';
+import router from '@/router';
+import { RouterProvider } from 'react-router-dom';
 
 const App = () => {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
-
-  return (
-    <main className="mt-20 flex justify-center text-4xl text-on-surface">
-      <Switch selected={isDarkMode} onInput={toggleDarkMode} />
-    </main>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
