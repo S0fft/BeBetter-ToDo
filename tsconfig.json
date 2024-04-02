@@ -24,6 +24,7 @@
       "@services/*": ["src/services/*"],
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
+      "@layout/*": ["src/layout/*"],
     },
     "baseUrl": "./"
   },

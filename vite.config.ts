@@ -13,6 +13,7 @@ export default defineConfig({
       { find: '@services', replacement: resolve(__dirname, './src/services') },
       { find: '@pages', replacement: resolve(__dirname, './src/pages') },
       { find: '@assets', replacement: resolve(__dirname, './src/assets') },
+      { find: '@layout', replacement: resolve(__dirname, './src/layout') },
     ],
   },
 });
