@@ -7,7 +7,7 @@ type InitialState = {
 };
 
 const isDarkMode =
-  localStorage.getItem(localStorageKeys.IS_DARK_MODE) !== undefined;
+  localStorage.getItem(localStorageKeys.IS_DARK_MODE) === 'true';
 
 const initialState: InitialState = {
   isDarkMode,
