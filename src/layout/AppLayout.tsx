@@ -6,7 +6,7 @@ const AppLayout = () => {
     <main className="grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-on-surface">
       <aside className="w-[300px]">sidebar</aside>
       <div className="grid grid-rows-[64px_1fr] gap-3">
-        <header>
+        <header className="relative">
           <Search />
         </header>
         <section>
