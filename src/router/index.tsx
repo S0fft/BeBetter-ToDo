@@ -1,5 +1,5 @@
 import AppLayout from '@layout/AppLayout';
-import Notes from '@pages/Notes';
+import { NotesList } from '@pages/Notes';
 import { routes } from '@shared/lib/const';
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ export const ROUTES: RouteObject[] = [
       },
       {
         path: routes.NOTES,
-        element: <Notes />,
+        element: <NotesList />,
       },
       {
         path: routes.ARCHIVE,
