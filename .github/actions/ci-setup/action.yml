@@ -22,5 +22,5 @@ runs:
         working-directory: './client'
 
     - name: Install Dependencies
-      run: cd client && pnpm
+      run: pnpm i
       shell: bash
