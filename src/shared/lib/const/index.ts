@@ -13,3 +13,8 @@ export const routes = {
   TRASH: 'trash',
   LABEL: 'labels/:labelId',
 } as const;
+
+export const langs = {
+  en: 'en',
+  ru: 'ru',
+} as const;

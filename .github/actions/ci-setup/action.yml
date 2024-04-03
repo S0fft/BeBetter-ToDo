@@ -17,10 +17,10 @@ runs:
       uses: actions/cache@v3
       id: cache-primes
       with:
-        path: ./client/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('./client/pnpm-lock.yaml') }}
+        path: ./node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('./pnpm-lock.yaml') }}
         working-directory: './client'
 
     - name: Install Dependencies
-      run: cd client && pnpm
+      run: pnpm i
       shell: bash
