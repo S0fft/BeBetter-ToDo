@@ -22,7 +22,7 @@ const App = () => {
   }, [isDarkMode]);
 
   useEffect(() => {
-    localStorage.setItem(localStorageKeys.isDarkMode, isDarkMode.toString());
+    localStorage.setItem(localStorageKeys.IS_DARK_MODE, isDarkMode.toString());
   }, [isDarkMode]);
 
   return <RouterProvider router={router} />;

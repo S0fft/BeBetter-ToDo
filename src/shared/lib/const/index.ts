@@ -3,7 +3,7 @@ export const urlParams = {} as const;
 export const queryParamsInit = {};
 
 export const localStorageKeys = {
-  isDarkMode: 'isDarkMode',
+  IS_DARK_MODE: 'isDarkMode',
 } as const;
 
 export const routes = {
@@ -15,6 +15,6 @@ export const routes = {
 } as const;
 
 export const langs = {
-  en: 'en',
-  ru: 'ru',
+  EN: 'en',
+  RU: 'ru',
 } as const;
