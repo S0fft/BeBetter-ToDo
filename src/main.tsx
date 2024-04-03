@@ -7,6 +7,7 @@ import { setupStore } from '@/store';
 import { Provider } from 'react-redux';
 
 import './index.css';
+import './locales/i18n';
 
 const store = setupStore();
 
