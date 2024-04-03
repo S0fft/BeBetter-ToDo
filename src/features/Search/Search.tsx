@@ -1,6 +1,5 @@
 import Icon from '@shared/ui/Icon';
-
-import user from '../../assets/user.png';
+import UserAvatar from '@shared/ui/UserAvatar';
 
 const Search = () => {
   return (
@@ -13,12 +12,7 @@ const Search = () => {
       <Icon className="absolute left-6 top-1/2 -translate-y-1/2 transition-transform ease-[inherit] peer-focus:-translate-y-[calc(50%+2px)]">
         search
       </Icon>
-      <img
-        slot="trailing-icon"
-        className="absolute right-4 top-1/2 size-9 -translate-y-1/2 rounded-full transition-transform ease-[inherit] peer-focus:-translate-y-[calc(50%+2px)]"
-        src={user}
-        alt=""
-      />
+      <UserAvatar className="absolute right-4 top-1/2 size-9 -translate-y-1/2 hover:scale-105 hover:cursor-pointer hover:shadow-xl peer-focus:-translate-y-[calc(50%+2px)]" />
     </div>
   );
 };
