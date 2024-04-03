@@ -1,23 +1,16 @@
-import { langs } from '@shared/lib/const';
-import FilledTonalButton from '@shared/ui/FilledTonalButton';
-import { useTranslation } from 'react-i18next';
 import { Outlet } from 'react-router-dom';
 
 const AppLayout = () => {
-  const { i18n } = useTranslation();
-
-  const currLang = i18n.resolvedLanguage === langs.EN ? langs.RU : langs.EN;
-
-  const handleLanguageSwitch = () => {
-    void i18n.changeLanguage(currLang);
-  };
-
   return (
-    <main className="mt-20 flex justify-center text-4xl text-on-surface">
-      <FilledTonalButton onClick={handleLanguageSwitch}>
-        Change language
-      </FilledTonalButton>
-      <Outlet />
+    <main className="grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-4xl text-on-surface">
+      <section className="w-[300px]">sidebar</section>
+      <div className="grid grid-rows-[64px_1fr] gap-3">
+        <section>header</section>
+        <section>
+          <Outlet />
+        </section>
+      </div>
+      <section>open note</section>
     </main>
   );
 };
