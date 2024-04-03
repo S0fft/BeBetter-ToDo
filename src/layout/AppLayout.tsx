@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 const AppLayout = () => {
   const { i18n } = useTranslation();
 
-  const currLang = i18n.resolvedLanguage === langs.en ? langs.ru : langs.en;
+  const currLang = i18n.resolvedLanguage === langs.EN ? langs.RU : langs.EN;
 
   const handleLanguageSwitch = () => {
     void i18n.changeLanguage(currLang);
