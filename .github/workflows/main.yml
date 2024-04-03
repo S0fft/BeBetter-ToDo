@@ -20,6 +20,9 @@ jobs:
         with:
           version: 8
 
+      - name: Setup Continuous integration
+        uses: ./.github/actions/ci-setup
+
       - name: Lint Application
         run: pnpm lint
 
@@ -35,6 +38,9 @@ jobs:
         with:
           version: 8
 
+      - name: Setup Continuous integration
+        uses: ./.github/actions/ci-setup
+
       - name: Check Application Types
         run: pnpm type-check
 
@@ -49,6 +55,9 @@ jobs:
       - uses: pnpm/action-setup@v3
         with:
           version: 8
+
+      - name: Setup Continuous integration
+        uses: ./.github/actions/ci-setup
 
       - name: Check Application Types
         run: pnpm prettier:fix
