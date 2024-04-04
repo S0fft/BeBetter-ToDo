@@ -9,6 +9,7 @@ const Icon = createComponent({
   elementClass: MdIcon,
   events: {
     onChange: 'change',
+    onClick: 'click',
   },
 });
 
