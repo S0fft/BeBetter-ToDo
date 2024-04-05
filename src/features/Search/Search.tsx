@@ -5,7 +5,7 @@ const Search = () => {
   return (
     <>
       <input
-        className="peer h-16 w-full rounded-full bg-surface pl-16 pr-3.5 text-on-surface outline-none transition-all duration-200 ease-standard-accelerate placeholder:text-on-surface-variant focus:-translate-y-0.5 focus:ring-4 focus:ring-primary-fixed-dim focus:drop-shadow-md focus:ease-standard-decelerate"
+        className="peer h-16 w-full rounded-full bg-surface pl-16 pr-3.5 text-on-surface outline-none transition-all duration-200 ease-standard-accelerate placeholder:text-on-surface-variant focus:-translate-y-0.5 focus:ring-4 focus:ring-high-contrast-inverse-primary focus:drop-shadow-md focus:ease-standard-decelerate"
         type="text"
         placeholder="Search notes"
       />
