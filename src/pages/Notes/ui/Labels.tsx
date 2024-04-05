@@ -18,7 +18,7 @@ const Labels: FC<LabelsProps> = ({ labels }) => {
 
         return (
           <span
-            className="rounded-full px-2 py-0.5 text-[11px] font-medium"
+            className="rounded-full px-2 py-0.5 text-xs font-medium"
             style={{ backgroundColor: color, color: darkenColor }}
             key={title}>
             {title}
