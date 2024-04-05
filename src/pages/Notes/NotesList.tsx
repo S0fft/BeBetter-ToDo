@@ -103,6 +103,7 @@ const NotesList = () => {
       {mockedNotes.map((note) => (
         <Note
           key={note.id}
+          id={note.id}
           title={note.title}
           content={note.content}
           createdAt={note.createdAt}

@@ -92,6 +92,7 @@
   --md-sys-color-inverse-surface: rgb(48 49 41);
   --md-sys-color-inverse-on-surface: rgb(242 241 229);
   --md-sys-color-inverse-primary: rgb(190 206 127);
+  --md-sys-color-high-contrast-inverse-primary: rgb(227 244 161);
   --md-sys-color-primary-fixed: rgb(218 235 153);
   --md-sys-color-on-primary-fixed: rgb(23 30 0);
   --md-sys-color-primary-fixed-dim: rgb(190 206 127);
@@ -114,7 +115,7 @@
 }
 
 ::selection {
-  background-color: var(--md-sys-color-primary-fixed);
+  background-color: var(--md-sys-color-high-contrast-inverse-primary);
   color: var(--md-sys-color-on-primary-fixed);
 }
 
