@@ -32,8 +32,9 @@ const ContextMenu = () => {
       <Menu
         className="min-w-48 [&::part(.item-padding)]:pt-10"
         style={menuStyles}
-        yOffset={10}
+        yOffset={12}
         menuCorner={Corner.START_END}
+        anchor-corner={Corner.END_END}
         anchor="menu-anchor"
         ref={menuRef}>
         <MenuItem
