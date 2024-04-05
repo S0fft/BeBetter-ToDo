@@ -10,7 +10,12 @@ const mockedNotes = [
       '2. Agreed on the next steps and assigned tasks.\n' +
       '3. Scheduled follow-up meeting for [Date].',
     createdAt: '20.03.24',
-    labels: ['Work'],
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+    ],
     isPinned: true,
   },
   {
@@ -18,7 +23,20 @@ const mockedNotes = [
     title: 'Home tasks',
     content: '1. Buy milk\n2. Buy bread\n3. Buy potato\n4. Clear car',
     createdAt: '20.03.24',
-    labels: ['Home', 'Study', 'Important'],
+    labels: [
+      {
+        title: 'Home',
+        color: '#DAEB99',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+      {
+        title: 'Important',
+        color: '#BDECE0',
+      },
+    ],
     isPinned: true,
   },
   {
@@ -27,7 +45,17 @@ const mockedNotes = [
     content:
       '- Explored potential solutions for [specific issue].\n- Compiled a list of resources and references.\n- Initiated a prototype for [feature/component].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['Important', 'Work'],
+    labels: [
+      {
+        title: 'Important',
+        color: '#BDECE0',
+      },
+
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+    ],
     isPinned: true,
   },
   {
@@ -36,7 +64,16 @@ const mockedNotes = [
     content:
       '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['Work', 'Study'],
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
     isPinned: false,
   },
   {
@@ -45,7 +82,16 @@ const mockedNotes = [
     content:
       '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['Work', 'Study'],
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
     isPinned: false,
   },
 ];

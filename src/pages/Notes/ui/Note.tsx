@@ -11,6 +11,7 @@ import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
 import Labels from '@pages/Notes/ui/Labels';
+import { Labels as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import UserAvatar from '@shared/ui/UserAvatar';
@@ -19,7 +20,7 @@ type NoteProps = {
   title: string;
   content: string;
   createdAt: string;
-  labels: string[];
+  labels: TLabels[];
   isPinned: boolean;
 };
 
