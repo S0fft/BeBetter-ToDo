@@ -9,40 +9,43 @@ const mockedNotes = [
       '1. Discussed project milestones and deliverables.\n' +
       '2. Agreed on the next steps and assigned tasks.\n' +
       '3. Scheduled follow-up meeting for [Date].',
-    createdAt: getFormattedDate(new Date()),
-    labels: ['label 1', 'label 2', 'label 3', 'label 4'],
+    createdAt: '20.03.24',
+    labels: ['Work'],
     isPinned: true,
   },
   {
     id: 1,
-    title: 'Note 2',
-    content: 'Note 2',
-    createdAt: getFormattedDate(new Date()),
-    labels: ['label 1', 'label 2', 'label 3', 'label 4'],
+    title: 'Home tasks',
+    content: '1. Buy milk\n2. Buy bread\n3. Buy potato\n4. Clear car',
+    createdAt: '20.03.24',
+    labels: ['Home', 'Study', 'Important'],
     isPinned: true,
   },
   {
     id: 2,
-    title: 'Note 3',
-    content: 'Note 3',
+    title: 'Research and Development',
+    content:
+      '- Explored potential solutions for [specific issue].\n- Compiled a list of resources and references.\n- Initiated a prototype for [feature/component].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['label 1', 'label 2', 'label 3', 'label 4'],
+    labels: ['Important', 'Work'],
     isPinned: true,
   },
   {
     id: 3,
-    title: 'Note 4',
-    content: 'Note 4',
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['label 1', 'label 2', 'label 3', 'label 4'],
+    labels: ['Work', 'Study'],
     isPinned: false,
   },
   {
     id: 4,
-    title: 'Note 5',
-    content: 'Note 5',
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
     createdAt: getFormattedDate(new Date()),
-    labels: ['label 1', 'label 2', 'label 3', 'label 4'],
+    labels: ['Work', 'Study'],
     isPinned: false,
   },
 ];
