@@ -1,14 +1,11 @@
 import { FC } from 'react';
 
-import {
-  dotButtonStyles,
-  iconStyles,
-  pinButtonStyles,
-} from '@pages/Notes/lib/const';
+import { iconStyles, pinButtonStyles } from '@pages/Notes/lib/const';
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
 import { noteSelected } from '@pages/Notes/slice';
 import Body from '@pages/Notes/ui/Body';
 import Content from '@pages/Notes/ui/Content';
+import ContextMenu from '@pages/Notes/ui/ContextMenu';
 import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
@@ -67,9 +64,7 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <FilledIconButton style={dotButtonStyles}>
-            <Icon>more_vert</Icon>
-          </FilledIconButton>
+          <ContextMenu />
         </Controls>
       </Header>
       <Body>

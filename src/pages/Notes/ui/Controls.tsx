@@ -4,7 +4,7 @@ import { controlsStyles } from '@pages/Notes/lib/const';
 
 const Controls: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="ml-auto space-x-3" style={controlsStyles}>
+    <div className="ml-auto flex gap-3" style={controlsStyles}>
       {children}
     </div>
   );
