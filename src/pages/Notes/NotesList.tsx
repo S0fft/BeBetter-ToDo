@@ -1,4 +1,5 @@
 import Note from '@pages/Notes/ui/Note';
+import getFormattedDate from '@shared/lib/helpers/getFormattedDate';
 
 const mockedNotes = [
   {
@@ -8,7 +9,7 @@ const mockedNotes = [
       '1. Discussed project milestones and deliverables.\n' +
       '2. Agreed on the next steps and assigned tasks.\n' +
       '3. Scheduled follow-up meeting for [Date].',
-    createdAt: new Date().toISOString(),
+    createdAt: getFormattedDate(new Date()),
     labels: ['label 1', 'label 2', 'label 3', 'label 4'],
     isPinned: true,
   },
@@ -16,7 +17,7 @@ const mockedNotes = [
     id: 1,
     title: 'Note 2',
     content: 'Note 2',
-    createdAt: new Date().toISOString(),
+    createdAt: getFormattedDate(new Date()),
     labels: ['label 1', 'label 2', 'label 3', 'label 4'],
     isPinned: true,
   },
@@ -24,7 +25,7 @@ const mockedNotes = [
     id: 2,
     title: 'Note 3',
     content: 'Note 3',
-    createdAt: new Date().toISOString(),
+    createdAt: getFormattedDate(new Date()),
     labels: ['label 1', 'label 2', 'label 3', 'label 4'],
     isPinned: true,
   },
@@ -32,7 +33,7 @@ const mockedNotes = [
     id: 3,
     title: 'Note 4',
     content: 'Note 4',
-    createdAt: new Date().toISOString(),
+    createdAt: getFormattedDate(new Date()),
     labels: ['label 1', 'label 2', 'label 3', 'label 4'],
     isPinned: false,
   },
@@ -40,7 +41,7 @@ const mockedNotes = [
     id: 4,
     title: 'Note 5',
     content: 'Note 5',
-    createdAt: new Date().toISOString(),
+    createdAt: getFormattedDate(new Date()),
     labels: ['label 1', 'label 2', 'label 3', 'label 4'],
     isPinned: false,
   },
