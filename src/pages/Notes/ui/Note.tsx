@@ -1,11 +1,18 @@
 import { FC } from 'react';
 
+import {
+  dotButtonStyles,
+  iconStyles,
+  pinButtonStyles,
+} from '@pages/Notes/lib/const';
 import Body from '@pages/Notes/ui/Body';
 import Content from '@pages/Notes/ui/Content';
 import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
 import Labels from '@pages/Notes/ui/Labels';
+import FilledIconButton from '@shared/ui/FilledIconButton';
+import Icon from '@shared/ui/Icon';
 import UserAvatar from '@shared/ui/UserAvatar';
 
 type NoteProps = {
@@ -28,7 +35,17 @@ const Note: FC<NoteProps> = ({
       <Header>
         <UserAvatar className="size-10" />
         <Essentials createdAt={createdAt} />
-        <Controls isPinned={isPinned} />
+        <Controls>
+          <FilledIconButton selected={isPinned} style={pinButtonStyles} toggle>
+            <Icon>keep</Icon>
+            <Icon slot="selected" style={iconStyles}>
+              keep
+            </Icon>
+          </FilledIconButton>
+          <FilledIconButton style={dotButtonStyles}>
+            <Icon>more_vert</Icon>
+          </FilledIconButton>
+        </Controls>
       </Header>
       <Body>
         <Content title={title} content={content} />
