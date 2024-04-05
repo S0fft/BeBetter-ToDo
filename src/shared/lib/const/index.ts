@@ -18,3 +18,5 @@ export const langs = {
   EN: 'en',
   RU: 'ru',
 } as const;
+
+export const LABEL_COLOR_DECREASE = 45;
