@@ -32,7 +32,7 @@ const Note: FC<NoteProps> = ({
   isPinned,
 }) => {
   return (
-    <li className="relative flex h-[200px] w-full flex-col gap-5 overflow-hidden rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50">
+    <li className="relative flex h-[200px] w-full flex-col gap-5 overflow-hidden rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low">
       <Header>
         <UserAvatar className="size-10" />
         <Essentials createdAt={createdAt} />
