@@ -41,3 +41,8 @@ export const subMenuItemStyles = {
   '--md-menu-item-selected-container-color':
     'var(--md-sys-color-high-contrast-inverse-primary)',
 };
+
+export const checkboxStyles = {
+  '--md-sys-color-primary': 'var(--md-sys-color-high-contrast-inverse-primary)',
+  '--md-sys-color-on-primary': 'var(--md-sys-color-on-primary-fixed)',
+};
