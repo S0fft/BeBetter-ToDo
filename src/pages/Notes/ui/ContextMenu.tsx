@@ -75,9 +75,6 @@ const ContextMenu = () => {
             <Icon slot="end" className="text-on-surface">
               label
             </Icon>
-            <Icon slot="start" className="text-on-surface">
-              arrow_left
-            </Icon>
           </MenuItem>
           <Menu className="min-w-48" style={menuStyles} slot="menu">
             {mockLabels.map((label) => (
