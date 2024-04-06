@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { LABEL_COLOR_DECREASE } from '@shared/lib/const';
-import { Labels as TLabels } from '@shared/types';
+import { Label as TLabels } from '@shared/types';
 import tinycolor from 'tinycolor2';
 
 type LabelsProps = {

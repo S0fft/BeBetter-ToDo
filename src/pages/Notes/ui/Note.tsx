@@ -12,7 +12,7 @@ import Header from '@pages/Notes/ui/Header';
 import Labels from '@pages/Notes/ui/Labels';
 import cn from '@shared/lib/helpers/cn';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
-import { Labels as TLabels } from '@shared/types';
+import { Label as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import UserAvatar from '@shared/ui/UserAvatar';

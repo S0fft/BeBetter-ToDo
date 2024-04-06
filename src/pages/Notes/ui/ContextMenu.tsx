@@ -8,10 +8,31 @@ import {
   menuItemStyles,
   menuStyles,
 } from '@pages/Notes/lib/const';
+import { Label } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
 import MenuItem from '@shared/ui/MenuItem';
+import SubMenu from '@shared/ui/SubMenu';
+
+const mockLabels: Label[] = [
+  {
+    title: 'Home',
+    color: '#DAEB99',
+  },
+  {
+    title: 'Study',
+    color: '#E3F383',
+  },
+  {
+    title: 'Important',
+    color: '#BDECE0',
+  },
+  {
+    title: 'Work',
+    color: '#EBD999',
+  },
+];
 
 const ContextMenu = () => {
   const menuRef = useRef<MdMenu>(null);
@@ -30,29 +51,48 @@ const ContextMenu = () => {
         <Icon>more_vert</Icon>
       </FilledIconButton>
       <Menu
-        className="min-w-48 [&::part(.item-padding)]:pt-10"
+        has-overflow
+        className="min-w-48"
         style={menuStyles}
         yOffset={12}
         menuCorner={Corner.START_END}
         anchor-corner={Corner.END_END}
         anchor="menu-anchor"
         ref={menuRef}>
-        <MenuItem
-          style={menuItemStyles}
-          className="[&::part(ripple)]:mx-2 [&::part(ripple)]:rounded-[6px]">
-          Delete
+        <MenuItem style={menuItemStyles} className="mx-2 rounded-md">
+          <span slot="headline"> Delete </span>
           <Icon slot="end">
             <img src={trash} alt="" />
           </Icon>
         </MenuItem>
-        <MenuItem
-          style={menuItemStyles}
-          className="[&::part(ripple)]:mx-2 [&::part(ripple)]:rounded-[6px]">
-          Set label
-          <Icon slot="end" className="text-on-surface">
-            label
-          </Icon>
-        </MenuItem>
+        <SubMenu menuCorner={Corner.END_END} anchor-corner={Corner.END_START}>
+          <MenuItem
+            slot="item"
+            style={{
+              ...menuItemStyles,
+              '--md-menu-item-selected-container-color':
+                'var(--md-sys-color-high-contrast-inverse-primary)',
+            }}
+            className="mx-2 rounded-md">
+            Set label
+            <Icon slot="end" className="text-on-surface">
+              label
+            </Icon>
+            <Icon slot="start" className="text-on-surface">
+              arrow_left
+            </Icon>
+          </MenuItem>
+          <Menu className="min-w-48" style={menuStyles} slot="menu">
+            {mockLabels.map((label) => (
+              <MenuItem
+                key={label.title}
+                style={menuItemStyles}
+                className="mx-2 rounded-md">
+                <span slot="headline">{label.title}</span>
+              </MenuItem>
+            ))}
+          </Menu>
+        </SubMenu>
       </Menu>
     </div>
   );

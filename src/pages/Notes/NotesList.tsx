@@ -50,7 +50,6 @@ const mockedNotes = [
         title: 'Important',
         color: '#BDECE0',
       },
-
       {
         title: 'Work',
         color: '#EBD999',

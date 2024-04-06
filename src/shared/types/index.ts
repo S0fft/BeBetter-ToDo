@@ -15,7 +15,7 @@ export type ReadUrl = (query: UrlParams) => string;
 
 export type LocalStorageKeys = keyof typeof localStorageKeys;
 
-export type Labels = {
+export type Label = {
   title: string;
   color: string;
 };
