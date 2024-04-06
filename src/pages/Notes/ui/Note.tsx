@@ -64,7 +64,7 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <ContextMenu />
+          <ContextMenu activeLabels={labels} />
         </Controls>
       </Header>
       <Body>

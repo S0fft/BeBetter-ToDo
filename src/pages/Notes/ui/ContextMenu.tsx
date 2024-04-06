@@ -1,4 +1,4 @@
-import { MouseEvent, useRef } from 'react';
+import { FC, MouseEvent, useRef } from 'react';
 
 import { Corner, MdMenu } from '@material/web/all';
 
@@ -10,6 +10,7 @@ import {
   subMenuItemStyles,
 } from '@pages/Notes/lib/const';
 import { Label } from '@shared/types';
+import Checkbox from '@shared/ui/Checkbox';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
@@ -35,7 +36,7 @@ const mockLabels: Label[] = [
   },
 ];
 
-const ContextMenu = () => {
+const ContextMenu: FC<{ activeLabels: Label[] }> = ({ activeLabels }) => {
   const menuRef = useRef<MdMenu>(null);
 
   const handleClick = (e: MouseEvent) => {
@@ -77,14 +78,22 @@ const ContextMenu = () => {
             </Icon>
           </MenuItem>
           <Menu className="min-w-48" style={menuStyles} slot="menu">
-            {mockLabels.map((label) => (
-              <MenuItem
-                key={label.title}
-                style={menuItemStyles}
-                className="mx-2 rounded-md">
-                <span slot="headline">{label.title}</span>
-              </MenuItem>
-            ))}
+            {mockLabels.map((label) => {
+              const isChecked = activeLabels.some(
+                (activeLabel) => activeLabel.title === label.title,
+              );
+
+              return (
+                <MenuItem
+                  keepOpen
+                  key={label.title}
+                  style={menuItemStyles}
+                  className="mx-2 rounded-md">
+                  <span slot="headline">{label.title}</span>
+                  <Checkbox checked={isChecked} slot="end" />
+                </MenuItem>
+              );
+            })}
           </Menu>
         </SubMenu>
       </Menu>
