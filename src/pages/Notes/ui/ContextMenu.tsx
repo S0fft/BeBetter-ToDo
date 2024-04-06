@@ -7,6 +7,7 @@ import {
   dotButtonStyles,
   menuItemStyles,
   menuStyles,
+  subMenuItemStyles,
 } from '@pages/Notes/lib/const';
 import { Label } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
@@ -68,11 +69,7 @@ const ContextMenu = () => {
         <SubMenu menuCorner={Corner.END_END} anchor-corner={Corner.END_START}>
           <MenuItem
             slot="item"
-            style={{
-              ...menuItemStyles,
-              '--md-menu-item-selected-container-color':
-                'var(--md-sys-color-high-contrast-inverse-primary)',
-            }}
+            style={subMenuItemStyles}
             className="mx-2 rounded-md">
             Set label
             <Icon slot="end" className="text-on-surface">

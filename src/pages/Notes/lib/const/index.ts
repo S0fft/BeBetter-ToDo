@@ -35,3 +35,9 @@ export const menuItemStyles = {
   '--md-menu-item-top-space': '8px',
   '--md-menu-item-bottom-space': '8px',
 };
+
+export const subMenuItemStyles = {
+  ...menuItemStyles,
+  '--md-menu-item-selected-container-color':
+    'var(--md-sys-color-high-contrast-inverse-primary)',
+};
