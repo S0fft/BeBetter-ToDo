@@ -48,7 +48,7 @@ const Note: FC<NoteProps> = ({
     <li
       onClick={handleSelectNote}
       className={cn(
-        'relative flex h-[200px] w-full flex-col gap-5 overflow-hidden rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low',
+        'relative flex h-[200px] w-full flex-col gap-5 rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:rounded-xl after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low',
         {
           'bg-high-contrast-inverse-primary hover:bg-high-contrast-inverse-primary':
             isActiveNote,
