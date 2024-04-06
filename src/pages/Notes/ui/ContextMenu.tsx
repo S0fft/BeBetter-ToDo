@@ -39,7 +39,7 @@ const mockLabels: Label[] = [
 const ContextMenu: FC<{ activeLabels: Label[] }> = ({ activeLabels }) => {
   const menuRef = useRef<MdMenu>(null);
 
-  const handleClick = (e: MouseEvent) => {
+  const handleMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
     if (menuRef.current) menuRef.current.show();
   };
@@ -48,7 +48,7 @@ const ContextMenu: FC<{ activeLabels: Label[] }> = ({ activeLabels }) => {
     <div className="relative">
       <FilledIconButton
         id="menu-anchor"
-        onClick={handleClick}
+        onClick={handleMenuOpen}
         style={dotButtonStyles}>
         <Icon>more_vert</Icon>
       </FilledIconButton>
