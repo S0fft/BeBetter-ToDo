@@ -13,6 +13,7 @@ function hasScrollbar(textArea: HTMLTextAreaElement) {
 }
 
 const TITLE_TEXT_AREA_INITIAL_HEIGHT = 36;
+const MAX_TITLE_LENGTH = 128;
 
 const ExpendedNote = () => {
   const selectedNote = useAppSelector(selectActiveNote);
@@ -40,27 +41,29 @@ const ExpendedNote = () => {
       </header>
       <article className="relative grid h-full w-full grid-rows-[max-content_1fr] gap-5 bg-surface p-6 transition-all before:absolute before:left-8 before:top-1 before:flex before:size-fit before:items-center before:justify-center before:bg-surface before:px-2 before:text-sm before:text-on-surface-variant before:opacity-0 before:transition-all before:content-['Title'] has-[input:focus]:before:opacity-100">
         <textarea
-          placeholder="Empty title..."
+          placeholder="Title your todo..."
           value={title}
-          maxLength={128}
-          style={{
-            height: TITLE_TEXT_AREA_INITIAL_HEIGHT,
-          }}
-          className="resize-none rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
+          maxLength={MAX_TITLE_LENGTH}
+          style={{ height: TITLE_TEXT_AREA_INITIAL_HEIGHT }}
+          className="resize-none rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none transition-[box-shadow] focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
           onChange={(e) => {
-            setTitle(e.target.value);
+            const { target } = e;
+            setTitle(target.value);
 
-            if (hasScrollbar(e.target)) {
-              e.target.style.height = `${Number.parseInt(getComputedStyle(e.target).height, 10) + TITLE_TEXT_AREA_INITIAL_HEIGHT}px`;
+            if (hasScrollbar(target)) {
+              const newHeighPlusOneRow = `${Number.parseInt(getComputedStyle(target).height, 10) + TITLE_TEXT_AREA_INITIAL_HEIGHT}px`;
+              target.style.height = newHeighPlusOneRow;
             }
           }}
           onKeyDown={(e: KeyboardEvent) => {
             const target = e.target as HTMLTextAreaElement;
 
             if (e.key === 'Backspace') {
-              const newHeight =
-                Number.parseInt(getComputedStyle(target).height, 10) -
-                TITLE_TEXT_AREA_INITIAL_HEIGHT;
+              const targetHeight = Number.parseInt(
+                getComputedStyle(target).height,
+                10,
+              );
+              const newHeight = targetHeight - TITLE_TEXT_AREA_INITIAL_HEIGHT;
               target.style.height = `${newHeight}px`;
 
               const isBiggerInitialHeight =
@@ -74,7 +77,7 @@ const ExpendedNote = () => {
         />
         <textarea
           placeholder="Start writing your notes here :)"
-          className="h-full w-full resize-none whitespace-pre rounded-sm bg-transparent px-3 py-1 text-on-surface-variant outline-none focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
+          className="h-full w-full resize-none whitespace-pre rounded-sm bg-transparent px-3 py-1 text-on-surface-variant outline-none transition-all focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
