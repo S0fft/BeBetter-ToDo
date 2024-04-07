@@ -14,6 +14,8 @@ function hasScrollbar(textArea: HTMLTextAreaElement) {
 
 const TITLE_TEXT_AREA_INITIAL_HEIGHT = 36;
 const MAX_TITLE_LENGTH = 128;
+const MAX_TITLE_HEIGHT_PX = 92;
+const TITLE_PADDING_Y = 8;
 
 const ExpendedNote = () => {
   const selectedNote = useAppSelector(selectActiveNote);
@@ -45,13 +47,18 @@ const ExpendedNote = () => {
           value={title}
           maxLength={MAX_TITLE_LENGTH}
           style={{ height: TITLE_TEXT_AREA_INITIAL_HEIGHT }}
-          className="resize-none rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none transition-[box-shadow] focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
+          className="resize-none overflow-hidden rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none transition-shadow focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
           onChange={(e) => {
             const { target } = e;
+            const isMaxHeightExceeded =
+              target.clientHeight > MAX_TITLE_HEIGHT_PX;
+
+            if (isMaxHeightExceeded) return;
+
             setTitle(target.value);
 
             if (hasScrollbar(target)) {
-              const newHeighPlusOneRow = `${Number.parseInt(getComputedStyle(target).height, 10) + TITLE_TEXT_AREA_INITIAL_HEIGHT}px`;
+              const newHeighPlusOneRow = `${Number.parseInt(getComputedStyle(target).height, 10) + (TITLE_TEXT_AREA_INITIAL_HEIGHT - TITLE_PADDING_Y)}px`;
               target.style.height = newHeighPlusOneRow;
             }
           }}
@@ -63,7 +70,9 @@ const ExpendedNote = () => {
                 getComputedStyle(target).height,
                 10,
               );
-              const newHeight = targetHeight - TITLE_TEXT_AREA_INITIAL_HEIGHT;
+              const newHeight =
+                targetHeight -
+                (TITLE_TEXT_AREA_INITIAL_HEIGHT - TITLE_PADDING_Y);
               target.style.height = `${newHeight}px`;
 
               const isBiggerInitialHeight =
