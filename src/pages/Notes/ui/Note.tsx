@@ -9,12 +9,12 @@ import ContextMenu from '@pages/Notes/ui/ContextMenu';
 import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
-import Labels from '@pages/Notes/ui/Labels';
 import cn from '@shared/lib/helpers/cn';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import { Label as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
+import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { useDispatch } from 'react-redux';
 
@@ -69,7 +69,7 @@ const Note: FC<NoteProps> = ({
       </Header>
       <Body>
         <Content title={title} content={content} />
-        <Labels labels={labels} />
+        <Labels className="z-10 ml-auto self-end pb-3.5" labels={labels} />
       </Body>
     </li>
   );
