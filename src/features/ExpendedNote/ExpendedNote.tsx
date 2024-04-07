@@ -51,7 +51,7 @@ const ExpendedNote = () => {
             setTitle(e.target.value);
 
             if (hasScrollbar(e.target)) {
-              e.target.style.height = `${Number.parseInt(getComputedStyle(e.target).height, 10) + 34}px`;
+              e.target.style.height = `${Number.parseInt(getComputedStyle(e.target).height, 10) + TITLE_TEXT_AREA_INITIAL_HEIGHT}px`;
             }
           }}
           onKeyDown={(e: KeyboardEvent) => {
@@ -73,8 +73,8 @@ const ExpendedNote = () => {
           }}
         />
         <textarea
-          placeholder="Write your notes here :)"
-          className="h-full w-full resize-none whitespace-pre rounded-sm bg-transparent px-3 py-1 outline-none focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
+          placeholder="Start writing your notes here :)"
+          className="h-full w-full resize-none whitespace-pre rounded-sm bg-transparent px-3 py-1 text-on-surface-variant outline-none focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
