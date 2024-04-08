@@ -23,7 +23,7 @@ const AppLayout = () => {
           <Search />
         </header>
         <section>
-          <Outlet context={setIsNoteExpanded} />
+          <Outlet context={[isNoteExpanded, setIsNoteExpanded]} />
         </section>
       </div>
       <section

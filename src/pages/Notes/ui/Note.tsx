@@ -10,6 +10,7 @@ import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
 import cn from '@shared/lib/helpers/cn';
+import viewTransition from '@shared/lib/helpers/viewTransition';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import { Label as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
@@ -36,7 +37,8 @@ const Note: FC<NoteProps> = ({
   labels,
   isPinned,
 }) => {
-  const setIsExpandNote = useOutletContext<Dispatch<SetStateAction<boolean>>>();
+  const [, setIsExpandNote] =
+    useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const activeNote = useAppSelector(selectActiveNote);
   const dispatch = useDispatch();
 
@@ -44,7 +46,7 @@ const Note: FC<NoteProps> = ({
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
 
   const handleSelectNote = () => {
-    setIsExpandNote(true);
+    viewTransition(() => setIsExpandNote(true));
     dispatch(noteSelected(id));
   };
 
