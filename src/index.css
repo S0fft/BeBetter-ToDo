@@ -130,3 +130,9 @@ body {
     color 200ms ease-in-out,
     background-color 200ms ease-in-out;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: theme(transitionTimingFunction.emphasized-decelerate);
+}

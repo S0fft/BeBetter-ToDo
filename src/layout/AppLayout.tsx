@@ -19,7 +19,11 @@ const AppLayout = () => {
       )}>
       <aside className="w-[300px]">sidebar</aside>
       <div className="grid grid-rows-[64px_1fr] gap-3">
-        <header className="relative">
+        <header
+          style={{
+            viewTransitionName: 'header',
+          }}
+          className="relative z-50">
           <Search />
         </header>
         <section>

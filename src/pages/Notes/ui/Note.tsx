@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useRef } from 'react';
 
 import { iconStyles, pinButtonStyles } from '@pages/Notes/lib/const';
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
@@ -37,24 +37,33 @@ const Note: FC<NoteProps> = ({
   labels,
   isPinned,
 }) => {
-  const [, setIsExpandNote] =
+  const [isExpanded, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const activeNote = useAppSelector(selectActiveNote);
   const dispatch = useDispatch();
+  const containerRef = useRef<HTMLLIElement>(null);
 
   const isActiveNote = activeNote === id;
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
 
   const handleSelectNote = () => {
-    viewTransition(() => setIsExpandNote(true));
+    if (isExpanded) {
+      setIsExpandNote(true);
+    } else {
+      viewTransition(() => setIsExpandNote(true));
+    }
     dispatch(noteSelected(id));
   };
 
   return (
     <li
+      ref={containerRef}
+      style={{
+        viewTransitionName: `expandedNote-${id}`,
+      }}
       onClick={handleSelectNote}
       className={cn(
-        'relative flex h-[200px] w-full flex-col gap-5 rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:rounded-xl after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low',
+        'relative flex h-[200px] w-full flex-col gap-5 rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors ease-emphasized-decelerate after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:rounded-xl after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low',
         {
           'bg-high-contrast-inverse-primary hover:bg-high-contrast-inverse-primary':
             isActiveNote,
