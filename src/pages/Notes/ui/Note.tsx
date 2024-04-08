@@ -39,6 +39,7 @@ const Note: FC<NoteProps> = ({
   const dispatch = useDispatch();
 
   const isActiveNote = activeNote === id;
+  const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
 
   const handleSelectNote = () => {
     dispatch(noteSelected(id));
@@ -64,7 +65,7 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <ContextMenu activeLabels={labels} />
+          <ContextMenu anchorId={contextMenuAnchorId} activeLabels={labels} />
         </Controls>
       </Header>
       <Body>
