@@ -3,6 +3,7 @@ import { MouseEvent, useRef } from 'react';
 import { MdMenu } from '@material/web/all';
 
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
+import EditedTime from '@pages/Notes/ui/EditedTime';
 import { mockedNotes } from '@shared/lib/const';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import Icon from '@shared/ui/Icon';
@@ -50,7 +51,7 @@ const Controls = () => {
       <IconButton>
         <Icon>redo</Icon>
       </IconButton>
-      <p className="ml-auto text-sm text-on-surface-variant">Edited today</p>
+      <EditedTime />
     </article>
   );
 };

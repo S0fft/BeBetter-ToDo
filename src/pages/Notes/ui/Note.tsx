@@ -17,6 +17,7 @@ import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
+import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 
@@ -45,6 +46,7 @@ const Note: FC<NoteProps> = ({
 
   const isActiveNote = activeNote === id;
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
+  const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {
     if (isExpanded) {
@@ -71,7 +73,7 @@ const Note: FC<NoteProps> = ({
       )}>
       <Header>
         <UserAvatar className="size-10" />
-        <Essentials createdAt={createdAt} />
+        <Essentials createdAt={formatedCreatedAt} />
         <Controls>
           <FilledIconButton selected={isPinned} style={pinButtonStyles} toggle>
             <Icon>keep</Icon>

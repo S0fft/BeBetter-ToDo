@@ -46,3 +46,7 @@ export const checkboxStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-high-contrast-inverse-primary)',
   '--md-sys-color-on-primary': 'var(--md-sys-color-on-primary-fixed)',
 };
+
+export const ONE_DAY = 1;
+
+export const ONE_YEAR = 365;

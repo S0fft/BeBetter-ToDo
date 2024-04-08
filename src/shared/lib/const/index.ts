@@ -1,5 +1,3 @@
-import getFormattedDate from '@shared/lib/helpers/getFormattedDate';
-
 export const urlParams = {} as const;
 
 export const queryParamsInit = {};
@@ -31,7 +29,7 @@ export const mockedNotes = [
       '1. Discussed project milestones and deliverables.\n' +
       '2. Agreed on the next steps and assigned tasks.\n' +
       '3. Scheduled follow-up meeting for [Date].',
-    createdAt: '20.03.24',
+    createdAt: '2024-04-08',
     labels: [
       {
         title: 'Work',
@@ -44,7 +42,7 @@ export const mockedNotes = [
     id: 1,
     title: 'Home tasks',
     content: '1. Buy milk\n2. Buy bread\n3. Buy potato\n4. Clear car',
-    createdAt: '20.03.24',
+    createdAt: '2024-04-07',
     labels: [
       {
         title: 'Home',
@@ -66,7 +64,7 @@ export const mockedNotes = [
     title: 'Research and Development',
     content:
       '- Explored potential solutions for [specific issue].\n- Compiled a list of resources and references.\n- Initiated a prototype for [feature/component].',
-    createdAt: getFormattedDate(new Date()),
+    createdAt: '2024-01-27',
     labels: [
       {
         title: 'Important',
@@ -84,7 +82,7 @@ export const mockedNotes = [
     title: 'Miscellaneous',
     content:
       '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
-    createdAt: getFormattedDate(new Date()),
+    createdAt: '2023-02-12',
     labels: [
       {
         title: 'Work',
@@ -102,7 +100,7 @@ export const mockedNotes = [
     title: 'Miscellaneous',
     content:
       '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
-    createdAt: getFormattedDate(new Date()),
+    createdAt: '2022-04-23',
     labels: [
       {
         title: 'Work',
