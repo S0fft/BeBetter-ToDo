@@ -116,3 +116,5 @@ export const mockedNotes = [
     isPinned: false,
   },
 ];
+
+export const BACKSPACE_KEY = 'Backspace';
