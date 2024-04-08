@@ -52,7 +52,7 @@ const Title = () => {
       value={title}
       maxLength={MAX_TITLE_LENGTH}
       style={{ height: TITLE_TEXT_AREA_INITIAL_HEIGHT }}
-      className="resize-none overflow-hidden rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none transition-shadow focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
+      className="origin-left animate-fade-in-standard resize-none overflow-hidden rounded-sm bg-transparent px-3 py-1 text-xl font-medium outline-none transition-shadow focus:ring-4 focus:ring-high-contrast-inverse-primary focus:ring-offset-4 focus:ring-offset-surface"
       onChange={handleChange}
       onKeyDown={handleKeyDown}
     />
