@@ -8,15 +8,12 @@ import {
 } from '@features/ExpendedNote/lib/const';
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
 import { mockedNotes } from '@shared/lib/const';
+import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
-
-function hasScrollbar(textArea: HTMLTextAreaElement) {
-  return textArea.clientHeight < textArea.scrollHeight;
-}
 
 const ExpendedNote = () => {
   const selectedNote = useAppSelector(selectActiveNote);
@@ -58,7 +55,7 @@ const ExpendedNote = () => {
 
             setTitle(target.value);
 
-            if (hasScrollbar(target)) {
+            if (elementHasScrollbar(target)) {
               const newHeighPlusOneRow = `${Number.parseInt(getComputedStyle(target).height, 10) + (TITLE_TEXT_AREA_INITIAL_HEIGHT - TITLE_PADDING_Y)}px`;
               target.style.height = newHeighPlusOneRow;
             }
