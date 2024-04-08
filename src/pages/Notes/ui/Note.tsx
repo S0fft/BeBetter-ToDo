@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
 import { iconStyles, pinButtonStyles } from '@pages/Notes/lib/const';
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
@@ -17,6 +17,7 @@ import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { useDispatch } from 'react-redux';
+import { useOutletContext } from 'react-router-dom';
 
 type NoteProps = {
   id: number;
@@ -35,6 +36,7 @@ const Note: FC<NoteProps> = ({
   labels,
   isPinned,
 }) => {
+  const setIsExpandNote = useOutletContext<Dispatch<SetStateAction<boolean>>>();
   const activeNote = useAppSelector(selectActiveNote);
   const dispatch = useDispatch();
 
@@ -42,6 +44,7 @@ const Note: FC<NoteProps> = ({
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
 
   const handleSelectNote = () => {
+    setIsExpandNote(true);
     dispatch(noteSelected(id));
   };
 
