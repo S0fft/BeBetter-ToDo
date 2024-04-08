@@ -10,31 +10,12 @@ import {
   subMenuItemStyles,
 } from '@pages/Notes/lib/const';
 import { Label } from '@shared/types';
-import Checkbox from '@shared/ui/Checkbox';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
+import LabelsMenu from '@shared/ui/LabelsMenu';
 import Menu from '@shared/ui/Menu';
 import MenuItem from '@shared/ui/MenuItem';
 import SubMenu from '@shared/ui/SubMenu';
-
-const mockLabels: Label[] = [
-  {
-    title: 'Home',
-    color: '#DAEB99',
-  },
-  {
-    title: 'Study',
-    color: '#E3F383',
-  },
-  {
-    title: 'Important',
-    color: '#BDECE0',
-  },
-  {
-    title: 'Work',
-    color: '#EBD999',
-  },
-];
 
 const ContextMenu: FC<{ activeLabels: Label[] }> = ({ activeLabels }) => {
   const menuRef = useRef<MdMenu>(null);
@@ -77,24 +58,7 @@ const ContextMenu: FC<{ activeLabels: Label[] }> = ({ activeLabels }) => {
               label
             </Icon>
           </MenuItem>
-          <Menu className="min-w-48" style={menuStyles} slot="menu">
-            {mockLabels.map((label) => {
-              const isChecked = activeLabels.some(
-                (activeLabel) => activeLabel.title === label.title,
-              );
-
-              return (
-                <MenuItem
-                  keepOpen
-                  key={label.title}
-                  style={menuItemStyles}
-                  className="mx-2 rounded-md">
-                  <span slot="headline">{label.title}</span>
-                  <Checkbox checked={isChecked} slot="end" />
-                </MenuItem>
-              );
-            })}
-          </Menu>
+          <LabelsMenu activeLabels={activeLabels} />
         </SubMenu>
       </Menu>
     </div>
