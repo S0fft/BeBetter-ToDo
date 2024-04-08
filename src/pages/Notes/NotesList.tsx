@@ -10,10 +10,9 @@ const NotesList = () => {
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
 
   return (
-    // 92px -> main container padding 16px + 12px gap + 64px header height
-    <ul className="h-[calc(100dvh_-_92px)] overflow-y-scroll rounded-xl pb-4">
+    <ul className="h-dvh overflow-y-scroll pb-4">
       <div
-        className={cn('grid grid-cols-1 gap-3 transition-all', {
+        className={cn('grid grid-cols-1 gap-3 pt-[92px] transition-all', {
           'grid-cols-2 items-center justify-center': !isNoteExpanded,
         })}>
         {mockedNotes.map((note) => (
