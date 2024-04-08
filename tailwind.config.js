@@ -23,7 +23,7 @@ export default {
         'fade-in': {
           from: {
             opacity: 0,
-            scale: '0.85',
+            scale: '0.95',
           },
           to: {
             opacity: 1,

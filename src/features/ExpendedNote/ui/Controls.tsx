@@ -50,7 +50,7 @@ const Controls = () => {
       <IconButton>
         <Icon>redo</Icon>
       </IconButton>
-      <p className="ml-auto text-sm">Edited today</p>
+      <p className="ml-auto text-sm text-on-surface-variant">Edited today</p>
     </article>
   );
 };
