@@ -11,9 +11,10 @@ const AppLayout = () => {
   return (
     <main
       className={cn(
-        'grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-on-surface transition-all duration-400 ease-emphasized-decelerate',
+        'grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-on-surface transition-all duration-500 ease-emphasized-decelerate',
         {
-          'grid-cols-[300px_1fr_0fr]': !isNoteExpanded,
+          'grid-cols-[300px_1fr_0fr] ease-emphasized-accelerate':
+            !isNoteExpanded,
         },
       )}>
       <aside className="w-[300px]">sidebar</aside>
