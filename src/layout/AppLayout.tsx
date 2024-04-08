@@ -11,7 +11,7 @@ const AppLayout = () => {
   return (
     <main
       className={cn(
-        'grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-on-surface transition-all duration-500 ease-emphasized-decelerate',
+        'grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 p-4 text-on-surface transition-all duration-400 ease-emphasized-decelerate',
         {
           'grid-cols-[300px_1fr_0fr] ease-emphasized-accelerate':
             !isNoteExpanded,
@@ -26,7 +26,13 @@ const AppLayout = () => {
           <Outlet context={setIsNoteExpanded} />
         </section>
       </div>
-      <section className="grid grid-rows-[max-content_1fr] overflow-hidden rounded-xl transition-all">
+      <section
+        className={cn(
+          'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden rounded-xl opacity-0 transition-all delay-[350ms]',
+          {
+            'scale-100 opacity-100 delay-0': isNoteExpanded,
+          },
+        )}>
         <ExpandedNote onExpand={setIsNoteExpanded} />
       </section>
     </main>
