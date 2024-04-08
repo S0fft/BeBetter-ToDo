@@ -1,5 +1,11 @@
 import { KeyboardEvent, useState } from 'react';
 
+import {
+  MAX_TITLE_HEIGHT_PX,
+  MAX_TITLE_LENGTH,
+  TITLE_PADDING_Y,
+  TITLE_TEXT_AREA_INITIAL_HEIGHT,
+} from '@features/ExpendedNote/lib/const';
 import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
 import { mockedNotes } from '@shared/lib/const';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
@@ -11,11 +17,6 @@ import UserAvatar from '@shared/ui/UserAvatar';
 function hasScrollbar(textArea: HTMLTextAreaElement) {
   return textArea.clientHeight < textArea.scrollHeight;
 }
-
-const TITLE_TEXT_AREA_INITIAL_HEIGHT = 36;
-const MAX_TITLE_LENGTH = 128;
-const MAX_TITLE_HEIGHT_PX = 92;
-const TITLE_PADDING_Y = 8;
 
 const ExpendedNote = () => {
   const selectedNote = useAppSelector(selectActiveNote);
