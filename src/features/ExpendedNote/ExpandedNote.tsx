@@ -8,7 +8,7 @@ import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import UserAvatar from '@shared/ui/UserAvatar';
 
-const ExpendedNote = () => {
+const ExpandedNote = () => {
   return (
     <>
       <Header>
@@ -27,4 +27,4 @@ const ExpendedNote = () => {
   );
 };
 
-export default ExpendedNote;
+export default ExpandedNote;

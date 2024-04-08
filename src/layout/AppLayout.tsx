@@ -1,4 +1,4 @@
-import ExpendedNote from '@features/ExpendedNote/ExpendedNote';
+import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
 import Search from '@features/Search/Search';
 import { Outlet } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const AppLayout = () => {
         </section>
       </div>
       <section className="grid grid-rows-[max-content_1fr] overflow-hidden rounded-xl">
-        <ExpendedNote />
+        <ExpandedNote />
       </section>
     </main>
   );
