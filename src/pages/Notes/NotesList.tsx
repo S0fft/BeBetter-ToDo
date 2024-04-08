@@ -16,6 +16,9 @@ const NotesList = () => {
           labels={note.labels}
         />
       ))}
+      <span className="!mt-6 flex w-full items-center justify-center text-sm text-on-surface-variant">
+        You reached the end 🙂
+      </span>
     </ul>
   );
 };
