@@ -134,5 +134,7 @@ body {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 250ms;
-  animation-timing-function: theme(transitionTimingFunction.emphasized-decelerate);
+  animation-timing-function: theme(
+    transitionTimingFunction.emphasized-decelerate
+  );
 }
