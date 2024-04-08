@@ -20,6 +20,7 @@
     "@material/web": "^1.4.0",
     "@reduxjs/toolkit": "^2.2.2",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.1",
     "overlayscrollbars": "^2.6.1",
