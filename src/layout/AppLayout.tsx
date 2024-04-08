@@ -28,7 +28,7 @@ const AppLayout = () => {
       </div>
       <section
         className={cn(
-          'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden rounded-xl opacity-0 transition-all delay-[350ms]',
+          'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden rounded-xl opacity-0 transition-all delay-[250ms]',
           {
             'scale-100 opacity-100 delay-0': isNoteExpanded,
           },
