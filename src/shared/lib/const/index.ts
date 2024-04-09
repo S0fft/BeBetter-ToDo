@@ -113,6 +113,96 @@ export const mockedNotes = [
     ],
     isPinned: false,
   },
+  {
+    id: 5,
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
+    createdAt: '2022-04-23',
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
+    isPinned: false,
+  },
+  {
+    id: 6,
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
+    createdAt: '2022-04-23',
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
+    isPinned: false,
+  },
+  {
+    id: 7,
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
+    createdAt: '2022-04-23',
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
+    isPinned: false,
+  },
+  {
+    id: 8,
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
+    createdAt: '2022-04-23',
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
+    isPinned: false,
+  },
+  {
+    id: 9,
+    title: 'Miscellaneous',
+    content:
+      '- Attended training on React.\n- Completed mandatory compliance and security courses.\n- Organized team-building activity scheduled for [Date].',
+    createdAt: '2022-04-23',
+    labels: [
+      {
+        title: 'Work',
+        color: '#EBD999',
+      },
+      {
+        title: 'Study',
+        color: '#E3F383',
+      },
+    ],
+    isPinned: false,
+  },
 ];
 
 export const BACKSPACE_KEY = 'Backspace';

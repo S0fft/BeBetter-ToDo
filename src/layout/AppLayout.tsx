@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
-import Search from '@features/Search/Search';
 import cn from '@shared/lib/helpers/cn';
 import { Outlet } from 'react-router-dom';
 
@@ -18,14 +17,7 @@ const AppLayout = () => {
         },
       )}>
       <aside className="w-[300px] pt-4 ">sidebar</aside>
-      <div className="relative h-full gap-3">
-        <header
-          style={{
-            viewTransitionName: 'header',
-          }}
-          className="absolute z-50 flex w-full justify-center pt-4">
-          <Search />
-        </header>
+      <div className="relative h-full w-full gap-3">
         <section>
           <Outlet context={[isNoteExpanded, setIsNoteExpanded]} />
         </section>
