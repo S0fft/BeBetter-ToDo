@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
+import Search from '@/features/Search/Search';
 import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
+import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
 import cn from '@shared/lib/helpers/cn';
 import { Outlet } from 'react-router-dom';
 
 const AppLayout = () => {
   const [isNoteExpanded, setIsNoteExpanded] = useState(true);
+  const { searchRef, notesListRef } = useHeaderScroll();
 
   return (
     <main
@@ -17,11 +20,23 @@ const AppLayout = () => {
         },
       )}>
       <aside className="w-[300px] pt-4 ">sidebar</aside>
-      <div className="relative h-full w-full gap-3">
-        <section>
-          <Outlet context={[isNoteExpanded, setIsNoteExpanded]} />
-        </section>
-      </div>
+      <section className="relative h-full w-full gap-3">
+        <Outlet
+          context={[
+            isNoteExpanded,
+            setIsNoteExpanded,
+            <header
+              key="header"
+              style={{
+                viewTransitionName: 'header',
+              }}
+              className="absolute z-50 flex w-full justify-center pt-4">
+              <Search ref={searchRef} />
+            </header>,
+            notesListRef,
+          ]}
+        />
+      </section>
       <section
         className={cn(
           'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden rounded-xl pt-4 opacity-0 transition-all delay-[50ms] duration-200',

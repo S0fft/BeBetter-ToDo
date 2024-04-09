@@ -1,4 +1,4 @@
-import AppLayout from '@layout/AppLayout';
+import AppLayout from '@layout/AppLayout/AppLayout';
 import { NotesList } from '@pages/Notes';
 import { routes } from '@shared/lib/const';
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';

@@ -206,3 +206,5 @@ export const mockedNotes = [
 ];
 
 export const BACKSPACE_KEY = 'Backspace';
+
+export const SEARCH_BOTTOM_OFFSET = 20;
