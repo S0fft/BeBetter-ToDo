@@ -5,7 +5,7 @@ import Labels from '@shared/ui/Labels';
 
 const Essentials = () => {
   const selectedNote = useAppSelector(selectActiveNote);
-  const { labels } = mockedNotes[selectedNote];
+  const labels = mockedNotes?.[selectedNote]?.labels;
 
   return (
     <article className="grid gap-1">

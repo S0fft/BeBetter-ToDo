@@ -4,7 +4,9 @@ import Body from '@features/ExpendedNote/ui/Body';
 import Controls from '@features/ExpendedNote/ui/Controls';
 import Essentials from '@features/ExpendedNote/ui/Essentials';
 import Header from '@features/ExpendedNote/ui/Header';
+import { noteSelected } from '@pages/Notes/slice';
 import viewTransition from '@shared/lib/helpers/viewTransition';
+import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import UserAvatar from '@shared/ui/UserAvatar';
@@ -14,7 +16,9 @@ type ExpandedNoteProps = {
 };
 
 const ExpandedNote: FC<ExpandedNoteProps> = ({ onExpand }) => {
+  const dispatch = useAppDispatch();
   const handleCollapseNote = () => {
+    dispatch(noteSelected(-1));
     viewTransition(() => onExpand(false));
   };
 

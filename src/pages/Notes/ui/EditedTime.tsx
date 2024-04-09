@@ -6,7 +6,7 @@ import { differenceInCalendarDays, format } from 'date-fns';
 
 const EditedTime = () => {
   const selectedNote = useAppSelector(selectActiveNote);
-  const { createdAt } = mockedNotes[selectedNote];
+  const createdAt = mockedNotes?.[selectedNote]?.createdAt;
 
   const diff = differenceInCalendarDays(new Date(), new Date(createdAt));
 

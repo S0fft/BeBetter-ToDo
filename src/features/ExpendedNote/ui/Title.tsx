@@ -13,7 +13,7 @@ import useAppSelector from '@shared/lib/hooks/useAppSelector';
 
 const Title = () => {
   const selectedNote = useAppSelector(selectActiveNote);
-  const { title: initialTitle } = mockedNotes[selectedNote];
+  const initialTitle = mockedNotes?.[selectedNote]?.title;
 
   const [title, setTitle] = useState(initialTitle);
 

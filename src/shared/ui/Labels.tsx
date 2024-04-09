@@ -14,7 +14,7 @@ const ANIMATION_OFFSET = 0.12;
 const Labels: FC<LabelsProps> = ({ labels, className }) => {
   return (
     <div className={cn('flex flex-shrink-0 gap-3.5', className)}>
-      {labels.map(({ title, color }, i) => {
+      {labels?.map(({ title, color }, i) => {
         const darkenColor = tinycolor(color)
           .darken(LABEL_COLOR_DECREASE)
           .toHexString();

@@ -14,7 +14,7 @@ const menuAnchorId = 'extendedNoteLabelsMenu';
 
 const Controls = () => {
   const selectedNote = useAppSelector(selectActiveNote);
-  const { labels } = mockedNotes[selectedNote];
+  const labels = mockedNotes?.[selectedNote]?.labels;
 
   const menuRef = useRef<MdMenu>(null);
 

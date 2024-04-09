@@ -41,7 +41,7 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
         style={menuStyles}
         slot="menu">
         {mockLabels.map((label) => {
-          const isChecked = activeLabels.some(
+          const isChecked = activeLabels?.some(
             (activeLabel) => activeLabel.title === label.title,
           );
 
