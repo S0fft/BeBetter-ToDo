@@ -1,30 +1,18 @@
 from django.db import models
+from django.utils import timezone
+from users.models import User
 
 
 class Todo(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
-    category = models.CharField(max_length=128)
+    label = models.CharField(max_length=128)
     content = models.TextField()
-    is_done = models.BooleanField()
-    is_trashed = models.BooleanField()
+    is_done = models.BooleanField(default=False)
+    is_trashed = models.BooleanField(default=False)
+    is_archived = models.BooleanField(default=False)
     time_created = models.DateTimeField(auto_now_add=True)
     time_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.title
-
-
-class Archive(Todo, models.Model):
-    time_archived = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return f'Archived: {self.title} at {self.time_archived}'
-
-
-class TrashBin(models.Model):
-    title = models.ForeignKey(Todo, on_delete=models.CASCADE)
-    category = models.CharField(max_length=128)
-    time_trashed = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return f'Removed: {self.title} at {self.time_trashed}'
