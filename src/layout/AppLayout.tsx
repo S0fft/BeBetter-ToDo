@@ -23,7 +23,7 @@ const AppLayout = () => {
           style={{
             viewTransitionName: 'header',
           }}
-          className="absolute z-50 w-full pt-4">
+          className="absolute z-50 flex w-full justify-center pt-4">
           <Search />
         </header>
         <section>

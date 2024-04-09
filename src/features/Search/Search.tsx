@@ -8,7 +8,7 @@ const Search = () => {
     <OutlinedTextField
       style={searchFieldStyles}
       placeholder="Search notes"
-      className="h-16 w-full rounded-full bg-surface pl-3 pr-2 text-on-surface outline-none transition-all duration-200 ease-standard-accelerate placeholder:text-on-surface-variant focus:-translate-y-0.5 focus:ring-4 focus:ring-high-contrast-inverse-primary focus:drop-shadow-md focus:ease-standard-decelerate">
+      className="h-16 w-full max-w-[720px] rounded-full bg-surface pl-3 pr-2 text-on-surface outline-none transition-all duration-200 ease-standard-accelerate placeholder:text-on-surface-variant focus:-translate-y-0.5 focus:ring-4 focus:ring-high-contrast-inverse-primary focus:drop-shadow-md focus:ease-standard-decelerate">
       <Icon slot="leading-icon" className="transition-transform ease-[inherit]">
         search
       </Icon>
