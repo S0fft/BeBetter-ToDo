@@ -2,10 +2,9 @@ import { MouseEvent, useRef } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
 import EditedTime from '@pages/Notes/ui/EditedTime';
-import { mockedNotes } from '@shared/lib/const';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import { mockedNotes, urlParams } from '@shared/lib/const';
+import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import LabelsMenu from '@shared/ui/labelMenu';
@@ -13,10 +12,11 @@ import LabelsMenu from '@shared/ui/labelMenu';
 const menuAnchorId = 'extendedNoteLabelsMenu';
 
 const Controls = () => {
-  const selectedNote = useAppSelector(selectActiveNote);
-  const labels = mockedNotes?.[selectedNote]?.labels;
-
+  const { readUrl } = useUrl();
   const menuRef = useRef<MdMenu>(null);
+
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const labels = mockedNotes?.[activeNote]?.labels;
 
   const handleLabelMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();

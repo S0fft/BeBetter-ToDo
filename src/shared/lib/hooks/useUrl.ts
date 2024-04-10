@@ -53,6 +53,10 @@ function useUrl() {
         searchParams.set(query, String(value));
       }
 
+      if (typeof query !== 'object' && value === undefined) {
+        searchParams.delete(query);
+      }
+
       setSearchParams(searchParams);
     },
 

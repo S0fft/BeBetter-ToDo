@@ -1,11 +1,12 @@
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
-import { mockedNotes } from '@shared/lib/const';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import { mockedNotes, urlParams } from '@shared/lib/const';
+import useUrl from '@shared/lib/hooks/useUrl';
 import Labels from '@shared/ui/Labels';
 
 const Essentials = () => {
-  const selectedNote = useAppSelector(selectActiveNote);
-  const labels = mockedNotes?.[selectedNote]?.labels;
+  const { readUrl } = useUrl();
+
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const labels = mockedNotes?.[activeNote]?.labels;
 
   return (
     <article className="grid gap-1">

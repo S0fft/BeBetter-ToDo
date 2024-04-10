@@ -1,24 +1,22 @@
 import { Dispatch, FC, SetStateAction, useRef } from 'react';
 
 import { iconStyles, pinButtonStyles } from '@pages/Notes/lib/const';
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
-import { noteSelected } from '@pages/Notes/slice';
 import Body from '@pages/Notes/ui/Body';
 import Content from '@pages/Notes/ui/Content';
 import ContextMenu from '@pages/Notes/ui/ContextMenu';
 import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
+import { urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import useUrl from '@shared/lib/hooks/useUrl';
 import { Label as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { format } from 'date-fns';
-import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
 
 type NoteProps = {
@@ -40,10 +38,10 @@ const Note: FC<NoteProps> = ({
 }) => {
   const [isExpanded, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
-  const activeNote = useAppSelector(selectActiveNote);
-  const dispatch = useDispatch();
   const containerRef = useRef<HTMLLIElement>(null);
+  const { readUrl, setUrl } = useUrl();
 
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
   const isActiveNote = activeNote === id;
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
@@ -54,7 +52,7 @@ const Note: FC<NoteProps> = ({
     } else {
       viewTransition(() => setIsExpandNote(true));
     }
-    dispatch(noteSelected(id));
+    setUrl(urlParams.NOTE_ID, id);
   };
 
   return (

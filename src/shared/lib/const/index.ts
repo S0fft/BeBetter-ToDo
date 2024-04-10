@@ -1,4 +1,6 @@
-export const urlParams = {} as const;
+export const urlParams = {
+  NOTE_ID: 'id',
+} as const;
 
 export const queryParamsInit = {};
 

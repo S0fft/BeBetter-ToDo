@@ -1,12 +1,13 @@
 import { ONE_DAY, ONE_YEAR } from '@pages/Notes/lib/const';
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
-import { mockedNotes } from '@shared/lib/const';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import { mockedNotes, urlParams } from '@shared/lib/const';
+import useUrl from '@shared/lib/hooks/useUrl';
 import { differenceInCalendarDays, format } from 'date-fns';
 
 const EditedTime = () => {
-  const selectedNote = useAppSelector(selectActiveNote);
-  const createdAt = mockedNotes?.[selectedNote]?.createdAt;
+  const { readUrl } = useUrl();
+
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const createdAt = mockedNotes?.[activeNote]?.createdAt;
 
   const diff = differenceInCalendarDays(new Date(), new Date(createdAt));
 

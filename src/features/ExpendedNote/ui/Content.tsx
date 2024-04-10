@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
-import { mockedNotes } from '@shared/lib/const';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import { mockedNotes, urlParams } from '@shared/lib/const';
+import useUrl from '@shared/lib/hooks/useUrl';
 
 const Content = () => {
-  const selectedNote = useAppSelector(selectActiveNote);
-  const initialContent = mockedNotes?.[selectedNote]?.content;
+  const { readUrl } = useUrl();
+
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const initialContent = mockedNotes?.[activeNote]?.content;
 
   const [content, setContent] = useState(initialContent);
 

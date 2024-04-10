@@ -6,14 +6,15 @@ import {
   TITLE_PADDING_Y,
   TITLE_TEXT_AREA_INITIAL_HEIGHT,
 } from '@features/ExpendedNote/lib/const';
-import selectActiveNote from '@pages/Notes/lib/selectors/selectActiveNote';
-import { BACKSPACE_KEY, mockedNotes } from '@shared/lib/const';
+import { BACKSPACE_KEY, mockedNotes, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import useUrl from '@shared/lib/hooks/useUrl';
 
 const Title = () => {
-  const selectedNote = useAppSelector(selectActiveNote);
-  const initialTitle = mockedNotes?.[selectedNote]?.title;
+  const { readUrl } = useUrl();
+
+  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const initialTitle = mockedNotes?.[activeNote]?.title;
 
   const [title, setTitle] = useState(initialTitle);
 
