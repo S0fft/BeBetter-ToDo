@@ -5,9 +5,6 @@ import { mockedNotes } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
 import { useOutletContext } from 'react-router-dom';
 
-// TODO: fix search focus width
-// TODO: animate end text
-
 type OutletContext = [
   boolean,
   Dispatch<SetStateAction<boolean>>,
@@ -22,7 +19,7 @@ const NotesList = () => {
   return (
     <ul
       ref={notesListRef}
-      className={cn('relative h-dvh overflow-y-scroll pb-4')}>
+      className={cn('relative h-dvh overflow-y-scroll px-2 pb-4')}>
       {children}
       <div
         className={cn('grid grid-cols-1 gap-3 pt-[92px] transition-all', {

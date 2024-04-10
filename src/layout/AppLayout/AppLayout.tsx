@@ -19,7 +19,7 @@ const AppLayout = () => {
             !isNoteExpanded,
         },
       )}>
-      <aside className="w-[300px] pt-4 ">sidebar</aside>
+      <aside className="w-full pt-4">sidebar</aside>
       <section className="relative h-full w-full gap-3">
         <Outlet
           context={[
@@ -30,7 +30,7 @@ const AppLayout = () => {
               style={{
                 viewTransitionName: 'header',
               }}
-              className="absolute z-50 flex w-full justify-center pt-4">
+              className="absolute left-0 top-0 z-50 flex w-full justify-center px-[inherit] pt-4">
               <Search ref={searchRef} />
             </header>,
             notesListRef,
