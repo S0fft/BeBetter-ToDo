@@ -3,14 +3,14 @@ import { useState } from 'react';
 import Search from '@/features/Search/Search';
 import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
-import { urlParams } from '@shared/lib/const';
+import { EMPTY_URL_PARAM, urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Outlet } from 'react-router-dom';
 
 const AppLayout = () => {
   const { readUrl } = useUrl();
-  const isNoteSelected = Number(readUrl(urlParams.NOTE_ID)) !== 0;
+  const isNoteSelected = Number(readUrl(urlParams.NOTE_ID)) !== EMPTY_URL_PARAM;
 
   const [isNoteExpanded, setIsNoteExpanded] = useState(isNoteSelected);
   const { searchRef, notesListRef } = useHeaderScroll();
