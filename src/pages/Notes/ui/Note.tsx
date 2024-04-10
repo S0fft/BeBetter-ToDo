@@ -65,9 +65,9 @@ const Note: FC<NoteProps> = ({
       }}
       onClick={handleSelectNote}
       className={cn(
-        'relative flex h-[200px] w-full flex-col gap-5 rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-colors ease-emphasized-decelerate after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:rounded-xl after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-50 hover:bg-surface-container-low',
+        'relative flex h-[200px] w-full flex-col gap-5 rounded-xl bg-surface-container pl-6 pr-3 pt-6 text-on-surface transition-all duration-400 ease-emphasized-decelerate after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:h-[90px] after:w-full after:rounded-xl after:bg-gradient-to-t after:from-surface-bright after:to-transparent after:opacity-30 hover:bg-surface-container-low',
         {
-          'bg-high-contrast-inverse-primary hover:bg-high-contrast-inverse-primary':
+          '-translate-y-0.5 bg-high-contrast-inverse-primary drop-shadow-md [box-shadow:_0px_1px_2px_0px_#0000004D] hover:bg-high-contrast-inverse-primary':
             isActiveNote,
         },
       )}>
