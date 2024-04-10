@@ -3,13 +3,13 @@ import { forwardRef } from 'react';
 import { MdMenu } from '@material/web/all';
 
 import { menuStyles } from '@pages/Notes/lib/const';
-import { Label } from '@shared/types';
+import { Label, MdProps } from '@shared/types';
 import Icon from '@shared/ui/Icon';
 import LabelMenuItem from '@shared/ui/labelMenu/ui/LabelMenuItem';
 import Menu from '@shared/ui/Menu';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 
-type LabelsMenuProps = Partial<Omit<MdMenu, keyof HTMLElement>> & {
+type LabelsMenuProps = MdProps<MdMenu> & {
   activeLabels: Label[];
 };
 
