@@ -5,8 +5,10 @@ import { MdMenu } from '@material/web/all';
 import { menuItemStyles, menuStyles } from '@pages/Notes/lib/const';
 import { Label } from '@shared/types';
 import Checkbox from '@shared/ui/Checkbox';
+import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
 import MenuItem from '@shared/ui/MenuItem';
+import OutlinedTextField from '@shared/ui/OutlinedTextField';
 
 type LabelsMenuProps = Partial<Omit<MdMenu, keyof HTMLElement>> & {
   activeLabels: Label[];
@@ -31,6 +33,12 @@ const mockLabels: Label[] = [
   },
 ];
 
+const textFieldStyles = {
+  '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',
+};
+
+// TODO: fix text field focus issue
+
 const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
   ({ activeLabels, ...props }, ref) => {
     return (
@@ -40,6 +48,13 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
         className="min-w-48"
         style={menuStyles}
         slot="menu">
+        <OutlinedTextField
+          style={textFieldStyles}
+          label="label note"
+          className="mx-2">
+          <Icon slot="leading-icon">search</Icon>
+          <Icon slot="trailing-icon">cancel</Icon>
+        </OutlinedTextField>
         {mockLabels.map((label) => {
           const isChecked = activeLabels?.some(
             (activeLabel) => activeLabel.title === label.title,
