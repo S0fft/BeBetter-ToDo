@@ -21,15 +21,13 @@ const useHeaderScroll = () => {
 
       if (isInitialPosition) {
         search.classList.remove('drop-shadow-lg');
-      } else {
-        search.classList.add('drop-shadow-lg');
       }
 
       const searchBottom = search.offsetTop + search.offsetHeight;
 
       if (scrolled > searchBottom) {
-        search.classList.add('absolute');
         search.style.translate = '0 -130%';
+        search.classList.add('drop-shadow-lg');
       }
 
       if (scrolled > searchBottom + SEARCH_BOTTOM_OFFSET) {

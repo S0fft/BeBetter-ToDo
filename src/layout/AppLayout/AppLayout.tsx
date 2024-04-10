@@ -30,7 +30,7 @@ const AppLayout = () => {
               style={{
                 viewTransitionName: 'header',
               }}
-              className="absolute left-0 top-0 z-50 flex w-full justify-center px-[inherit] pt-4">
+              className="absolute left-0 top-0 z-50 flex w-full justify-center px-2 pt-4">
               <Search ref={searchRef} />
             </header>,
             notesListRef,
