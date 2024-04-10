@@ -12,7 +12,7 @@ import {
 import { Label } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
-import LabelsMenu from '@shared/ui/LabelsMenu';
+import LabelsMenu from '@shared/ui/labelMenu';
 import Menu from '@shared/ui/Menu';
 import MenuItem from '@shared/ui/MenuItem';
 import SubMenu from '@shared/ui/SubMenu';

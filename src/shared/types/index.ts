@@ -19,3 +19,5 @@ export type Label = {
   title: string;
   color: string;
 };
+
+export type MdProps<TComponent> = Partial<Omit<TComponent, keyof HTMLElement>>;

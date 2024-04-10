@@ -2,12 +2,11 @@ import { forwardRef } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
-import { menuItemStyles, menuStyles } from '@pages/Notes/lib/const';
+import { menuStyles } from '@pages/Notes/lib/const';
 import { Label } from '@shared/types';
-import Checkbox from '@shared/ui/Checkbox';
 import Icon from '@shared/ui/Icon';
+import LabelMenuItem from '@shared/ui/labelMenu/ui/LabelMenuItem';
 import Menu from '@shared/ui/Menu';
-import MenuItem from '@shared/ui/MenuItem';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 
 type LabelsMenuProps = Partial<Omit<MdMenu, keyof HTMLElement>> & {
@@ -37,7 +36,7 @@ const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',
 };
 
-// TODO: fix text field focus issue
+// FIXME: text field focus issue
 
 const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
   ({ activeLabels, ...props }, ref) => {
@@ -61,14 +60,11 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
           );
 
           return (
-            <MenuItem
-              keepOpen
+            <LabelMenuItem
               key={label.title}
-              style={menuItemStyles}
-              className="mx-2 rounded-md">
-              <span slot="headline">{label.title}</span>
-              <Checkbox checked={isChecked} slot="end" />
-            </MenuItem>
+              title={label.title}
+              isChecked={isChecked}
+            />
           );
         })}
       </Menu>

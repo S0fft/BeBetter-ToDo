@@ -8,7 +8,7 @@ import { mockedNotes } from '@shared/lib/const';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
-import LabelsMenu from '@shared/ui/LabelsMenu';
+import LabelsMenu from '@shared/ui/labelMenu';
 
 const menuAnchorId = 'extendedNoteLabelsMenu';
 
