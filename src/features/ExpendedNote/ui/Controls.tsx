@@ -15,7 +15,7 @@ const Controls = () => {
   const { readUrl } = useUrl();
   const menuRef = useRef<MdMenu>(null);
 
-  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const labels = mockedNotes?.[activeNote]?.labels;
 
   const handleLabelMenuOpen = (e: MouseEvent) => {

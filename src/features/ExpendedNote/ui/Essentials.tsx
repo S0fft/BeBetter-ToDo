@@ -5,7 +5,7 @@ import Labels from '@shared/ui/Labels';
 const Essentials = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const labels = mockedNotes?.[activeNote]?.labels;
 
   return (

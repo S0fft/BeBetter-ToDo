@@ -41,7 +41,7 @@ const Note: FC<NoteProps> = ({
   const containerRef = useRef<HTMLLIElement>(null);
   const { readUrl, setUrl } = useUrl();
 
-  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const isActiveNote = activeNote === id;
   const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');

@@ -13,7 +13,7 @@ import useUrl from '@shared/lib/hooks/useUrl';
 const Title = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const initialTitle = mockedNotes?.[activeNote]?.title;
 
   const [title, setTitle] = useState(initialTitle);

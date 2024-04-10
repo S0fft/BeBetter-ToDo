@@ -6,7 +6,7 @@ import { differenceInCalendarDays, format } from 'date-fns';
 const EditedTime = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number(readUrl(urlParams.NOTE_ID));
+  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const createdAt = mockedNotes?.[activeNote]?.createdAt;
 
   const diff = differenceInCalendarDays(new Date(), new Date(createdAt));

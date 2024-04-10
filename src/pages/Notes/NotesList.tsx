@@ -28,9 +28,7 @@ const NotesList = () => {
         {mockedNotes.map((note) => (
           <Note
             key={note.id}
-            // + 1 because of the react router empty search param = 0.
-            // Therefore with zero based id's by default first note will be selected on note close
-            id={note.id + 1}
+            id={note.id}
             title={note.title}
             content={note.content}
             createdAt={note.createdAt}
