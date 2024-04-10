@@ -17,6 +17,7 @@ const Controls = () => {
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const labels = mockedNotes?.[activeNote]?.labels;
+  const labelsMenuKey = `extendedNoteLabels-${activeNote}`;
 
   const handleLabelMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
@@ -36,6 +37,7 @@ const Controls = () => {
           <Icon>label</Icon>
         </IconButton>
         <LabelsMenu
+          key={labelsMenuKey}
           anchorCorner="end-start"
           anchor={menuAnchorId}
           ref={menuRef}
