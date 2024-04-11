@@ -22,10 +22,6 @@ export const dotButtonStyles = {
   '--md-filled-icon-button-container-width': '30px',
 };
 
-export const iconStyles = {
-  fontVariationSettings: "'FILL' 1",
-};
-
 export const menuStyles = {
   '--md-menu-container-shape': '12px',
   '--md-menu-item-one-line-container-height': '23px',
