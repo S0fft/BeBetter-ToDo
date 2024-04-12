@@ -21,13 +21,13 @@ const AppLayout = () => {
   return (
     <main
       className={cn(
-        'grid h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 pb-4 text-on-surface transition-all duration-400 ease-emphasized-decelerate',
+        'grid max-h-dvh grid-cols-[300px_1fr_1fr] grid-rows-1 gap-6 text-on-surface transition-all duration-400 ease-emphasized-decelerate',
         {
           'grid-cols-[300px_1fr_0fr] ease-emphasized-accelerate':
             !isNoteExpanded,
         },
       )}>
-      <aside className="w-full pl-3 pt-3">
+      <aside className="h-full w-full overflow-scroll px-3 pt-3">
         <NavigationDrawer />
       </aside>
       <section className="relative h-full w-full gap-3">
@@ -49,7 +49,7 @@ const AppLayout = () => {
       </section>
       <section
         className={cn(
-          'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden pr-4 pt-4 opacity-0 transition-all delay-[50ms] duration-200',
+          'grid scale-95 grid-rows-[max-content_1fr] overflow-hidden pb-4 pr-4 pt-4 opacity-0 transition-all delay-[50ms] duration-200',
           {
             'scale-100 opacity-100 delay-0': isNoteExpanded,
           },

@@ -225,6 +225,18 @@ export const mockLabels = [
     title: 'Work',
     color: '#EBD999',
   },
+  {
+    title: 'Cat',
+    color: '#EBD999',
+  },
+  {
+    title: 'Foo',
+    color: '#EBD999',
+  },
+  {
+    title: 'Bar',
+    color: '#EBD999',
+  },
 ];
 
 export const BACKSPACE_KEY = 'Backspace';
