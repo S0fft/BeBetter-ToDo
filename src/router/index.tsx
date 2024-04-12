@@ -25,7 +25,7 @@ export const ROUTES: RouteObject[] = [
         element: <div>TRASH</div>,
       },
       {
-        path: routes.LABEL,
+        path: routes.DYNAMIC_LABEL,
         element: <div>TRASH</div>,
       },
     ],
