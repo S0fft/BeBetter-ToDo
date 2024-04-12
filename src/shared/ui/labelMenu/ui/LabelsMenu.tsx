@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 import { MdMenu } from '@material/web/all';
 
 import { menuStyles } from '@pages/Notes/lib/const';
+import { mockLabels } from '@shared/lib/const';
 import { Label, MdProps } from '@shared/types';
 import Icon from '@shared/ui/Icon';
 import LabelMenuItem from '@shared/ui/labelMenu/ui/LabelMenuItem';
@@ -12,25 +13,6 @@ import OutlinedTextField from '@shared/ui/OutlinedTextField';
 type LabelsMenuProps = MdProps<MdMenu> & {
   activeLabels: Label[];
 };
-
-const mockLabels: Label[] = [
-  {
-    title: 'Home',
-    color: '#DAEB99',
-  },
-  {
-    title: 'Study',
-    color: '#E3F383',
-  },
-  {
-    title: 'Important',
-    color: '#BDECE0',
-  },
-  {
-    title: 'Work',
-    color: '#EBD999',
-  },
-];
 
 const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',

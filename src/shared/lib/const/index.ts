@@ -13,7 +13,8 @@ export const routes = {
   NOTES: 'notes',
   ARCHIVE: 'archive',
   TRASH: 'trash',
-  LABEL: 'labels/:labelId',
+  LABEL: 'labels',
+  DYNAMIC_LABEL: 'labels/:labelId',
 } as const;
 
 export const langs = {
@@ -204,6 +205,25 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+  },
+];
+
+export const mockLabels = [
+  {
+    title: 'Home',
+    color: '#DAEB99',
+  },
+  {
+    title: 'Study',
+    color: '#E3F383',
+  },
+  {
+    title: 'Important',
+    color: '#BDECE0',
+  },
+  {
+    title: 'Work',
+    color: '#EBD999',
   },
 ];
 
