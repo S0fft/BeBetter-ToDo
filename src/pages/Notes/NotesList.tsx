@@ -1,8 +1,9 @@
 import { Dispatch, ReactNode, RefObject, SetStateAction } from 'react';
 
+import selectNotes from '@pages/Notes/lib/selectors/selectNotes';
 import Note from '@pages/Notes/ui/Note';
-import { mockedNotes } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
+import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import { useOutletContext } from 'react-router-dom';
 
 type OutletContext = [
@@ -16,6 +17,8 @@ const NotesList = () => {
   const [isNoteExpanded, , children, notesListRef] =
     useOutletContext<OutletContext>();
 
+  const notes = useAppSelector(selectNotes);
+
   return (
     <ul
       ref={notesListRef}
@@ -25,7 +28,7 @@ const NotesList = () => {
         className={cn('grid grid-cols-1 gap-3 pt-[92px] transition-all', {
           'grid-cols-2 items-center justify-center': !isNoteExpanded,
         })}>
-        {mockedNotes.map((note) => (
+        {notes.map((note) => (
           <Note
             key={note.id}
             id={note.id}
