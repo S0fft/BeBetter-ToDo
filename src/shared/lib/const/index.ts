@@ -40,6 +40,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: true,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 1,
@@ -61,6 +63,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: true,
+    isArchived: true,
+    isTrashed: false,
   },
   {
     id: 2,
@@ -79,6 +83,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: true,
+    isArchived: true,
+    isTrashed: false,
   },
   {
     id: 3,
@@ -97,6 +103,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 4,
@@ -115,6 +123,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 5,
@@ -133,6 +143,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 6,
@@ -151,6 +163,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 7,
@@ -169,6 +183,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 8,
@@ -187,6 +203,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: false,
   },
   {
     id: 9,
@@ -205,6 +223,8 @@ export const mockedNotes = [
       },
     ],
     isPinned: false,
+    isArchived: false,
+    isTrashed: true,
   },
 ];
 

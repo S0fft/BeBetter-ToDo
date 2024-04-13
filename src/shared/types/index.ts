@@ -33,4 +33,6 @@ export type Note = {
   createdAt: string;
   labels: Label[];
   isPinned: boolean;
+  isArchived: boolean;
+  isTrashed: boolean;
 };
