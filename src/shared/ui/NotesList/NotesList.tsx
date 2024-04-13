@@ -3,6 +3,7 @@ import { Dispatch, FC, ReactNode, RefObject, SetStateAction } from 'react';
 import Note from '@pages/Notes/ui/Note';
 import cn from '@shared/lib/helpers/cn';
 import { Note as TNote } from '@shared/types';
+import Footer from '@shared/ui/NotesList/ui/Footer';
 import { useOutletContext } from 'react-router-dom';
 
 type OutletContext = [
@@ -22,7 +23,7 @@ const NotesList: FC<NotesListProps> = ({ notes, preList }) => {
     useOutletContext<OutletContext>();
 
   return (
-    <ul
+    <article
       ref={notesListRef}
       className={cn('relative h-dvh overflow-y-scroll px-2 pb-4')}>
       {children}
@@ -45,10 +46,8 @@ const NotesList: FC<NotesListProps> = ({ notes, preList }) => {
           ))}
         </ul>
       </div>
-      <span className="!mt-6 flex w-full items-center justify-center text-sm text-on-surface-variant">
-        You reached the end 🙂
-      </span>
-    </ul>
+      <Footer containerRef={notesListRef} />
+    </article>
   );
 };
 
