@@ -32,7 +32,7 @@ const NavigationDrawer = () => {
       }),
     );
 
-    setUrl(urlParams.NOTE_ID, notesNum - 1);
+    setUrl(urlParams.NOTE_ID, notesNum);
   };
 
   return (

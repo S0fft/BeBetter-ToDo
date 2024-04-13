@@ -10,7 +10,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   notes: mockedNotes,
-  notesNum: 0,
+  notesNum: mockedNotes.length,
 };
 
 const noteSlice = createSlice({
