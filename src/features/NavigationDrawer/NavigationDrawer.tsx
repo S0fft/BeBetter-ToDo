@@ -1,10 +1,10 @@
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
-import selectNotesNum from '@pages/Notes/lib/selectors/selectNotesNum';
 import { noteAdded } from '@pages/Notes/slice';
 import { mockLabels, routes, urlParams } from '@shared/lib/const';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import useUrl from '@shared/lib/hooks/useUrl';
+import selectNotesNum from '@shared/lib/selectors/selectNotesNum';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
 import { useDispatch } from 'react-redux';
@@ -29,6 +29,8 @@ const NavigationDrawer = () => {
         labels: [],
         createdAt,
         isPinned: false,
+        isArchived: false,
+        isTrashed: false,
       }),
     );
 
