@@ -1,5 +1,7 @@
 import { Dispatch, FC, ReactNode, RefObject, SetStateAction } from 'react';
 
+import Search from '@features/Search/Search';
+import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
 import Note from '@pages/Notes/ui/Note';
 import cn from '@shared/lib/helpers/cn';
 import { Note as TNote } from '@shared/types';
@@ -19,14 +21,21 @@ type NotesListProps = {
 };
 
 const NotesList: FC<NotesListProps> = ({ notes, preList }) => {
-  const [isNoteExpanded, , children, notesListRef] =
-    useOutletContext<OutletContext>();
+  const [isNoteExpanded] = useOutletContext<OutletContext>();
+  const { searchRef, notesListRef } = useHeaderScroll();
 
   return (
     <article
       ref={notesListRef}
       className={cn('relative h-dvh overflow-y-scroll px-2 pb-4')}>
-      {children}
+      <header
+        key="header"
+        style={{
+          viewTransitionName: 'header',
+        }}
+        className="absolute left-0 top-0 z-50 flex w-full justify-center px-2 pt-4">
+        <Search ref={searchRef} />
+      </header>
       <div className="grid pt-[92px]">
         {preList}
         <ul
