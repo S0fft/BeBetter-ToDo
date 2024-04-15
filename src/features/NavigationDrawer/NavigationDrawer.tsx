@@ -1,7 +1,7 @@
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
 import { noteAdded } from '@pages/Notes/slice';
-import { mockLabels, routes, urlParams } from '@shared/lib/const';
+import { routes, urlParams } from '@shared/lib/const';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import useUrl from '@shared/lib/hooks/useUrl';
 import selectNotesNum from '@shared/lib/selectors/selectNotesNum';
@@ -9,6 +9,8 @@ import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { mockLabels } from '../../../dev-data';
 
 const NavigationDrawer = () => {
   const navigate = useNavigate();

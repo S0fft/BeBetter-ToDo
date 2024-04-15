@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { mockedNotes } from '@shared/lib/const';
 import { Note } from '@shared/types';
+
+import { mockedNotes } from '../../../../dev-data';
 
 type InitialState = {
   notes: Note[];

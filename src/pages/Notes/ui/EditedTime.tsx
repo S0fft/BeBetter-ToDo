@@ -1,7 +1,9 @@
 import { ONE_DAY, ONE_YEAR } from '@pages/Notes/lib/const';
-import { mockedNotes, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { differenceInCalendarDays, format } from 'date-fns';
+
+import { mockedNotes } from '../../../../dev-data';
 
 const EditedTime = () => {
   const { readUrl } = useUrl();

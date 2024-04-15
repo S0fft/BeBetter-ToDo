@@ -1,5 +1,7 @@
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
-import { mockLabels, routes } from '@shared/lib/const';
+import { routes } from '@shared/lib/const';
+
+import { mockLabels } from '../../../../dev-data';
 
 const LabelsList = () => {
   return (
