@@ -23,7 +23,7 @@ export default {
         'fade-in': {
           from: {
             opacity: 0,
-            scale: 0,
+            scale: '0.95',
           },
           to: {
             opacity: 1,
@@ -146,6 +146,7 @@ export default {
       'inverse-surface': 'var(--md-sys-color-inverse-surface)',
       'inverse-on-surface': 'var(--md-sys-color-inverse-on-surface)',
       'inverse-primary': 'var(--md-sys-color-inverse-primary)',
+      'high-contrast-inverse-primary': 'var(--md-sys-color-high-contrast-inverse-primary)',
       shadow: 'var(--md-sys-color-shadow)',
       'surface-tint': 'var(--md-sys-color-surface-tint)',
       'outline-variant': 'var(--md-sys-color-outline-variant)',

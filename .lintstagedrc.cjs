@@ -1,6 +1,6 @@
 module.exports = {
   './src/**/*.{tsx,ts}': [
-    'pnpm lint',
+    'pnpm lint:fix',
     'pnpm prettier:fix',
   ],
 };

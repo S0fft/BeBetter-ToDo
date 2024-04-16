@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animation-delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+
+  .animation-delay-900 {
+    animation-delay: 900ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+}
+
 :root {
   --md-ref-typeface-brand: 'Roboto';
   --md-ref-typeface-plain: 'Roboto';
@@ -92,6 +138,7 @@
   --md-sys-color-inverse-surface: rgb(48 49 41);
   --md-sys-color-inverse-on-surface: rgb(242 241 229);
   --md-sys-color-inverse-primary: rgb(190 206 127);
+  --md-sys-color-high-contrast-inverse-primary: rgb(227 244 161);
   --md-sys-color-primary-fixed: rgb(218 235 153);
   --md-sys-color-on-primary-fixed: rgb(23 30 0);
   --md-sys-color-primary-fixed-dim: rgb(190 206 127);
@@ -114,7 +161,7 @@
 }
 
 ::selection {
-  background-color: var(--md-sys-color-primary-fixed);
+  background-color: var(--md-sys-color-high-contrast-inverse-primary);
   color: var(--md-sys-color-on-primary-fixed);
 }
 
@@ -128,4 +175,12 @@ body {
   transition:
     color 200ms ease-in-out,
     background-color 200ms ease-in-out;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: theme(
+    transitionTimingFunction.emphasized-decelerate
+  );
 }
