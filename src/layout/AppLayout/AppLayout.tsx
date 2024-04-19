@@ -25,7 +25,7 @@ const AppLayout = () => {
         },
       )}>
       <aside className="h-full w-full overflow-scroll px-3 pt-3">
-        <NavigationDrawer />
+        <NavigationDrawer onExpandNote={setIsNoteExpanded} />
       </aside>
       <section className="relative h-full w-full gap-3">
         <Outlet context={[isNoteExpanded, setIsNoteExpanded]} />

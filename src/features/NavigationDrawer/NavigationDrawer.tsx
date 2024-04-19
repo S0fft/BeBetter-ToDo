@@ -1,3 +1,5 @@
+import { Dispatch, FC, SetStateAction } from 'react';
+
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
 import { noteAdded } from '@pages/Notes/slice';
@@ -12,7 +14,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { mockLabels } from '../../../dev-data';
 
-const NavigationDrawer = () => {
+type NavigationDrawerProps = {
+  onExpandNote: Dispatch<SetStateAction<boolean>>;
+};
+
+const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
   const navigate = useNavigate();
   const { setUrl } = useUrl();
   const dispatch = useDispatch();
@@ -37,6 +43,7 @@ const NavigationDrawer = () => {
     );
 
     setUrl(urlParams.NOTE_ID, notesNum);
+    onExpandNote(true);
   };
 
   return (
