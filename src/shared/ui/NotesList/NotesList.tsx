@@ -49,9 +49,9 @@ const NotesList: FC<NotesListProps> = ({
       <div className="grid h-[calc(100%-92px)] pt-[92px]">
         {preList}
         <ul
-          className={cn('grid grid-cols-1 gap-3 transition-all', {
+          className={cn('grid grid-cols-1 content-start gap-3 transition-all', {
             'grid-cols-2 justify-center': !isNoteExpanded,
-            'align-items': listIsEmpty,
+            'align-items content-center': listIsEmpty,
           })}>
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
