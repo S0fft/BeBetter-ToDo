@@ -16,13 +16,10 @@ class TodoViewSet(viewsets.ModelViewSet):
 
         return Todo.objects.filter(pk=pk)
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
-
     @action(methods=['get'], detail=True)
     def label(self, request, pk=None):
-        label = Label.objects.get(pk=pk)
-
-        return Response({'Label': label.title})
+        try:
+            label = Label.objects.get(pk=pk)
+        except Label.DoesNotExist:
+            return Response({'error': 'Label not found!'}, status=404)
+        return Response({'label': label.title})
