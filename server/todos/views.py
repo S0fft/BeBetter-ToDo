@@ -25,4 +25,5 @@ class TodoViewSet(viewsets.ModelViewSet):
             label = Label.objects.get(pk=pk)
         except Label.DoesNotExist:
             return Response({'error': 'Label not found!'}, status=404)
+
         return Response({'label': label.title})
