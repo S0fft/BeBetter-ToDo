@@ -9,28 +9,11 @@ import LabelMenuItem from '@shared/ui/labelMenu/ui/LabelMenuItem';
 import Menu from '@shared/ui/Menu';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 
+import { mockLabels } from '../../../../../dev-data';
+
 type LabelsMenuProps = MdProps<MdMenu> & {
   activeLabels: Label[];
 };
-
-const mockLabels: Label[] = [
-  {
-    title: 'Home',
-    color: '#DAEB99',
-  },
-  {
-    title: 'Study',
-    color: '#E3F383',
-  },
-  {
-    title: 'Important',
-    color: '#BDECE0',
-  },
-  {
-    title: 'Work',
-    color: '#EBD999',
-  },
-];
 
 const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',

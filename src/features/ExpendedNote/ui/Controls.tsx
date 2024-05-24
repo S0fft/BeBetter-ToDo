@@ -3,11 +3,13 @@ import { MouseEvent, useRef } from 'react';
 import { MdMenu } from '@material/web/all';
 
 import EditedTime from '@pages/Notes/ui/EditedTime';
-import { mockedNotes, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import LabelsMenu from '@shared/ui/labelMenu';
+
+import { mockedNotes } from '../../../../dev-data';
 
 const menuAnchorId = 'extendedNoteLabelsMenu';
 

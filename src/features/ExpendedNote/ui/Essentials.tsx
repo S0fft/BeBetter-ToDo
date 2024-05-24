@@ -1,6 +1,8 @@
-import { mockedNotes, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Labels from '@shared/ui/Labels';
+
+import { mockedNotes } from '../../../../dev-data';
 
 const Essentials = () => {
   const { readUrl } = useUrl();

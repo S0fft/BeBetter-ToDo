@@ -6,9 +6,11 @@ import {
   TITLE_PADDING_Y,
   TITLE_TEXT_AREA_INITIAL_HEIGHT,
 } from '@features/ExpendedNote/lib/const';
-import { BACKSPACE_KEY, mockedNotes, urlParams } from '@shared/lib/const';
+import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';
+
+import { mockedNotes } from '../../../../dev-data';
 
 const Title = () => {
   const { readUrl } = useUrl();

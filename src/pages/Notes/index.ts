@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as NotesList } from './NotesList';
+import Notes from './Notes';
+
+export default Notes;

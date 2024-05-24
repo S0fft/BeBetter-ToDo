@@ -1,5 +1,8 @@
 import AppLayout from '@layout/AppLayout/AppLayout';
-import { NotesList } from '@pages/Notes';
+import Archive from '@pages/Archive';
+import Label from '@pages/Label';
+import Notes from '@pages/Notes/Notes';
+import Trash from '@pages/Trash';
 import { routes } from '@shared/lib/const';
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 
@@ -14,19 +17,19 @@ export const ROUTES: RouteObject[] = [
       },
       {
         path: routes.NOTES,
-        element: <NotesList />,
+        element: <Notes />,
       },
       {
         path: routes.ARCHIVE,
-        element: <div>ARCHIVE</div>,
+        element: <Archive />,
       },
       {
         path: routes.TRASH,
-        element: <div>TRASH</div>,
+        element: <Trash />,
       },
       {
-        path: routes.LABEL,
-        element: <div>TRASH</div>,
+        path: routes.DYNAMIC_LABEL,
+        element: <Label />,
       },
     ],
   },

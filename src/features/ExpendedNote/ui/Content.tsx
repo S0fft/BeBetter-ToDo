@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-import { mockedNotes, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
+
+import { mockedNotes } from '../../../../dev-data';
 
 const Content = () => {
   const { readUrl } = useUrl();
