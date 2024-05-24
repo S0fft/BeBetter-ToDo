@@ -5,7 +5,7 @@ from users.models import User
 
 class Label(models.Model):
     title = models.CharField(max_length=128)
-    color = models.CharField(max_length=6)
+    color = models.CharField(max_length=6, default=False)
 
     def __str__(self) -> str:
         return self.title
