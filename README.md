@@ -1,1 +1,2 @@
-# BeBetter-ToDo-Frontend
+# Todo-App
+TODO-App [React | DRF]

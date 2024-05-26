@@ -3,13 +3,15 @@ name: Pull Request
 on:
   pull_request:
     types: [opened, synchronize]
+    branches:
+      - main
 
 env:
-  NODE_VERSION: 21.5.0
+  NODE_VERSION: 21.x
 
 jobs:
-  linting:
-    name: Lint
+  ci:
+    name: CI
     runs-on: ubuntu-latest
 
     steps:
@@ -24,40 +26,10 @@ jobs:
         uses: ./.github/actions/ci-setup
 
       - name: Lint Application
-        run: pnpm lint:fix
-
-  type-check:
-    name: Types
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Setup Continuous integration
-        uses: ./.github/actions/ci-setup
+        run: cd client && pnpm lint
 
       - name: Check Application Types
-        run: pnpm type-check
-
-  prettify:
-    name: Prettier
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Setup Continuous integration
-        uses: ./.github/actions/ci-setup
+        run: cd client && pnpm type-check
 
       - name: Check Application Types
-        run: pnpm prettier:fix
+        run: cd client && pnpm prettier:fix

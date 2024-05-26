@@ -1,0 +1,10 @@
+Django
+django-allauth
+django-extensions
+
+
+python-decouple
+autopep8
+isort
+
+psycopg2

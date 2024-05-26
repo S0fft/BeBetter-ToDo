@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
-    "precommit": "pnpm lint-staged && pnpm type-check",
+    "precommit": "cd client && pnpm lint-staged && pnpm type-check",
     "prepare": "husky"
   },
   "dependencies": {
