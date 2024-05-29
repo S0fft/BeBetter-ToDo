@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 
     'todos.apps.TodosConfig',
     'users.apps.UsersConfig',
+    'djoser',
 ]
 
 MIDDLEWARE = [
