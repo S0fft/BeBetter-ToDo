@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from users.models import User
 
 
@@ -15,9 +14,9 @@ class Todo(models.Model):
     title = models.CharField(max_length=128)
     content = models.TextField()
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True, related_name='todos')
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='todos')
     is_done = models.BooleanField(default=False)
-    is_pined = models.BooleanField(default=False)
+    is_pinned = models.BooleanField(default=False)
     is_trashed = models.BooleanField(default=False)
     time_created = models.DateTimeField(auto_now_add=True)
     time_updated = models.DateTimeField(auto_now=True)
