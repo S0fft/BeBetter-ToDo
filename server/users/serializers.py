@@ -47,6 +47,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    todos_quantity = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'is_active',
+                  'todos_quantity']
+
+    def get_todos_quantity(self, obj):
+        return obj.todos.count()
