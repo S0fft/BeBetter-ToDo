@@ -13,11 +13,11 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from .serializers import MyTokenObtainPairSerializer, ProfileSerializer, RegisterSerializer
+from .serializers import CustomTokenObtainPairSerializer, ProfileSerializer, RegisterSerializer
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class RegisterView(generics.CreateAPIView):
