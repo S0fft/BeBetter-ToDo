@@ -16,7 +16,7 @@ from .models import User
 from .serializers import CustomTokenObtainPairSerializer, ProfileSerializer, RegisterSerializer
 
 
-class MyTokenObtainPairView(TokenObtainPairView):
+class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
