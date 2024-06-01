@@ -16,8 +16,16 @@ class TodoViewSet(viewsets.ModelViewSet):
 
         if pk:
             return Todo.objects.filter(pk=pk, user=user)
+        elif pk is None:
+            return Todo.objects.filter(user=user)
 
-        return Todo.objects.filter(user=user)
+        qst = Todo.objects.all()
+        title = self.request.query_params.get('title')
+
+        if title is not None:
+            qst = qst.filter(title__icontains=title)
+        else:
+            return qst
 
     @action(methods=['get'], detail=True)
     def label(self, request, pk=None):
