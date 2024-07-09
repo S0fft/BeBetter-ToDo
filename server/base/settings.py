@@ -73,8 +73,11 @@ DATABASES = {
         'NAME': config('NAME'),
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        'HOST': config('MYSQL_HOST'),
+        'PORT': config('MYSQL_TCP_PORT'),
+
+        # 'HOST': config('HOST'),
+        # 'PORT': config('PORT'),
     }
 }
 
