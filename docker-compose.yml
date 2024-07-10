@@ -22,7 +22,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
 
-    restart: always
+    restart: on-failure
 
     ports:
       - "8000:8000"
@@ -36,7 +36,7 @@ services:
 
   mysql:
     image: mysql
-    restart: always
+    restart: on-failure
 
     environment:
       MYSQL_HOST: ${MYSQL_HOST}
