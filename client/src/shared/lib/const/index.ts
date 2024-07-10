@@ -16,6 +16,7 @@ export const routes = {
   LABEL: 'labels',
   DYNAMIC_LABEL: 'labels/:labelId',
   LOGIN: 'login',
+  SIGN_UP: 'signup',
   AUTH: 'auth',
 } as const;
 
