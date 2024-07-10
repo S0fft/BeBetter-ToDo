@@ -15,6 +15,8 @@ export const routes = {
   TRASH: 'trash',
   LABEL: 'labels',
   DYNAMIC_LABEL: 'labels/:labelId',
+  LOGIN: 'login',
+  AUTH: 'auth',
 } as const;
 
 export const langs = {
