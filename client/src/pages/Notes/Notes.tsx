@@ -5,6 +5,7 @@ import NotesList from '@shared/ui/NotesList';
 const Notes = () => {
   const notes = useAppSelector(selectNotes);
   const activeNotes = notes.filter(({ isTrashed }) => !isTrashed);
+
   return (
     <NotesList
       notes={activeNotes}

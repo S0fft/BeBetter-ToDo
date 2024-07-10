@@ -24,6 +24,7 @@ const NavItem: FC<NavButtonProps> = ({
 
   return (
     <NavLink
+      end
       style={style}
       className={cn('flex justify-center lg:inline', {
         'max-w-[60px]': !isExpand,

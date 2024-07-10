@@ -27,7 +27,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
   const isLabelsExists = Boolean(mockLabels.length);
 
   const handleComposeNote = () => {
-    navigate(routes.NOTES);
+    navigate(`/${routes.NOTES}`);
 
     const createdAt = new Date().toDateString();
     dispatch(
@@ -58,7 +58,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
         variant="tertiary">
         <Icon slot="icon">mode_edit</Icon>
       </Fab>
-      <NavItem icon="lightbulb" to={routes.NOTES}>
+      <NavItem icon="lightbulb" to={`/${routes.NOTES}`}>
         Notes
       </NavItem>
       <NavItem icon="collections_bookmark" to={routes.ARCHIVE}>
