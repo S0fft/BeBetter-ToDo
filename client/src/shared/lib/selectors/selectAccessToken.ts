@@ -1,7 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import { RootState } from '@/store';
+
 const selectAccessToken = createSelector(
-  (state) => state.sessionReducer.accessToken,
+  (state: RootState) => state.sessionReducer.accessToken,
   (accessToken) => accessToken,
 );
 

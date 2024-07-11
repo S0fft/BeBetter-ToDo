@@ -1,7 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
 
+import { RootState } from '@/store';
+
 const selectIsLogged = createSelector(
-  (state) => state.sessionReducer.isLogged,
+  (state: RootState) => state.sessionReducer.isLogged,
   (isLogged) => isLogged,
 );
 
