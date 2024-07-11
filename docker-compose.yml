@@ -36,6 +36,14 @@ services:
     networks:
       - app-network
 
+    develop:
+      watch:
+        - path: ./requirements.txt
+          action: rebuild
+        - path: ./server
+          action: sync
+          target: /app
+
   mysql:
     image: mysql
     restart: on-failure
