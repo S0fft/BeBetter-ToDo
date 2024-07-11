@@ -7,6 +7,8 @@ const UserAvatar: FC<ImgHTMLAttributes<HTMLImageElement>> = ({
   className,
   ...props
 }) => {
+  // const { data } = useProfileQuery();
+
   return (
     <img
       {...props}
