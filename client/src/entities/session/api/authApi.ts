@@ -1,3 +1,9 @@
+import {
+  LoginBody,
+  LoginResponse,
+  SignUpBody,
+  SignUpResponse,
+} from '@/entities/session/model/types';
 import rootApi from '@shared/api/rootApi';
 
 export const authApi = rootApi.injectEndpoints({
