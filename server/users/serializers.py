@@ -48,10 +48,19 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     todos_quantity = serializers.SerializerMethodField()
+    is_done_todos_quantity = serializers.SerializerMethodField()
+    is_trashed_todos_quantity = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'todos_quantity']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email',
+                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity']
 
     def get_todos_quantity(self, obj):
         return obj.todos.count()
+
+    def get_is_done_todos_quantity(self, obj):
+        return obj.todos.filter(is_done=True).count()
+
+    def get_is_trashed_todos_quantity(self, obj):
+        return obj.todos.filter(is_trashed=True).count()
