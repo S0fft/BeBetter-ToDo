@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useLoginMutation } from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
-import { routes } from '@shared/lib/const';
+import { cookie, routes } from '@shared/lib/const';
 import isApiError from '@shared/lib/helpers/isApiError';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -12,6 +12,7 @@ import { loginSchema } from '@shared/ui/AuthBlock/model';
 import { TextInputProps, TLoginSchema } from '@shared/ui/AuthBlock/model/types';
 import Loader from '@shared/ui/Loader';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
+import Cookies from 'js-cookie';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -27,14 +28,17 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [login, { isLoading }] = useLoginMutation();
   const snackbar = useSnackbar();
+  const [login, { isLoading }] = useLoginMutation();
 
   const forgotUsernamePath = `/${routes.AUTH}/${routes.LOGIN}`;
 
   const onSubmit = async (fields: TLoginSchema) => {
     try {
       const data = await login(fields).unwrap();
+
+      Cookies.set(cookie.ACCESS_TOKEN, data.access);
+      Cookies.set(cookie.REFRESH_TOKEN, data.access);
 
       dispatch(loggedIn(data));
       navigate(`/${routes.NOTES}`);

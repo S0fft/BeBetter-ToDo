@@ -10,6 +10,11 @@ export const localStorageKeys = {
   IS_DARK_MODE: 'isDarkMode',
 } as const;
 
+export const cookie = {
+  ACCESS_TOKEN: 'access-token',
+  REFRESH_TOKEN: 'refresh-token',
+} as const;
+
 export const routes = {
   BASE: '/',
   NOTES: 'notes',
