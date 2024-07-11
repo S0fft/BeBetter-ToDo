@@ -1,15 +1,5 @@
 import rootApi from '@shared/api/rootApi';
 
-type LoginBody = {
-  username: string;
-  password: string;
-};
-
-type LoginResponse = {
-  access: string;
-  refresh: string;
-};
-
 export const authApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginBody>({
@@ -19,7 +9,15 @@ export const authApi = rootApi.injectEndpoints({
         body,
       }),
     }),
+
+    signUp: builder.mutation<SignUpResponse, SignUpBody>({
+      query: (body) => ({
+        url: '/users/register/',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useSignUpMutation } = authApi;
