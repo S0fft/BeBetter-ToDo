@@ -9,6 +9,7 @@ import SignUp from '@pages/SignUp/SignUp';
 import Trash from '@pages/Trash';
 import { routes } from '@shared/lib/const';
 import LoginRequired from '@shared/ui/LoginRequired';
+import UnauthRequired from '@shared/ui/UnauthRequired';
 import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 
 export const ROUTES: RouteObject[] = [
@@ -64,11 +65,19 @@ export const ROUTES: RouteObject[] = [
         children: [
           {
             path: routes.LOGIN,
-            element: <Login />,
+            element: (
+              <UnauthRequired>
+                <Login />
+              </UnauthRequired>
+            ),
           },
           {
             path: routes.SIGN_UP,
-            element: <SignUp />,
+            element: (
+              <UnauthRequired>
+                <SignUp />
+              </UnauthRequired>
+            ),
           },
         ],
       },
