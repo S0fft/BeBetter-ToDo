@@ -48,3 +48,5 @@ export const SnackBarTransition = cssTransition({
   enter: 'animate-fade-in-snackbar',
   exit: 'animate-fade-out-snackbar',
 });
+
+export const UNKNOWN_ERROR_MESSAGE = 'Something went wrong 😭';

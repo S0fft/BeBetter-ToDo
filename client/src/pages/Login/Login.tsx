@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useLoginMutation } from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
-import { cookie, routes } from '@shared/lib/const';
+import { cookie, routes, UNKNOWN_ERROR_MESSAGE } from '@shared/lib/const';
 import isApiError from '@shared/lib/helpers/isApiError';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -24,7 +24,7 @@ const Login = () => {
     reset,
   } = useForm<TLoginSchema>({
     resolver: zodResolver(loginSchema),
-    mode: 'onChange',
+    mode: 'all',
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -38,12 +38,15 @@ const Login = () => {
       const data = await login(fields).unwrap();
 
       Cookies.set(cookie.ACCESS_TOKEN, data.access);
-      Cookies.set(cookie.REFRESH_TOKEN, data.access);
+      Cookies.set(cookie.REFRESH_TOKEN, data.refresh);
 
       dispatch(loggedIn(data));
       navigate(`/${routes.NOTES}`);
     } catch (e) {
-      if (!isApiError(e)) return;
+      if (!isApiError(e)) {
+        snackbar(UNKNOWN_ERROR_MESSAGE);
+        return;
+      }
 
       const errorMessage = e.data.detail;
       snackbar(errorMessage);
@@ -53,7 +56,7 @@ const Login = () => {
   };
 
   if (isLoading) {
-    return <Loader indeterminate color="red" />;
+    return <Loader indeterminate />;
   }
 
   return (
