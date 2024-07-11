@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useLoginMutation } from '@/entities/session/api/authApi';
 import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
 import { inputStyles } from '@shared/ui/AuthBlock/lib/const';
 import { loginSchema } from '@shared/ui/AuthBlock/model';
@@ -21,16 +20,10 @@ const SignUp = () => {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   });
-  const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit = (fields: TLoginSchema) => {
     console.log(fields);
-    login(fields);
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <AuthBlock isValid={isValid} isSignUp onSubmit={handleSubmit(onSubmit)}>
@@ -38,16 +31,16 @@ const SignUp = () => {
         <OutlinedTextField
           {...(register('username') as TextInputProps)}
           className="focus:ring-high-contrast-inverse-primary"
-          style={inputStyles}
           label="Username"
           supportingText={errors.username && errors.username.message}
+          style={{ ...inputStyles, viewTransitionName: 'username-field' }}
         />
       </div>
       <OutlinedTextField
         {...(register('password') as TextInputProps)}
-        style={inputStyles}
         label="Password"
         supportingText={errors.password && errors.password.message}
+        style={{ ...inputStyles, viewTransitionName: 'password-field' }}
       />
       <OutlinedTextField
         {...(register('confirmPassword') as TextInputProps)}

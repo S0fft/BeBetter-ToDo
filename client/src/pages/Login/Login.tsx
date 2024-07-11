@@ -58,7 +58,7 @@ const Login = () => {
         <OutlinedTextField
           {...(register('username') as TextInputProps)}
           className="focus:ring-high-contrast-inverse-primary"
-          style={inputStyles}
+          style={{ ...inputStyles, viewTransitionName: 'username-field' }}
           label="Username"
           supportingText={errors.username && errors.username.message}
         />
@@ -71,9 +71,9 @@ const Login = () => {
       </div>
       <OutlinedTextField
         {...(register('password') as TextInputProps)}
-        style={inputStyles}
         label="Password"
         supportingText={errors.password && errors.password.message}
+        style={{ ...inputStyles, viewTransitionName: 'password-field' }}
       />
     </AuthBlock>
   );
