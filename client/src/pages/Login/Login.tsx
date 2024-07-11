@@ -1,5 +1,7 @@
+import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
+
 const Login = () => {
-  return <div>Login page</div>;
+  return <AuthBlock />;
 };
 
 export default Login;

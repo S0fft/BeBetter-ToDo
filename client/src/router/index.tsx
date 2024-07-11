@@ -1,9 +1,11 @@
 import AppLayout from '@layout/AppLayout/AppLayout';
+import AuthLayout from '@layout/AuthLayout/AuthLayout';
 import NotesLayout from '@layout/NotesLayout/NotesLayout';
 import Archive from '@pages/Archive';
 import Label from '@pages/Label';
 import Login from '@pages/Login/Login';
 import Notes from '@pages/Notes';
+import SignUp from '@pages/SignUp/SignUp';
 import Trash from '@pages/Trash';
 import { routes } from '@shared/lib/const';
 import LoginRequired from '@shared/ui/LoginRequired';
@@ -57,8 +59,18 @@ export const ROUTES: RouteObject[] = [
         ],
       },
       {
-        path: routes.LOGIN,
-        element: <Login />,
+        path: routes.AUTH,
+        element: <AuthLayout />,
+        children: [
+          {
+            path: routes.LOGIN,
+            element: <Login />,
+          },
+          {
+            path: routes.SIGN_UP,
+            element: <SignUp />,
+          },
+        ],
       },
     ],
   },

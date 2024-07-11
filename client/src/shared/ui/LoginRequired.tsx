@@ -9,7 +9,7 @@ const LoginRequired: FC<PropsWithChildren> = ({ children }) => {
   const { isLogged } = useAppSelector(selectIsLogged);
 
   if (!isLogged) {
-    return <Navigate to={`/${routes.LOGIN}`} replace />;
+    return <Navigate to={`/${routes.AUTH}/${routes.LOGIN}`} replace />;
   }
 
   return children;
