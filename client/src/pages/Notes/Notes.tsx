@@ -1,14 +1,15 @@
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
-import selectNotes from '@shared/lib/selectors/selectNotes';
+import { useNotesQuery } from '@/entities/note/api/noteApi';
+import Loader from '@shared/ui/Loader';
 import NotesList from '@shared/ui/NotesList';
 
 const Notes = () => {
-  const notes = useAppSelector(selectNotes);
-  const activeNotes = notes.filter(({ isTrashed }) => !isTrashed);
+  const { data: notes = [], isLoading } = useNotesQuery();
+
+  if (isLoading) return <Loader />;
 
   return (
     <NotesList
-      notes={activeNotes}
+      notes={notes}
       emptyListIcon="lightbulb"
       emptyListSubText="Your notes appear here"
     />
