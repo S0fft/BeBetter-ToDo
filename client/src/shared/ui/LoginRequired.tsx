@@ -6,7 +6,7 @@ import selectIsLogged from '@shared/lib/selectors/selectIsLogged';
 import { Navigate } from 'react-router-dom';
 
 const LoginRequired: FC<PropsWithChildren> = ({ children }) => {
-  const { isLogged } = useAppSelector(selectIsLogged);
+  const isLogged = useAppSelector(selectIsLogged);
 
   if (!isLogged) {
     return <Navigate to={`/${routes.AUTH}/${routes.LOGIN}`} replace />;

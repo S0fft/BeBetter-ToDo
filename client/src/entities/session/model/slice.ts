@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type LoggedInPayload = {
   access: string;
   refresh: string;
-  isLogged: boolean;
 };
 
 type InitialState = {

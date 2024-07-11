@@ -36,3 +36,10 @@ export type Note = {
   isArchived: boolean;
   isTrashed: boolean;
 };
+
+export type ApiError = {
+  status: number;
+  data: {
+    detail: string;
+  };
+};

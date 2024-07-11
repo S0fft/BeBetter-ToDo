@@ -6,6 +6,7 @@ import App from '@/App';
 import { setupStore } from '@/store';
 import { Provider } from 'react-redux';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import './locales/i18n';
 
