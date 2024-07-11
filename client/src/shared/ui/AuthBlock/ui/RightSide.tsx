@@ -9,10 +9,16 @@ import { useNavigate } from 'react-router-dom';
 
 type RightSideProps = PropsWithChildren & {
   isSignUp: boolean;
+  isDisabled: boolean;
   actionText: string;
 };
 
-const RightSide: FC<RightSideProps> = ({ children, isSignUp, actionText }) => {
+const RightSide: FC<RightSideProps> = ({
+  children,
+  isSignUp,
+  isDisabled,
+  actionText,
+}) => {
   const navigate = useNavigate();
 
   const redirectPath = isSignUp
@@ -38,6 +44,7 @@ const RightSide: FC<RightSideProps> = ({ children, isSignUp, actionText }) => {
           {redirectText}
         </TextButton>
         <FilledTonalButton
+          disabled={isDisabled}
           style={{ ...signInStyles, viewTransitionName: 'action-button' }}>
           {actionText}
         </FilledTonalButton>
