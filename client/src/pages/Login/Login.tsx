@@ -19,9 +19,7 @@ const Login = () => {
     mode: 'onChange',
   });
 
-  console.log(errors);
-
-  const forgotEmailPath = `/${routes.AUTH}/${routes.LOGIN}`;
+  const forgotUsernamePath = `/${routes.AUTH}/${routes.LOGIN}`;
 
   const onSubmit = (fields: TLoginSchema) => {
     console.log(fields);
@@ -31,17 +29,17 @@ const Login = () => {
     <AuthBlock isValid={isValid} onSubmit={handleSubmit(onSubmit)}>
       <div className="grid gap-1">
         <OutlinedTextField
-          {...(register('email') as TextInputProps)}
+          {...(register('username') as TextInputProps)}
           className="focus:ring-high-contrast-inverse-primary"
           style={inputStyles}
-          label="Email"
-          supportingText={errors.email && errors.email.message}
+          label="Username"
+          supportingText={errors.username && errors.username.message}
         />
         <Link
           className="w-fit text-xs text-primary-fixed-dim"
           // TODO: add util like Node.js path.join
-          to={forgotEmailPath}>
-          Forgot email?
+          to={forgotUsernamePath}>
+          Forgot username?
         </Link>
       </div>
       <OutlinedTextField
