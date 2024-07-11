@@ -62,8 +62,8 @@ const NotesList: FC<NotesListProps> = ({
               id={note.id}
               title={note.title}
               content={note.content}
-              createdAt={note.createdAt}
-              isPinned={note.isPinned}
+              createdAt={note.time_created}
+              isPinned={note.is_pinned}
               labels={note.labels}
             />
           ))}
