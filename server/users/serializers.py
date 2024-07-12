@@ -15,8 +15,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
 
-        data['refresh_token_lifetime'] = str(refresh.lifetime.total_seconds())
-        data['access_token_lifetime'] = str(refresh.access_token.lifetime.total_seconds())
+        data['refresh_token_lifetime'] = str(int(refresh.lifetime.total_seconds()))
+        data['access_token_lifetime'] = str(int(refresh.access_token.lifetime.total_seconds()))
 
         return data
 
