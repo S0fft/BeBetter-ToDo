@@ -8,3 +8,14 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = "__all__"
+
+
+class TodoSerializerPartial(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = '__all__'
+
+        extra_kwargs = {
+            'title': {'required': False},
+            'content': {'required': False},
+        }
