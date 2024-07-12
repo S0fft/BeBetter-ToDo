@@ -11,6 +11,8 @@ class TodoSerializer(serializers.ModelSerializer):
 
 
 class TodoSerializerPartial(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Todo
         fields = '__all__'
