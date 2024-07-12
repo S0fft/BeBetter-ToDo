@@ -7,14 +7,18 @@ from .models import User
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-        token['username'] = user.username
-        token['email'] = user.email
+        refresh = self.get_token(self.user)
 
-        return token
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+        data['refresh_token_lifetime'] = str(int(refresh.lifetime.total_seconds()))
+        data['access_token_lifetime'] = str(int(refresh.access_token.lifetime.total_seconds()))
+
+        return data
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -30,6 +34,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Password fields didn't match!"})
+
+        try:
+            validate_password(attrs['password'], self.instance)
+        except serializers.ValidationError as e:
+            raise serializers.ValidationError({"password": e})
 
         return attrs
 
@@ -48,10 +57,19 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     todos_quantity = serializers.SerializerMethodField()
+    is_done_todos_quantity = serializers.SerializerMethodField()
+    is_trashed_todos_quantity = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'todos_quantity']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email',
+                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity']
 
     def get_todos_quantity(self, obj):
         return obj.todos.count()
+
+    def get_is_done_todos_quantity(self, obj):
+        return obj.todos.filter(is_done=True).count()
+
+    def get_is_trashed_todos_quantity(self, obj):
+        return obj.todos.filter(is_trashed=True).count()
