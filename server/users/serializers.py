@@ -7,14 +7,18 @@ from .models import User
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-        token['username'] = user.username
-        token['email'] = user.email
+        refresh = self.get_token(self.user)
 
-        return token
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+        data['refresh_token_lifetime'] = str(refresh.lifetime.total_seconds())
+        data['access_token_lifetime'] = str(refresh.access_token.lifetime.total_seconds())
+
+        return data
 
 
 class RegisterSerializer(serializers.ModelSerializer):
