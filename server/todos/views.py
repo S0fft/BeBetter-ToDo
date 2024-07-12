@@ -3,12 +3,16 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from todos.models import Label, Todo
-from todos.serializers import TodoSerializer
+from todos.serializers import TodoSerializer, TodoSerializerPartial
 
 
 class TodoViewSet(viewsets.ModelViewSet):
-    serializer_class = TodoSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        return TodoSerializerPartial if self.action in ['update', 'partial_update'] else TodoSerializer
+
+    serializer_class = get_serializer_class
 
     def get_queryset(self):
         user = self.request.user
