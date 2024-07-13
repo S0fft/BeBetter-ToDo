@@ -44,3 +44,15 @@ export type ApiError = {
     detail: string;
   };
 };
+
+export type User = {
+  email: string;
+  first_name: string;
+  id: number;
+  is_active: boolean;
+  is_done_todos_quantity: number;
+  is_trashed_todos_quantity: number;
+  last_name: string;
+  todos_quantity: number;
+  username: string;
+};
