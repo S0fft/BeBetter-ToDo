@@ -3,7 +3,7 @@ from pathlib import Path
 
 from decouple import config
 
-DEFAULT_CHARSET = 'utf-8'
+# DEFAULT_CHARSET = 'utf-8'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,11 +75,11 @@ DATABASES = {
         'NAME': config('NAME'),
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
-        # 'HOST': config('MYSQL_HOST'),
-        # 'PORT': config('MYSQL_TCP_PORT'),
+        'HOST': config('MYSQL_HOST'),
+        'PORT': config('MYSQL_TCP_PORT'),
 
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        # 'HOST': config('HOST'),
+        # 'PORT': config('PORT'),
 
         'OPTIONS': {
             'charset': 'utf8mb4',
