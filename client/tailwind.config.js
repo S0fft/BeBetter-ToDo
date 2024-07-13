@@ -76,9 +76,11 @@ export default {
         'fade-in-section': {
           from: {
             opacity: 0,
+            translate: '0 30px',
             scale: '0.94',
           },
           to: {
+            translate: '0',
             opacity: 1,
             scale: '1',
           },

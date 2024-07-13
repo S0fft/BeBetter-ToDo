@@ -38,7 +38,9 @@ const NotesList: FC<NotesListProps> = ({
   return (
     <article
       ref={notesListRef}
-      className={cn('relative h-dvh overflow-y-scroll px-2 pb-4')}>
+      className={cn(
+        'relative h-dvh overflow-y-scroll px-2 pb-4 ease-emphasized-decelerate',
+      )}>
       <header
         key="header"
         style={{
@@ -50,10 +52,13 @@ const NotesList: FC<NotesListProps> = ({
       <div className="grid h-[calc(100%-92px)] pt-[92px]">
         {preList}
         <ul
-          className={cn('grid grid-cols-1 content-start gap-3 transition-all', {
-            'grid-cols-2 justify-center': !isNoteExpanded,
-            'align-items content-center': listIsEmpty,
-          })}>
+          className={cn(
+            'grid animate-fade-in-section grid-cols-1 content-start gap-3 transition-all',
+            {
+              'grid-cols-2 justify-center': !isNoteExpanded,
+              'align-items content-center': listIsEmpty,
+            },
+          )}>
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
           )}

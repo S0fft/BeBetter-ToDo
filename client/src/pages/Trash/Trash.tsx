@@ -12,7 +12,7 @@ const Trash = () => {
   return (
     <NotesList
       preList={
-        <article className="flex h-fit items-center justify-center gap-3 py-6 font-medium">
+        <article className="absolute left-1/2 flex h-fit -translate-x-1/2 items-center justify-center gap-3 py-6 font-medium">
           <h4>Notes in Trash are deleted after 7 days.</h4>
           {isTrashNotEmpty && <TextButton>Empty Trash</TextButton>}
         </article>
