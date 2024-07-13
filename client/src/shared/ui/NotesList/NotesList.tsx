@@ -57,6 +57,7 @@ const NotesList: FC<NotesListProps> = ({
             {
               'grid-cols-2 justify-center': !isNoteExpanded,
               'align-items content-center': listIsEmpty,
+              'mt-24': preList,
             },
           )}>
           {listIsEmpty && (
