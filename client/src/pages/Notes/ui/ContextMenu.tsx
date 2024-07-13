@@ -2,7 +2,7 @@ import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react';
 
 import { Corner, MdMenu } from '@material/web/all';
 
-import { useDeleteNoteMutation } from '@/entities/note/api/noteApi';
+import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import {
   dotButtonStyles,
@@ -36,7 +36,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 }) => {
   const menuRef = useRef<MdMenu>(null);
   const { setUrl } = useUrl();
-  const [deleteNote] = useDeleteNoteMutation();
+  const [updateNote] = useUpdateNoteMutation();
 
   const anchorId = `noteLabelsContextMenu-${noteId}`;
 
@@ -53,7 +53,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
       viewTransition(() => onExpandNote(false));
     }
 
-    deleteNote(noteId);
+    updateNote({ id: noteId, body: { is_trashed: true } });
   };
 
   return (
