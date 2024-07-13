@@ -1,44 +1,21 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 import {
-  useNoteQuery,
-  useUpdateNoteMutation,
-} from '@/entities/note/api/noteApi';
-import {
-  DEBOUNCE_TIME,
   MAX_TITLE_HEIGHT_PX,
   MAX_TITLE_LENGTH,
   TITLE_PADDING_Y,
   TITLE_TEXT_AREA_INITIAL_HEIGHT,
 } from '@features/ExpendedNote/lib/const';
+import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
 import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';
-import { useDebounce } from 'use-debounce';
 
 const Title = () => {
   const { readUrl } = useUrl();
 
   const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-
-  const { data: activeNote } = useNoteQuery(activeNoteId, {
-    skip: Number.isNaN(activeNoteId),
-  });
-  const [updateNote] = useUpdateNoteMutation();
-  const [title, setTitle] = useState('');
-  const [titleValue] = useDebounce(title, DEBOUNCE_TIME);
-
-  useEffect(() => {
-    if (activeNote?.title) {
-      setTitle(activeNote.title);
-    }
-  }, [activeNote?.title]);
-
-  useEffect(() => {
-    if (activeNoteId && titleValue && titleValue !== activeNote?.title) {
-      updateNote({ id: activeNoteId, body: { title: titleValue } });
-    }
-  }, [activeNote?.title, activeNoteId, titleValue, updateNote]);
+  const [title, setTitle] = useUpdateNote(activeNoteId, 'title');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;

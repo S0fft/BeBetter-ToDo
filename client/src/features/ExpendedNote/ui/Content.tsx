@@ -1,37 +1,12 @@
-import { useEffect, useState } from 'react';
-
-import {
-  useNoteQuery,
-  useUpdateNoteMutation,
-} from '@/entities/note/api/noteApi';
-import { DEBOUNCE_TIME } from '@features/ExpendedNote/lib/const';
+import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
-import { useDebounce } from 'use-debounce';
 
 const Content = () => {
   const { readUrl } = useUrl();
 
   const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-
-  const { data: activeNote } = useNoteQuery(activeNoteId, {
-    skip: Number.isNaN(activeNoteId),
-  });
-  const [updateNote] = useUpdateNoteMutation();
-  const [content, setContent] = useState(activeNote?.content);
-  const [contentValue] = useDebounce(content, DEBOUNCE_TIME);
-
-  useEffect(() => {
-    if (activeNote?.content) {
-      setContent(activeNote.content);
-    }
-  }, [activeNote?.content]);
-
-  useEffect(() => {
-    if (activeNoteId && contentValue && contentValue !== activeNote?.content) {
-      updateNote({ id: activeNoteId, body: { content: contentValue } });
-    }
-  }, [activeNote?.content, activeNoteId, contentValue, updateNote]);
+  const [content, setContent] = useUpdateNote(activeNoteId, 'content');
 
   return (
     <textarea
