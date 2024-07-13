@@ -14,7 +14,9 @@ const Content = () => {
 
   const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
 
-  const { data: activeNote } = useNoteQuery(activeNoteId);
+  const { data: activeNote } = useNoteQuery(activeNoteId, {
+    skip: Number.isNaN(activeNoteId),
+  });
   const [updateNote] = useUpdateNoteMutation();
   const [content, setContent] = useState(activeNote?.content);
   const [contentValue] = useDebounce(content, DEBOUNCE_TIME);
@@ -29,7 +31,7 @@ const Content = () => {
     if (activeNoteId && contentValue && contentValue !== activeNote?.content) {
       updateNote({ id: activeNoteId, body: { content: contentValue } });
     }
-  }, [activeNoteId, contentValue, updateNote]);
+  }, [contentValue]);
 
   return (
     <textarea

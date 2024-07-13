@@ -21,9 +21,11 @@ const Title = () => {
 
   const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
 
-  const { data: activeNote } = useNoteQuery(activeNoteId);
+  const { data: activeNote } = useNoteQuery(activeNoteId, {
+    skip: Number.isNaN(activeNoteId),
+  });
   const [updateNote] = useUpdateNoteMutation();
-  const [title, setTitle] = useState(activeNote?.title);
+  const [title, setTitle] = useState('');
   const [titleValue] = useDebounce(title, DEBOUNCE_TIME);
 
   useEffect(() => {
