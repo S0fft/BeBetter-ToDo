@@ -10,8 +10,10 @@ import {
   menuStyles,
   subMenuItemStyles,
 } from '@pages/Notes/lib/const';
-import { urlParams } from '@shared/lib/const';
+import { UNKNOWN_ERROR_MESSAGE, urlParams } from '@shared/lib/const';
+import isApiError from '@shared/lib/helpers/isApiError';
 import viewTransition from '@shared/lib/helpers/viewTransition';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Label } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
@@ -37,6 +39,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
   const menuRef = useRef<MdMenu>(null);
   const { setUrl } = useUrl();
   const [updateNote] = useUpdateNoteMutation();
+  const snackbar = useSnackbar();
 
   const anchorId = `noteLabelsContextMenu-${noteId}`;
 
@@ -45,7 +48,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
     if (menuRef.current) menuRef.current.show();
   };
 
-  const handleDeleteNote = (e: MouseEvent) => {
+  const handleDeleteNote = async (e: MouseEvent) => {
     e.stopPropagation();
 
     if (isActiveNote) {
@@ -53,7 +56,15 @@ const ContextMenu: FC<ContextMenuProps> = ({
       viewTransition(() => onExpandNote(false));
     }
 
-    updateNote({ id: noteId, body: { is_trashed: true } });
+    try {
+      await updateNote({ id: noteId, body: { is_trashed: true } });
+      snackbar('Moved to trash');
+    } catch (err) {
+      const errorMessage = isApiError(err)
+        ? err.data.detail
+        : UNKNOWN_ERROR_MESSAGE;
+      snackbar(errorMessage);
+    }
   };
 
   return (
