@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 
 import {
@@ -17,18 +18,20 @@ const useUpdateNote = (id: number, field: 'title' | 'content') => {
   const [updateNote] = useUpdateNoteMutation();
   const [value, setValue] = useState(DEFAULT_NOTE_VALUE);
   const [debouncedValue] = useDebounce(value, DEBOUNCE_TIME);
+  const [isSynchronizedWithServer, setIsSynchronizedWithServer] =
+    useState(false);
 
   const fieldValue = activeNote?.[field];
-  const valueNotSyncWithServer = value === DEFAULT_NOTE_VALUE;
 
   useEffect(() => {
-    if (fieldValue && valueNotSyncWithServer) {
+    if (fieldValue && !isSynchronizedWithServer) {
       setValue(fieldValue);
+      setIsSynchronizedWithServer(true);
     }
-  }, [fieldValue, valueNotSyncWithServer]);
+  }, [fieldValue]);
 
   useEffect(() => {
-    if (id && debouncedValue && debouncedValue !== fieldValue) {
+    if (isSynchronizedWithServer && id && debouncedValue !== fieldValue) {
       updateNote({ id, body: { [field]: debouncedValue } });
     }
   }, [debouncedValue, field, fieldValue, id, updateNote]);
