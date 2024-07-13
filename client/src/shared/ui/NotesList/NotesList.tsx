@@ -57,7 +57,7 @@ const NotesList: FC<NotesListProps> = ({
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
           )}
-          {sortedNotes.map((note) => (
+          {sortedNotes.map((note, index) => (
             <Note
               key={note.id}
               id={note.id}
@@ -66,6 +66,7 @@ const NotesList: FC<NotesListProps> = ({
               createdAt={note.time_created}
               isPinned={note.is_pinned}
               labels={note.labels}
+              index={index}
             />
           ))}
         </ul>

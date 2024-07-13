@@ -18,6 +18,7 @@ import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { format } from 'date-fns';
+import { motion } from 'framer-motion';
 import { useOutletContext } from 'react-router-dom';
 
 type NoteProps = {
@@ -27,6 +28,19 @@ type NoteProps = {
   createdAt: string;
   labels: TLabels[];
   isPinned: boolean;
+  index: number;
+};
+
+const animations = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+  transition: {
+    type: 'spring',
+    stiffness: 240,
+    damping: 15,
+    bounce: 0,
+    mass: 0.7,
+  },
 };
 
 const Note: FC<NoteProps> = ({
@@ -36,6 +50,7 @@ const Note: FC<NoteProps> = ({
   createdAt,
   labels,
   isPinned,
+  index,
 }) => {
   const [isExpanded, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
@@ -62,7 +77,12 @@ const Note: FC<NoteProps> = ({
   };
 
   return (
-    <li
+    <motion.li
+      {...{
+        ...animations,
+        transition: { ...animations.transition, delay: index * 0.02 },
+      }}
+      layout
       ref={containerRef}
       style={{
         viewTransitionName: `expandedNote-${id}`,
@@ -101,7 +121,7 @@ const Note: FC<NoteProps> = ({
         <Content title={title} content={content} />
         <Labels className="z-10 ml-auto self-end pb-3.5" labels={labels} />
       </Body>
-    </li>
+    </motion.li>
   );
 };
 
