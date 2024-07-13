@@ -1,5 +1,9 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 
+import {
+  useNoteQuery,
+  useUpdateNoteMutation,
+} from '@/entities/note/api/noteApi';
 import {
   MAX_TITLE_HEIGHT_PX,
   MAX_TITLE_LENGTH,
@@ -9,16 +13,23 @@ import {
 import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';
+import { useDebounce } from 'use-debounce';
 
-import { mockedNotes } from '../../../../dev-data';
+const DEBOUNCE_TIME = 500;
 
 const Title = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-  const initialTitle = mockedNotes?.[activeNote]?.title;
+  const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
 
-  const [title, setTitle] = useState(initialTitle);
+  const { data: activeNote } = useNoteQuery(activeNoteId);
+  const [updateNote] = useUpdateNoteMutation();
+  const [title, setTitle] = useState(activeNote?.title ?? '');
+  const [titleValue] = useDebounce(title, DEBOUNCE_TIME);
+
+  useEffect(() => {
+    updateNote({ id: activeNoteId, body: { title: titleValue } });
+  }, [activeNoteId, titleValue, updateNote]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;
