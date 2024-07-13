@@ -31,7 +31,7 @@ const Content = () => {
     if (activeNoteId && contentValue && contentValue !== activeNote?.content) {
       updateNote({ id: activeNoteId, body: { content: contentValue } });
     }
-  }, [contentValue]);
+  }, [activeNote?.content, activeNoteId, contentValue, updateNote]);
 
   return (
     <textarea

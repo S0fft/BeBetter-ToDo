@@ -38,7 +38,7 @@ const Title = () => {
     if (activeNoteId && titleValue && titleValue !== activeNote?.title) {
       updateNote({ id: activeNoteId, body: { title: titleValue } });
     }
-  }, [titleValue]);
+  }, [activeNote?.title, activeNoteId, titleValue, updateNote]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;

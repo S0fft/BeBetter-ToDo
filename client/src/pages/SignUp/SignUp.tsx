@@ -1,6 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useLoginMutation, useSignUpMutation, } from '@/entities/session/api/authApi';
+import {
+  useLoginMutation,
+  useSignUpMutation,
+} from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
 import { cookie, routes, UNKNOWN_ERROR_MESSAGE } from '@shared/lib/const';
 import isApiError from '@shared/lib/helpers/isApiError';
@@ -9,7 +12,10 @@ import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
 import { inputStyles } from '@shared/ui/AuthBlock/lib/const';
 import { signUpSchema } from '@shared/ui/AuthBlock/model';
-import { TextInputProps, TSignUpSchema, } from '@shared/ui/AuthBlock/model/types';
+import {
+  TextInputProps,
+  TSignUpSchema,
+} from '@shared/ui/AuthBlock/model/types';
 import Loader from '@shared/ui/Loader';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 import Cookies from 'js-cookie';
