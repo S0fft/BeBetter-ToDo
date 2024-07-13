@@ -7,7 +7,7 @@ import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Outlet } from 'react-router-dom';
 
-const Notes = () => {
+const NotesLayout = () => {
   const { readUrl } = useUrl();
   const isNoteSelected = Number.isFinite(
     Number.parseInt(readUrl(urlParams.NOTE_ID), 10),
@@ -42,4 +42,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default NotesLayout;

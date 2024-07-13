@@ -43,7 +43,6 @@ const Note: FC<NoteProps> = ({
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const isActiveNote = activeNote === id;
-  const contextMenuAnchorId = `noteLabelsContextMenu-${id}`;
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {
@@ -79,7 +78,12 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <ContextMenu anchorId={contextMenuAnchorId} activeLabels={labels} />
+          <ContextMenu
+            isActiveNote={isActiveNote}
+            onExpandNote={setIsExpandNote}
+            noteId={id}
+            activeLabels={labels}
+          />
         </Controls>
       </Header>
       <Body>

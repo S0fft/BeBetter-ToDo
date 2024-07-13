@@ -1,7 +1,8 @@
-import { FC, MouseEvent, useRef } from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react';
 
 import { Corner, MdMenu } from '@material/web/all';
 
+import { useDeleteNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import {
   dotButtonStyles,
@@ -9,6 +10,9 @@ import {
   menuStyles,
   subMenuItemStyles,
 } from '@pages/Notes/lib/const';
+import { urlParams } from '@shared/lib/const';
+import viewTransition from '@shared/lib/helpers/viewTransition';
+import useUrl from '@shared/lib/hooks/useUrl';
 import { Label } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
@@ -19,15 +23,37 @@ import SubMenu from '@shared/ui/SubMenu';
 
 type ContextMenuProps = {
   activeLabels: Label[];
-  anchorId: string;
+  noteId: number;
+  onExpandNote: Dispatch<SetStateAction<boolean>>;
+  isActiveNote: boolean;
 };
 
-const ContextMenu: FC<ContextMenuProps> = ({ activeLabels, anchorId }) => {
+const ContextMenu: FC<ContextMenuProps> = ({
+  activeLabels,
+  noteId,
+  onExpandNote,
+  isActiveNote,
+}) => {
   const menuRef = useRef<MdMenu>(null);
+  const { setUrl } = useUrl();
+  const [deleteNote] = useDeleteNoteMutation();
+
+  const anchorId = `noteLabelsContextMenu-${noteId}`;
 
   const handleMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
     if (menuRef.current) menuRef.current.show();
+  };
+
+  const handleDeleteNote = (e: MouseEvent) => {
+    e.stopPropagation();
+
+    if (isActiveNote) {
+      setUrl(urlParams.NOTE_ID);
+      viewTransition(() => onExpandNote(false));
+    }
+
+    deleteNote(noteId);
   };
 
   return (
@@ -48,7 +74,10 @@ const ContextMenu: FC<ContextMenuProps> = ({ activeLabels, anchorId }) => {
         anchor-corner={Corner.END_END}
         anchor={anchorId}
         ref={menuRef}>
-        <MenuItem style={menuItemStyles} className="mx-2 rounded-md">
+        <MenuItem
+          onClick={handleDeleteNote}
+          style={menuItemStyles}
+          className="mx-2 rounded-md">
           <span slot="headline"> Delete </span>
           <Icon slot="end">
             <img src={trash} alt="" />

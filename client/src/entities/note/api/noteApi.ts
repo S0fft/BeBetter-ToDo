@@ -39,13 +39,21 @@ export const noteApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['Note'],
     }),
+
+    deleteNote: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/todos/${id}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Note'],
+    }),
   }),
 });
 
 export const {
   useNotesQuery,
   useNoteQuery,
-  useLazyNoteQuery,
   useCreateNoteMutation,
   useUpdateNoteMutation,
+  useDeleteNoteMutation,
 } = noteApi;
