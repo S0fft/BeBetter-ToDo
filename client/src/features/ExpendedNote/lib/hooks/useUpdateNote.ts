@@ -31,7 +31,7 @@ const useUpdateNote = (id: number, field: 'title' | 'content') => {
     if (id && debouncedValue && debouncedValue !== fieldValue) {
       updateNote({ id, body: { [field]: debouncedValue } });
     }
-  }, [debouncedValue]);
+  }, [debouncedValue, field, fieldValue, id, updateNote]);
 
   return [value, setValue] as const;
 };
