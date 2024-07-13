@@ -5,6 +5,7 @@ import {
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
 import {
+  DEBOUNCE_TIME,
   MAX_TITLE_HEIGHT_PX,
   MAX_TITLE_LENGTH,
   TITLE_PADDING_Y,
@@ -14,8 +15,6 @@ import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { useDebounce } from 'use-debounce';
-
-const DEBOUNCE_TIME = 500;
 
 const Title = () => {
   const { readUrl } = useUrl();
