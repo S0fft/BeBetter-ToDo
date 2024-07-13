@@ -20,6 +20,7 @@ module.exports = {
     'node_modules',
     'tailwind.config.js',
     'environment.d.ts',
+    'vite.config.ts',
   ],
   plugins: [
     'react',
