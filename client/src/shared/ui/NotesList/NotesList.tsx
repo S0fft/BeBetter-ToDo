@@ -33,6 +33,7 @@ const NotesList: FC<NotesListProps> = ({
   const { searchRef, notesListRef } = useHeaderScroll();
 
   const listIsEmpty = notes.length === 0;
+  const sortedNotes = [...notes].sort((note) => (note.is_pinned ? -1 : 1));
 
   return (
     <article
@@ -56,7 +57,7 @@ const NotesList: FC<NotesListProps> = ({
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
           )}
-          {notes.map((note) => (
+          {sortedNotes.map((note) => (
             <Note
               key={note.id}
               id={note.id}

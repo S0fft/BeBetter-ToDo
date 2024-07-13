@@ -1,5 +1,6 @@
-import { Dispatch, FC, SetStateAction, useRef } from 'react';
+import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react';
 
+import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import { pinButtonStyles } from '@pages/Notes/lib/const';
 import Body from '@pages/Notes/ui/Body';
 import Content from '@pages/Notes/ui/Content';
@@ -40,6 +41,7 @@ const Note: FC<NoteProps> = ({
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const containerRef = useRef<HTMLLIElement>(null);
   const { readUrl, setUrl } = useUrl();
+  const [updateNote] = useUpdateNoteMutation();
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const isActiveNote = activeNote === id;
@@ -52,6 +54,11 @@ const Note: FC<NoteProps> = ({
       viewTransition(() => setIsExpandNote(true));
     }
     setUrl(urlParams.NOTE_ID, id);
+  };
+
+  const handleTogglePinNote = (e: MouseEvent) => {
+    e.stopPropagation();
+    updateNote({ id, body: { is_pinned: !isPinned } });
   };
 
   return (
@@ -72,7 +79,11 @@ const Note: FC<NoteProps> = ({
         <UserAvatar className="size-10" />
         <Essentials createdAt={formatedCreatedAt} />
         <Controls>
-          <FilledIconButton selected={isPinned} style={pinButtonStyles} toggle>
+          <FilledIconButton
+            onClick={handleTogglePinNote}
+            selected={isPinned}
+            style={pinButtonStyles}
+            toggle>
             <Icon>keep</Icon>
             <Icon slot="selected" style={filledIconStyles}>
               keep
