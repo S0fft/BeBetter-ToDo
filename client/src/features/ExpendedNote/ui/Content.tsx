@@ -16,11 +16,19 @@ const Content = () => {
 
   const { data: activeNote } = useNoteQuery(activeNoteId);
   const [updateNote] = useUpdateNoteMutation();
-  const [content, setContent] = useState(activeNote?.content ?? '');
+  const [content, setContent] = useState(activeNote?.content);
   const [contentValue] = useDebounce(content, DEBOUNCE_TIME);
 
   useEffect(() => {
-    updateNote({ id: activeNoteId, body: { content: contentValue } });
+    if (activeNote?.content) {
+      setContent(activeNote.content);
+    }
+  }, [activeNote?.content]);
+
+  useEffect(() => {
+    if (activeNoteId && contentValue && contentValue !== activeNote?.content) {
+      updateNote({ id: activeNoteId, body: { content: contentValue } });
+    }
   }, [activeNoteId, contentValue, updateNote]);
 
   return (

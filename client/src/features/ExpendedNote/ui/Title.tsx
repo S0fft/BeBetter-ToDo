@@ -23,12 +23,20 @@ const Title = () => {
 
   const { data: activeNote } = useNoteQuery(activeNoteId);
   const [updateNote] = useUpdateNoteMutation();
-  const [title, setTitle] = useState(activeNote?.title ?? '');
+  const [title, setTitle] = useState(activeNote?.title);
   const [titleValue] = useDebounce(title, DEBOUNCE_TIME);
 
   useEffect(() => {
-    updateNote({ id: activeNoteId, body: { title: titleValue } });
-  }, [activeNoteId, titleValue, updateNote]);
+    if (activeNote?.title) {
+      setTitle(activeNote.title);
+    }
+  }, [activeNote?.title]);
+
+  useEffect(() => {
+    if (activeNoteId && titleValue && titleValue !== activeNote?.title) {
+      updateNote({ id: activeNoteId, body: { title: titleValue } });
+    }
+  }, [titleValue]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;

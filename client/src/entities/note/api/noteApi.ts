@@ -19,7 +19,7 @@ export const noteApi = rootApi.injectEndpoints({
       query: (id) => ({
         url: `/todos/${id}/`,
       }),
-      // providesTags: ['Note'],
+      providesTags: ['Note'],
     }),
 
     updateNote: builder.mutation<Note, UpdateNoteParams>({
@@ -45,6 +45,7 @@ export const noteApi = rootApi.injectEndpoints({
 export const {
   useNotesQuery,
   useNoteQuery,
+  useLazyNoteQuery,
   useCreateNoteMutation,
   useUpdateNoteMutation,
 } = noteApi;
