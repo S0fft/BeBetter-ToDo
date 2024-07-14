@@ -3,8 +3,6 @@ import { FC, MouseEvent } from 'react';
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { UNKNOWN_ERROR_MESSAGE } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
@@ -24,12 +22,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     try {
       await updateNote({ id: noteId, body: { is_done: false } });
-      snackbar('Note unarchived');
+      snackbar.msg('Note unarchived');
     } catch (err) {
-      const errorMessage = isApiError(err)
-        ? err.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-      snackbar(errorMessage);
+      snackbar.err(err);
     }
   };
 

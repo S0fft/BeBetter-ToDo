@@ -5,8 +5,6 @@ import { Corner } from '@material/web/all';
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles, subMenuItemStyles } from '@pages/Notes/lib/const';
-import { UNKNOWN_ERROR_MESSAGE } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import { Label } from '@shared/types';
@@ -28,12 +26,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
   const handleArchiveNote = async () => {
     try {
       await updateNote({ id: noteId, body: { is_done: true } });
-      snackbar('Archived');
+      snackbar.msg('Note archived');
     } catch (err) {
-      const errorMessage = isApiError(err)
-        ? err.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-      snackbar(errorMessage);
+      snackbar.err(err);
     }
   };
 

@@ -5,8 +5,7 @@ import {
   useSignUpMutation,
 } from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
-import { cookie, routes, UNKNOWN_ERROR_MESSAGE } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
+import { cookie, routes } from '@shared/lib/const';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
@@ -52,13 +51,7 @@ const SignUp = () => {
       dispatch(loggedIn(loginResponse));
       navigate(`/${routes.NOTES}`);
     } catch (e) {
-      if (!isApiError(e)) {
-        snackbar(UNKNOWN_ERROR_MESSAGE);
-        return;
-      }
-
-      const errorMessage = e.data.detail;
-      snackbar(errorMessage);
+      snackbar.err(e);
     }
   };
 

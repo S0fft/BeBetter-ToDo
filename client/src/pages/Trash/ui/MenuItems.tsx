@@ -5,8 +5,7 @@ import {
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { UNKNOWN_ERROR_MESSAGE, urlParams } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
+import { urlParams } from '@shared/lib/const';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -43,12 +42,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
       await deleteNote(noteId);
 
       // 3.show snackbar
-      snackbar('Note successfully deleted');
+      snackbar.msg('Note successfully deleted');
     } catch (err) {
-      const errorMessage = isApiError(err)
-        ? err.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-      snackbar(errorMessage);
+      snackbar.err(err);
     }
   };
 
@@ -57,12 +53,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     try {
       await updateNote({ id: noteId, body: { is_trashed: false } });
-      snackbar('Note restored');
+      snackbar.msg('Note restored');
     } catch (err) {
-      const errorMessage = isApiError(err)
-        ? err.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-      snackbar(errorMessage);
+      snackbar.err(err);
     }
   };
 

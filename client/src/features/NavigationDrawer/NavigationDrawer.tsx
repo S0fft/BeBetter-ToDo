@@ -3,8 +3,7 @@ import { Dispatch, FC, SetStateAction } from 'react';
 import { useCreateNoteMutation } from '@/entities/note/api/noteApi';
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
-import { routes, UNKNOWN_ERROR_MESSAGE, urlParams } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
+import { routes, urlParams } from '@shared/lib/const';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
@@ -35,11 +34,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
       setUrl(urlParams.NOTE_ID, note.id);
       onExpandNote(true);
     } catch (e) {
-      const errorMessage = isApiError(e)
-        ? e.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-
-      snackbar(errorMessage);
+      snackbar.err(e);
     }
   };
 

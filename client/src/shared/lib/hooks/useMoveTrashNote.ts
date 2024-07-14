@@ -1,8 +1,7 @@
 import { MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
-import { UNKNOWN_ERROR_MESSAGE, urlParams } from '@shared/lib/const';
-import isApiError from '@shared/lib/helpers/isApiError';
+import { urlParams } from '@shared/lib/const';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -27,12 +26,9 @@ const useMoveTrashNote = (noteId: number) => {
 
     try {
       await updateNote({ id: noteId, body: { is_trashed: true } });
-      snackbar('Moved to trash');
+      snackbar.msg('Moved to trash');
     } catch (err) {
-      const errorMessage = isApiError(err)
-        ? err.data.detail
-        : UNKNOWN_ERROR_MESSAGE;
-      snackbar(errorMessage);
+      snackbar.err(err);
     }
   };
 };
