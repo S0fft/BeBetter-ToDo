@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 
 import { Corner } from '@material/web/all';
 
@@ -24,7 +24,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
   const snackbar = useSnackbar();
   const handleMoveTrashNote = useMoveTrashNote(noteId);
 
-  const handleArchiveNote = async () => {
+  const handleArchiveNote = async (e: MouseEvent) => {
+    e.stopPropagation();
+
     try {
       await updateNote({ id: noteId, body: { is_done: true } });
       snackbar.msg(SNACKBAR_MESSAGE.ARCHIVED);

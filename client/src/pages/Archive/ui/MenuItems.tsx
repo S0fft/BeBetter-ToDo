@@ -29,6 +29,10 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
     }
   };
 
+  const handleMoveToTrashNote = (e: MouseEvent) => {
+    void handleMoveTrashNote(e, handleUnarchiveNote);
+  };
+
   return (
     <>
       <MenuItem
@@ -41,7 +45,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         </Icon>
       </MenuItem>
       <MenuItem
-        onClick={handleMoveTrashNote}
+        onClick={handleMoveToTrashNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
         <span slot="headline">Delete</span>

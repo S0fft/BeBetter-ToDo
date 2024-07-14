@@ -16,7 +16,10 @@ const useMoveTrashNote = (noteId: number) => {
   const snackbar = useSnackbar();
   const isActiveNote = useActiveNote(noteId);
 
-  return async (e: MouseEvent) => {
+  return async (
+    e: MouseEvent,
+    cb?: (e: MouseEvent) => void | Promise<void>,
+  ) => {
     e.stopPropagation();
 
     if (isActiveNote) {
@@ -25,6 +28,7 @@ const useMoveTrashNote = (noteId: number) => {
     }
 
     try {
+      await cb?.(e);
       await updateNote({ id: noteId, body: { is_trashed: true } });
       snackbar.msg(SNACKBAR_MESSAGE.TRASHED);
     } catch (err) {
