@@ -1,17 +1,14 @@
 import { useNotesQuery } from '@/entities/note/api/noteApi';
 import Note from '@pages/Notes/ui/Note';
 import MenuItems from '@pages/Trash/ui/MenuItems';
-import Loader from '@shared/ui/Loader';
 import NotesList from '@shared/ui/NotesList';
 import TextButton from '@shared/ui/TextButton';
 
 const Trash = () => {
-  const { data: notes = [], isFetching } = useNotesQuery();
+  const { data: notes = [] } = useNotesQuery();
 
   const trashedNotes = notes.filter(({ is_trashed }) => is_trashed);
   const isTrashNotEmpty = trashedNotes.length !== 0;
-
-  if (isFetching) return <Loader />;
 
   return (
     <NotesList
