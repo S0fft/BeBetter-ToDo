@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 
 import {
   useDeleteNoteMutation,
@@ -10,6 +10,7 @@ import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
+import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
 import { OutletContext } from '@shared/ui/NotesList/model/types';
@@ -26,6 +27,12 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
   const { setUrl } = useUrl();
   const snackbar = useSnackbar();
   const isActiveNote = useActiveNote(noteId);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleToggleDialog = (e: MouseEvent) => {
+    e.stopPropagation();
+    setIsDialogOpen((prev) => !prev);
+  };
 
   const handleDeleteForeverNote = async (e: MouseEvent) => {
     e.stopPropagation();
@@ -36,12 +43,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
     }
 
     try {
-      // 1.show modal
-
-      // 2.delete note
       await deleteNote(noteId);
-
-      // 3.show snackbar
       snackbar.msg(SNACKBAR_MESSAGE.DELETED);
     } catch (err) {
       snackbar.err(err);
@@ -61,8 +63,17 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
   return (
     <>
+      <ConfirmDialog
+        setIsOpen={setIsDialogOpen}
+        open={isDialogOpen}
+        title="Permanently delete?"
+        subtitle="You'll no longer see this note. This will also delete it from all labels."
+        confirmText="Delete"
+        onCancel={handleToggleDialog}
+        onConfirm={handleDeleteForeverNote}
+      />
       <MenuItem
-        onClick={handleDeleteForeverNote}
+        onClick={handleToggleDialog}
         style={menuItemStyles}
         className="mx-2 rounded-md">
         Delete forever
