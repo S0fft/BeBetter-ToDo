@@ -18,6 +18,7 @@ import Header from '@pages/Notes/ui/Header';
 import { filledIconStyles, urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
+import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Label as TLabels } from '@shared/types';
 import FilledIconButton from '@shared/ui/FilledIconButton';
@@ -63,11 +64,10 @@ const Note: FC<NoteProps> = ({
   const [isExpanded, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const containerRef = useRef<HTMLLIElement>(null);
-  const { readUrl, setUrl } = useUrl();
+  const { setUrl } = useUrl();
   const [updateNote] = useUpdateNoteMutation();
+  const isActiveNote = useActiveNote(id);
 
-  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-  const isActiveNote = activeNote === id;
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {

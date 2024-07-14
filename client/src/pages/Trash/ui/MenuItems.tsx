@@ -8,6 +8,7 @@ import { menuItemStyles } from '@pages/Notes/lib/const';
 import { UNKNOWN_ERROR_MESSAGE, urlParams } from '@shared/lib/const';
 import isApiError from '@shared/lib/helpers/isApiError';
 import viewTransition from '@shared/lib/helpers/viewTransition';
+import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
@@ -23,12 +24,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
   const [, setIsExpandNote] = useOutletContext<OutletContext>();
   const [deleteNote] = useDeleteNoteMutation();
   const [updateNote] = useUpdateNoteMutation();
-  const { setUrl, readUrl } = useUrl();
+  const { setUrl } = useUrl();
   const snackbar = useSnackbar();
-
-  // TODO: useActiveNote??
-  const isActiveNote =
-    noteId === Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
+  const isActiveNote = useActiveNote(noteId);
 
   const handleDeleteForeverNote = async (e: MouseEvent) => {
     e.stopPropagation();
