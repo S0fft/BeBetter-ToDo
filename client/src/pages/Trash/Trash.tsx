@@ -1,21 +1,119 @@
-import { useNotesQuery } from '@/entities/note/api/noteApi';
+import { useEffect, useState } from 'react';
+
+import {
+  useDeleteNoteMutation,
+  useNotesQuery,
+} from '@/entities/note/api/noteApi';
 import Note from '@pages/Notes/ui/Note';
+import {
+  emptyTrashAnimation,
+  successAnimation,
+} from '@pages/Trash/model/constants';
 import MenuItems from '@pages/Trash/ui/MenuItems';
+import { SNACKBAR_MESSAGE } from '@shared/lib/const';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
+import Icon from '@shared/ui/Icon';
+import Loader from '@shared/ui/Loader';
 import NotesList from '@shared/ui/NotesList';
 import TextButton from '@shared/ui/TextButton';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Trash = () => {
   const { data: notes = [] } = useNotesQuery();
+  const [deleteNote, { isLoading, isSuccess }] = useDeleteNoteMutation();
+  const snackbar = useSnackbar();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const trashedNotes = notes.filter(({ is_trashed }) => is_trashed);
   const isTrashNotEmpty = trashedNotes.length !== 0;
 
+  const isShowLoader = isTrashNotEmpty && isLoading;
+  const isShowSuccess = !isTrashNotEmpty && showSuccess;
+  const isShowEmptyTrash = isTrashNotEmpty && !isLoading && !isSuccess;
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (isSuccess) {
+      setShowSuccess(true);
+      timeout = setTimeout(() => setShowSuccess(false), 5000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isSuccess]);
+
+  const handleEmptyTrash = async () => {
+    for await (const note of trashedNotes) {
+      try {
+        await deleteNote(note.id);
+      } catch (err) {
+        snackbar.err(err);
+      }
+    }
+
+    snackbar.msg(SNACKBAR_MESSAGE.EMPTYED);
+  };
+
   return (
     <NotesList
       preList={
-        <article className="absolute left-1/2 flex h-fit w-full -translate-x-1/2 items-center justify-center gap-3 py-6 font-medium">
-          <h4>Notes in Trash are deleted after 7 days.</h4>
-          {isTrashNotEmpty && <TextButton>Empty Trash</TextButton>}
+        <article className="absolute left-1/2 flex h-[88px] w-full -translate-x-1/2 items-center justify-center gap-3 py-6 font-medium">
+          <motion.h4
+            className="inline-block"
+            layout
+            transition={{
+              type: 'spring',
+              stiffness: 340,
+              damping: 12,
+              mass: 0.8,
+            }}>
+            Notes in Trash are deleted after 7 days.
+          </motion.h4>
+          <AnimatePresence mode="wait">
+            {isShowLoader && (
+              <motion.div
+                key="loader"
+                variants={successAnimation}
+                initial="hidden"
+                exit="hidden"
+                animate="visible"
+                className="inline-block"
+                layout>
+                <Loader
+                  style={{
+                    '--md-circular-progress-size': '24px',
+                  }}
+                  indeterminate
+                />
+              </motion.div>
+            )}
+            {isShowEmptyTrash && (
+              <motion.div
+                key="emptyTrash"
+                variants={emptyTrashAnimation}
+                initial="hidden"
+                exit="hidden"
+                animate="visible"
+                className="inline-block"
+                layout>
+                <TextButton disabled={isLoading} onClick={handleEmptyTrash}>
+                  Empty Trash
+                </TextButton>
+              </motion.div>
+            )}
+            {isShowSuccess && (
+              <motion.div
+                key="success"
+                variants={successAnimation}
+                initial="hidden"
+                exit="hidden"
+                animate="visible"
+                layout
+                className="inline-block">
+                <Icon className="text-primary-fixed-dim">check</Icon>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </article>
       }
       notes={trashedNotes}

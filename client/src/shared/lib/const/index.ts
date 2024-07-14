@@ -57,4 +57,5 @@ export const SNACKBAR_MESSAGE = {
   UNARCHIVED: 'Note unarchived',
   DELETED: 'Note successfully deleted',
   RESTORED: 'Note restored',
+  EMPTYED: 'All notes has been successfully deleted',
 };
