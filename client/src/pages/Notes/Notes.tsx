@@ -5,12 +5,12 @@ import NotesList from '@shared/ui/NotesList';
 import MenuItems from '@shared/ui/NotesList/ui/MenuItems';
 
 const Notes = () => {
-  const { data: notes = [], isLoading } = useNotesQuery();
+  const { data: notes = [], isFetching } = useNotesQuery();
   const filteredNotes = notes
     .filter(({ is_trashed }) => !is_trashed)
     .filter(({ is_done }) => !is_done);
 
-  if (isLoading) return <Loader />;
+  if (isFetching) return <Loader />;
 
   return (
     <NotesList
