@@ -50,3 +50,11 @@ export const SnackBarTransition = cssTransition({
 });
 
 export const UNKNOWN_ERROR_MESSAGE = 'Something went wrong 😭';
+
+export const SNACKBAR_MESSAGE = {
+  TRASHED: 'Moved to trash',
+  ARCHIVED: 'Note archived',
+  UNARCHIVED: 'Note unarchived',
+  DELETED: 'Note successfully deleted',
+  RESTORED: 'Note restored',
+};

@@ -3,6 +3,7 @@ import { FC, MouseEvent } from 'react';
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
+import { SNACKBAR_MESSAGE } from '@shared/lib/const';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
@@ -22,7 +23,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     try {
       await updateNote({ id: noteId, body: { is_done: false } });
-      snackbar.msg('Note unarchived');
+      snackbar.msg(SNACKBAR_MESSAGE.UNARCHIVED);
     } catch (err) {
       snackbar.err(err);
     }

@@ -5,7 +5,7 @@ import {
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { urlParams } from '@shared/lib/const';
+import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -42,7 +42,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
       await deleteNote(noteId);
 
       // 3.show snackbar
-      snackbar.msg('Note successfully deleted');
+      snackbar.msg(SNACKBAR_MESSAGE.DELETED);
     } catch (err) {
       snackbar.err(err);
     }
@@ -53,7 +53,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     try {
       await updateNote({ id: noteId, body: { is_trashed: false } });
-      snackbar.msg('Note restored');
+      snackbar.msg(SNACKBAR_MESSAGE.RESTORED);
     } catch (err) {
       snackbar.err(err);
     }

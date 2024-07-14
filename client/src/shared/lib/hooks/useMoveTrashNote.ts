@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
-import { urlParams } from '@shared/lib/const';
+import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -26,7 +26,7 @@ const useMoveTrashNote = (noteId: number) => {
 
     try {
       await updateNote({ id: noteId, body: { is_trashed: true } });
-      snackbar.msg('Moved to trash');
+      snackbar.msg(SNACKBAR_MESSAGE.TRASHED);
     } catch (err) {
       snackbar.err(err);
     }

@@ -5,6 +5,7 @@ import { Corner } from '@material/web/all';
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles, subMenuItemStyles } from '@pages/Notes/lib/const';
+import { SNACKBAR_MESSAGE } from '@shared/lib/const';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import { Label } from '@shared/types';
@@ -26,7 +27,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
   const handleArchiveNote = async () => {
     try {
       await updateNote({ id: noteId, body: { is_done: true } });
-      snackbar.msg('Note archived');
+      snackbar.msg(SNACKBAR_MESSAGE.ARCHIVED);
     } catch (err) {
       snackbar.err(err);
     }
