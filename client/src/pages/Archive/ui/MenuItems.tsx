@@ -47,9 +47,26 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
     }
   };
 
+  const handleUnarchiveNote = async (e: MouseEvent) => {
+    e.stopPropagation();
+
+    try {
+      await updateNote({ id: noteId, body: { is_done: false } });
+      snackbar('Note unarchived');
+    } catch (err) {
+      const errorMessage = isApiError(err)
+        ? err.data.detail
+        : UNKNOWN_ERROR_MESSAGE;
+      snackbar(errorMessage);
+    }
+  };
+
   return (
     <>
-      <MenuItem style={menuItemStyles} className="mx-2 rounded-md">
+      <MenuItem
+        onClick={handleUnarchiveNote}
+        style={menuItemStyles}
+        className="mx-2 rounded-md">
         Unarchive
         <Icon slot="end" className="text-on-surface">
           collections_bookmark
