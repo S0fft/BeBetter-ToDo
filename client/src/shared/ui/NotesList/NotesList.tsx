@@ -1,26 +1,20 @@
-import { Dispatch, FC, ReactNode, RefObject, SetStateAction } from 'react';
+import { FC, ReactNode } from 'react';
 
 import Search from '@features/Search/Search';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
-import Note from '@pages/Notes/ui/Note';
 import cn from '@shared/lib/helpers/cn';
 import { Note as TNote } from '@shared/types';
+import { OutletContext } from '@shared/ui/NotesList/model/types';
 import EmptyList from '@shared/ui/NotesList/ui/EmptyList';
 import Footer from '@shared/ui/NotesList/ui/Footer';
 import { useOutletContext } from 'react-router-dom';
-
-type OutletContext = [
-  boolean,
-  Dispatch<SetStateAction<boolean>>,
-  ReactNode,
-  RefObject<HTMLUListElement>,
-];
 
 type NotesListProps = {
   notes: TNote[];
   preList?: ReactNode;
   emptyListIcon: string;
   emptyListSubText: string;
+  renderNote: (note: TNote, index: number) => ReactNode;
 };
 
 const NotesList: FC<NotesListProps> = ({
@@ -28,6 +22,7 @@ const NotesList: FC<NotesListProps> = ({
   preList,
   emptyListIcon,
   emptyListSubText,
+  renderNote,
 }) => {
   const [isNoteExpanded] = useOutletContext<OutletContext>();
   const { searchRef, notesListRef } = useHeaderScroll();
@@ -63,18 +58,7 @@ const NotesList: FC<NotesListProps> = ({
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
           )}
-          {sortedNotes.map((note, index) => (
-            <Note
-              key={note.id}
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              createdAt={note.time_created}
-              isPinned={note.is_pinned}
-              labels={note.labels}
-              index={index}
-            />
-          ))}
+          {sortedNotes.map(renderNote)}
         </ul>
       </div>
       <Footer containerRef={notesListRef} />

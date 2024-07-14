@@ -1,4 +1,11 @@
-import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from 'react';
+import {
+  Dispatch,
+  FC,
+  MouseEvent,
+  PropsWithChildren,
+  SetStateAction,
+  useRef,
+} from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import { pinButtonStyles } from '@pages/Notes/lib/const';
@@ -21,7 +28,7 @@ import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { useOutletContext } from 'react-router-dom';
 
-type NoteProps = {
+type NoteProps = PropsWithChildren<{
   id: number;
   title: string;
   content: string;
@@ -29,7 +36,7 @@ type NoteProps = {
   labels: TLabels[];
   isPinned: boolean;
   index: number;
-};
+}>;
 
 const animations = {
   initial: { scale: 0 },
@@ -51,6 +58,7 @@ const Note: FC<NoteProps> = ({
   labels,
   isPinned,
   index,
+  children,
 }) => {
   const [isExpanded, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
@@ -109,12 +117,7 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <ContextMenu
-            isActiveNote={isActiveNote}
-            onExpandNote={setIsExpandNote}
-            noteId={id}
-            activeLabels={labels}
-          />
+          <ContextMenu noteId={id}>{children}</ContextMenu>
         </Controls>
       </Header>
       <Body>
