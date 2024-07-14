@@ -54,6 +54,7 @@ module.exports = {
     ],
     'no-void': 0,
     'no-param-reassign': 0,
+    'no-restricted-syntax': 0,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/namespace': 0,
