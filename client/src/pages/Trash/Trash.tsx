@@ -7,6 +7,7 @@ import {
 import Note from '@pages/Notes/ui/Note';
 import {
   emptyTrashAnimation,
+  layoutTransition,
   successAnimation,
 } from '@pages/Trash/model/constants';
 import MenuItems from '@pages/Trash/ui/MenuItems';
@@ -60,60 +61,60 @@ const Trash = () => {
         <article className="absolute left-1/2 flex h-[88px] w-full -translate-x-1/2 items-center justify-center gap-3 py-6 font-medium">
           <motion.h4
             className="inline-block"
-            layout
-            transition={{
-              type: 'spring',
-              stiffness: 340,
-              damping: 12,
-              mass: 0.8,
-            }}>
+            transition={layoutTransition}
+            layout>
             Notes in Trash are deleted after 7 days.
           </motion.h4>
-          <AnimatePresence mode="wait">
-            {isShowLoader && (
-              <motion.div
-                key="loader"
-                variants={successAnimation}
-                initial="hidden"
-                exit="hidden"
-                animate="visible"
-                className="inline-block"
-                layout>
-                <Loader
-                  style={{
-                    '--md-circular-progress-size': '24px',
-                  }}
-                  indeterminate
-                />
-              </motion.div>
-            )}
-            {isShowEmptyTrash && (
-              <motion.div
-                key="emptyTrash"
-                variants={emptyTrashAnimation}
-                initial="hidden"
-                exit="hidden"
-                animate="visible"
-                className="inline-block"
-                layout>
-                <TextButton disabled={isLoading} onClick={handleEmptyTrash}>
-                  Empty Trash
-                </TextButton>
-              </motion.div>
-            )}
-            {isShowSuccess && (
-              <motion.div
-                key="success"
-                variants={successAnimation}
-                initial="hidden"
-                exit="hidden"
-                animate="visible"
-                layout
-                className="inline-block">
-                <Icon className="text-primary-fixed-dim">check</Icon>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            className="flex w-0 items-center transition-all duration-400 ease-bounce has-[div]:w-28"
+            transition={layoutTransition}
+            layout>
+            <AnimatePresence mode="wait">
+              {isShowLoader && (
+                <motion.div
+                  key="loader"
+                  variants={successAnimation}
+                  initial="hidden"
+                  exit="hidden"
+                  animate="visible"
+                  className="inline-block"
+                  layout>
+                  <Loader
+                    style={{
+                      '--md-circular-progress-size': '24px',
+                    }}
+                    indeterminate
+                  />
+                </motion.div>
+              )}
+              {isShowEmptyTrash && (
+                <motion.div
+                  key="emptyTrash"
+                  variants={emptyTrashAnimation}
+                  initial="hidden"
+                  exit="hidden"
+                  animate="visible"
+                  className="flex items-center justify-center"
+                  layout>
+                  <TextButton disabled={isLoading} onClick={handleEmptyTrash}>
+                    Empty Trash
+                  </TextButton>
+                </motion.div>
+              )}
+              {isShowSuccess && (
+                <motion.div
+                  key="success"
+                  variants={successAnimation}
+                  initial="hidden"
+                  exit="hidden"
+                  animate="visible"
+                  layout
+                  className="flex items-center justify-center">
+                  <Icon className="text-primary-fixed-dim">check</Icon>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </article>
       }
       notes={trashedNotes}

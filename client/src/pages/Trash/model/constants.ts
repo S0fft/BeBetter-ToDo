@@ -1,4 +1,3 @@
-
 export const successAnimation = {
   visible: {
     opacity: [0, 1],
@@ -46,4 +45,11 @@ export const emptyTrashAnimation = {
       ease: 'easeOut',
     },
   },
+};
+
+export const layoutTransition = {
+  type: 'spring',
+  stiffness: 340,
+  damping: 12,
+  mass: 0.8,
 };
