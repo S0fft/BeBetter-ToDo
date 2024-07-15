@@ -90,7 +90,7 @@ const Note: FC<NoteProps> = ({
         ...animations,
         transition: { ...animations.transition, delay: index * 0.02 },
       }}
-      layout
+      layout="position"
       ref={containerRef}
       style={{
         viewTransitionName: `expandedNote-${id}`,
