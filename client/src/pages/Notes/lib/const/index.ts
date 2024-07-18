@@ -16,6 +16,8 @@ export const pinButtonStyles = {
     'var(--md-sys-color-on-surface)',
   '--md-filled-icon-button-toggle-hover-icon-color':
     'var(--md-sys-color-on-primary)',
+  '--md-filled-icon-button-toggle-hover-state-layer-color':
+    'var(--md-sys-color-on-primary)',
 };
 
 export const dotButtonStyles = {

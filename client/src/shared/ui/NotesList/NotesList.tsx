@@ -1,26 +1,20 @@
-import { Dispatch, FC, ReactNode, RefObject, SetStateAction } from 'react';
+import { FC, ReactNode } from 'react';
 
 import Search from '@features/Search/Search';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
-import Note from '@pages/Notes/ui/Note';
 import cn from '@shared/lib/helpers/cn';
 import { Note as TNote } from '@shared/types';
+import { OutletContext } from '@shared/ui/NotesList/model/types';
 import EmptyList from '@shared/ui/NotesList/ui/EmptyList';
 import Footer from '@shared/ui/NotesList/ui/Footer';
 import { useOutletContext } from 'react-router-dom';
-
-type OutletContext = [
-  boolean,
-  Dispatch<SetStateAction<boolean>>,
-  ReactNode,
-  RefObject<HTMLUListElement>,
-];
 
 type NotesListProps = {
   notes: TNote[];
   preList?: ReactNode;
   emptyListIcon: string;
   emptyListSubText: string;
+  renderNote: (note: TNote, index: number) => ReactNode;
 };
 
 const NotesList: FC<NotesListProps> = ({
@@ -28,16 +22,20 @@ const NotesList: FC<NotesListProps> = ({
   preList,
   emptyListIcon,
   emptyListSubText,
+  renderNote,
 }) => {
   const [isNoteExpanded] = useOutletContext<OutletContext>();
   const { searchRef, notesListRef } = useHeaderScroll();
 
   const listIsEmpty = notes.length === 0;
+  const sortedNotes = [...notes].sort((note) => (note.is_pinned ? -1 : 1));
 
   return (
     <article
       ref={notesListRef}
-      className={cn('relative h-dvh overflow-y-scroll px-2 pb-4')}>
+      className={cn(
+        'relative h-dvh overflow-y-scroll px-2 pb-4 ease-emphasized-decelerate',
+      )}>
       <header
         key="header"
         style={{
@@ -49,24 +47,18 @@ const NotesList: FC<NotesListProps> = ({
       <div className="grid h-[calc(100%-92px)] pt-[92px]">
         {preList}
         <ul
-          className={cn('grid grid-cols-1 content-start gap-3 transition-all', {
-            'grid-cols-2 justify-center': !isNoteExpanded,
-            'align-items content-center': listIsEmpty,
-          })}>
+          className={cn(
+            'grid animate-fade-in-section grid-cols-1 content-start gap-3 transition-all',
+            {
+              'grid-cols-2 justify-center': !isNoteExpanded,
+              'align-items content-center': listIsEmpty,
+              'mt-24': preList,
+            },
+          )}>
           {listIsEmpty && (
             <EmptyList icon={emptyListIcon} subText={emptyListSubText} />
           )}
-          {notes.map((note) => (
-            <Note
-              key={note.id}
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              createdAt={note.createdAt}
-              isPinned={note.isPinned}
-              labels={note.labels}
-            />
-          ))}
+          {sortedNotes.map(renderNote)}
         </ul>
       </div>
       <Footer containerRef={notesListRef} />

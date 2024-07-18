@@ -1,17 +1,12 @@
-import { useState } from 'react';
-
+import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
-
-import { mockedNotes } from '../../../../dev-data';
 
 const Content = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-  const initialContent = mockedNotes?.[activeNote]?.content;
-
-  const [content, setContent] = useState(initialContent);
+  const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
+  const [content, setContent] = useUpdateNote(activeNoteId, 'content');
 
   return (
     <textarea

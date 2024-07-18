@@ -1,15 +1,13 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 
+import { useCreateNoteMutation } from '@/entities/note/api/noteApi';
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
 import NavItem from '@features/NavigationDrawer/ui/NavItem';
-import { noteAdded } from '@pages/Notes/slice';
 import { routes, urlParams } from '@shared/lib/const';
-import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
-import selectNotesNum from '@shared/lib/selectors/selectNotesNum';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { mockLabels } from '../../../dev-data';
@@ -20,30 +18,24 @@ type NavigationDrawerProps = {
 
 const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
   const navigate = useNavigate();
+  const snackbar = useSnackbar();
   const { setUrl } = useUrl();
-  const dispatch = useDispatch();
-  const notesNum = useAppSelector(selectNotesNum);
+  const [createNote] = useCreateNoteMutation();
 
   const isLabelsExists = Boolean(mockLabels.length);
 
-  const handleComposeNote = () => {
-    navigate(routes.NOTES);
+  const handleComposeNote = async () => {
+    try {
+      navigate(`/${routes.NOTES}`);
 
-    const createdAt = new Date().toDateString();
-    dispatch(
-      noteAdded({
-        title: '',
-        content: '',
-        labels: [],
-        createdAt,
-        isPinned: false,
-        isArchived: false,
-        isTrashed: false,
-      }),
-    );
+      const emptyNote = { title: '.', content: '.' };
+      const note = await createNote(emptyNote).unwrap();
 
-    setUrl(urlParams.NOTE_ID, notesNum);
-    onExpandNote(true);
+      setUrl(urlParams.NOTE_ID, note.id);
+      onExpandNote(true);
+    } catch (e) {
+      snackbar.err(e);
+    }
   };
 
   return (
@@ -58,7 +50,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
         variant="tertiary">
         <Icon slot="icon">mode_edit</Icon>
       </Fab>
-      <NavItem icon="lightbulb" to={routes.NOTES}>
+      <NavItem icon="lightbulb" to={`/${routes.NOTES}`}>
         Notes
       </NavItem>
       <NavItem icon="collections_bookmark" to={routes.ARCHIVE}>

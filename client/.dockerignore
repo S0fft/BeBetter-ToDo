@@ -1,7 +1,12 @@
 node_modules
+dist
 npm-debug.log
 Dockerfile
 yarn-error.log
-README.md
+*.md
 .gitignore
+.git
 .env.example
+.husky
+.editorconfig
+.lintstagedrc.cjs

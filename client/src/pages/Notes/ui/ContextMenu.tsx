@@ -1,33 +1,23 @@
-import { FC, MouseEvent, useRef } from 'react';
+import { FC, MouseEvent, PropsWithChildren, useRef } from 'react';
 
 import { Corner, MdMenu } from '@material/web/all';
 
-import trash from '@assets/trash.svg';
-import {
-  dotButtonStyles,
-  menuItemStyles,
-  menuStyles,
-  subMenuItemStyles,
-} from '@pages/Notes/lib/const';
-import { Label } from '@shared/types';
+import { dotButtonStyles, menuStyles } from '@pages/Notes/lib/const';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
-import LabelsMenu from '@shared/ui/labelMenu';
 import Menu from '@shared/ui/Menu';
-import MenuItem from '@shared/ui/MenuItem';
-import SubMenu from '@shared/ui/SubMenu';
 
-type ContextMenuProps = {
-  activeLabels: Label[];
-  anchorId: string;
-};
+type ContextMenuProps = PropsWithChildren<{
+  noteId: number;
+}>;
 
-const ContextMenu: FC<ContextMenuProps> = ({ activeLabels, anchorId }) => {
+const ContextMenu: FC<ContextMenuProps> = ({ noteId, children }) => {
   const menuRef = useRef<MdMenu>(null);
+  const anchorId = `noteLabelsContextMenu-${noteId}`;
 
   const handleMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
-    if (menuRef.current) menuRef.current.show();
+    menuRef.current?.show();
   };
 
   return (
@@ -48,24 +38,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ activeLabels, anchorId }) => {
         anchor-corner={Corner.END_END}
         anchor={anchorId}
         ref={menuRef}>
-        <MenuItem style={menuItemStyles} className="mx-2 rounded-md">
-          <span slot="headline"> Delete </span>
-          <Icon slot="end">
-            <img src={trash} alt="" />
-          </Icon>
-        </MenuItem>
-        <SubMenu menuCorner={Corner.END_END} anchor-corner={Corner.END_START}>
-          <MenuItem
-            slot="item"
-            style={subMenuItemStyles}
-            className="mx-2 rounded-md">
-            Set label
-            <Icon slot="end" className="text-on-surface">
-              label
-            </Icon>
-          </MenuItem>
-          <LabelsMenu positioning="popover" activeLabels={activeLabels} />
-        </SubMenu>
+        {children}
       </Menu>
     </div>
   );
