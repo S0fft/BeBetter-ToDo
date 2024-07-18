@@ -63,7 +63,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email',
-                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity']
+                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity', 'image']
 
     def get_todos_quantity(self, obj):
         return obj.todos.count()
