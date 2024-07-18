@@ -9,14 +9,6 @@ class TodoSerializer(serializers.ModelSerializer):
         model = Todo
         fields = "__all__"
 
-
-class TodoSerializerPartial(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = Todo
-        fields = '__all__'
-
         extra_kwargs = {
             'title': {'required': False},
             'content': {'required': False},
