@@ -1,3 +1,5 @@
+import { cssTransition } from 'react-toastify';
+
 export const urlParams = {
   NOTE_ID: 'id',
 } as const;
@@ -8,6 +10,11 @@ export const localStorageKeys = {
   IS_DARK_MODE: 'isDarkMode',
 } as const;
 
+export const cookie = {
+  ACCESS_TOKEN: 'access-token',
+  REFRESH_TOKEN: 'refresh-token',
+} as const;
+
 export const routes = {
   BASE: '/',
   NOTES: 'notes',
@@ -15,6 +22,9 @@ export const routes = {
   TRASH: 'trash',
   LABEL: 'labels',
   DYNAMIC_LABEL: 'labels/:labelId',
+  LOGIN: 'login',
+  SIGN_UP: 'signup',
+  AUTH: 'auth',
 } as const;
 
 export const langs = {
@@ -30,4 +40,22 @@ export const SEARCH_BOTTOM_OFFSET = 20;
 
 export const filledIconStyles = {
   fontVariationSettings: "'FILL' 1",
+};
+
+export const SNACKBAR_AUTO_HIDE_DURATION = 4000;
+
+export const SnackBarTransition = cssTransition({
+  enter: 'animate-fade-in-snackbar',
+  exit: 'animate-fade-out-snackbar',
+});
+
+export const UNKNOWN_ERROR_MESSAGE = 'Something went wrong 😭';
+
+export const SNACKBAR_MESSAGE = {
+  TRASHED: 'Moved to trash',
+  ARCHIVED: 'Note archived',
+  UNARCHIVED: 'Note unarchived',
+  DELETED: 'Note successfully deleted',
+  RESTORED: 'Note restored',
+  EMPTYED: 'All notes has been successfully deleted',
 };

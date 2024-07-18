@@ -30,9 +30,29 @@ export type Note = {
   id: number;
   title: string;
   content: string;
-  createdAt: string;
+  is_done: boolean;
+  is_pinned: boolean;
+  is_trashed: boolean;
+  time_created: string;
+  time_updated: string;
   labels: Label[];
-  isPinned: boolean;
-  isArchived: boolean;
-  isTrashed: boolean;
+};
+
+export type ApiError = {
+  status: number;
+  data: {
+    detail: string;
+  };
+};
+
+export type User = {
+  email: string;
+  first_name: string;
+  id: number;
+  is_active: boolean;
+  is_done_todos_quantity: number;
+  is_trashed_todos_quantity: number;
+  last_name: string;
+  todos_quantity: number;
+  username: string;
 };

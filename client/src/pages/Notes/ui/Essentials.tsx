@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import Username from '@shared/ui/Username';
+
 type EssentialsProps = {
   createdAt: string;
 };
@@ -7,7 +9,7 @@ type EssentialsProps = {
 const Essentials: FC<EssentialsProps> = ({ createdAt }) => {
   return (
     <div className="grid gap-1">
-      <span className="font-medium">Caroline</span>
+      <Username className="font-medium" />
       <span className="text-sm">{createdAt}</span>
     </div>
   );

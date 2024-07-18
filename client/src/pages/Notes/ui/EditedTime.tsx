@@ -1,37 +1,61 @@
-import { ONE_DAY, ONE_YEAR } from '@pages/Notes/lib/const';
+import { useNoteQuery } from '@/entities/note/api/noteApi';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
-import { differenceInCalendarDays, format } from 'date-fns';
-
-import { mockedNotes } from '../../../../dev-data';
+import Loader from '@shared/ui/Loader';
+import { format, isThisYear, isToday, isYesterday } from 'date-fns';
 
 const EditedTime = () => {
   const { readUrl } = useUrl();
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-  const createdAt = mockedNotes?.[activeNote]?.createdAt;
+  const { data: note, isFetching } = useNoteQuery(activeNote, {
+    skip: Number.isNaN(activeNote),
+  });
 
-  const diff = differenceInCalendarDays(new Date(), new Date(createdAt));
-
-  // TODO: change mocked time to real
-  let editedTime = 'today 4:03 PM';
-
-  if (diff === ONE_DAY) {
-    editedTime = 'yesterday 3:30 PM';
+  if (isFetching || !note) {
+    return (
+      <p key="loader" className="ml-auto animate-fade-in-screen">
+        <Loader
+          style={{
+            '--md-circular-progress-size': '24px',
+          }}
+          indeterminate
+        />
+      </p>
+    );
   }
 
-  if (diff > ONE_DAY) {
-    editedTime = format(new Date(createdAt), 'MMM dd');
+  const updatedAt = note?.time_updated;
+  const formattedDate = format(new Date(updatedAt), 'h:mm a');
+
+  let editedTime;
+
+  if (isToday(updatedAt)) {
+    editedTime = `today, ${formattedDate}`;
   }
 
-  if (diff > ONE_YEAR) {
-    editedTime = format(new Date(createdAt), 'MMM dd, yyyy');
+  if (isYesterday(updatedAt)) {
+    editedTime = `yesterday, ${formattedDate}`;
+  }
+
+  if (isThisYear(updatedAt) && !isYesterday(updatedAt) && !isToday(updatedAt)) {
+    editedTime = format(new Date(updatedAt), 'MMM dd');
+  }
+
+  if (
+    !isThisYear(updatedAt) &&
+    !isYesterday(updatedAt) &&
+    !isToday(updatedAt)
+  ) {
+    editedTime = format(new Date(updatedAt), 'MMM dd, yyyy');
   }
 
   return (
-    <p className="ml-auto text-sm text-on-surface-variant">
+    <time
+      dateTime={updatedAt}
+      className="ml-auto animate-fade-in-screen text-sm text-on-surface-variant ease-standard-decelerate">
       Edited {editedTime}
-    </p>
+    </time>
   );
 };
 

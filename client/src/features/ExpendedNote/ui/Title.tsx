@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 import {
   MAX_TITLE_HEIGHT_PX,
@@ -6,19 +6,16 @@ import {
   TITLE_PADDING_Y,
   TITLE_TEXT_AREA_INITIAL_HEIGHT,
 } from '@features/ExpendedNote/lib/const';
+import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
 import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';
 
-import { mockedNotes } from '../../../../dev-data';
-
 const Title = () => {
   const { readUrl } = useUrl();
 
-  const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
-  const initialTitle = mockedNotes?.[activeNote]?.title;
-
-  const [title, setTitle] = useState(initialTitle);
+  const activeNoteId = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
+  const [title, setTitle] = useUpdateNote(activeNoteId, 'title');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;
