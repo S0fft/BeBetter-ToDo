@@ -42,6 +42,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+APPEND_SLASH = True
+
 ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [
@@ -75,11 +77,11 @@ DATABASES = {
         'NAME': config('NAME'),
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
-        'HOST': config('MYSQL_HOST'),
-        'PORT': config('MYSQL_TCP_PORT'),
+        # 'HOST': config('MYSQL_HOST'),
+        # 'PORT': config('MYSQL_TCP_PORT'),
 
-        # 'HOST': config('HOST'),
-        # 'PORT': config('PORT'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
 
         # 'OPTIONS': {
         #     'charset': 'utf8mb4',
