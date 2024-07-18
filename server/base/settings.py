@@ -1,3 +1,4 @@
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -77,11 +78,11 @@ DATABASES = {
         'NAME': config('NAME'),
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
-        # 'HOST': config('MYSQL_HOST'),
-        # 'PORT': config('MYSQL_TCP_PORT'),
+        'HOST': config('MYSQL_HOST'),
+        'PORT': config('MYSQL_TCP_PORT'),
 
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        # 'HOST': config('HOST'),
+        # 'PORT': config('PORT'),
 
         # 'OPTIONS': {
         #     'charset': 'utf8mb4',
@@ -156,3 +157,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / MEDIA_URL
