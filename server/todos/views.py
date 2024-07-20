@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -35,3 +35,10 @@ class TodoViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Label not found!'}, status=404)
 
         return Response({'label': label.title})
+
+    @action(methods=['delete'], detail=False, url_path='clear_trashed')
+    def clear_trashed(self, request):
+        user = request.user
+        deleted_count, _ = Todo.objects.filter(is_trashed=True, user=user).delete()
+
+        return Response({"message": f"Deleted {deleted_count} trashed todos"}, status=status.HTTP_204_NO_CONTENT)
