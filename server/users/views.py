@@ -30,7 +30,7 @@ class RegisterView(generics.CreateAPIView):
 @permission_classes([IsAuthenticated])
 def get_profile(request):
     user = request.user
-    serializer = ProfileSerializer(user, many=False)
+    serializer = ProfileSerializer(user, many=False, context={'request': request})
 
     return Response(serializer.data)
 
