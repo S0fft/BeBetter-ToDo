@@ -1,5 +1,6 @@
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework.serializers import ImageField
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -59,11 +60,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     todos_quantity = serializers.SerializerMethodField()
     is_done_todos_quantity = serializers.SerializerMethodField()
     is_trashed_todos_quantity = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email',
-                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity', 'image']
+                  'is_active', 'todos_quantity', 'is_done_todos_quantity', 'is_trashed_todos_quantity', 'image_url']
 
     def get_todos_quantity(self, obj):
         return obj.todos.count()
@@ -73,3 +75,11 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def get_is_trashed_todos_quantity(self, obj):
         return obj.todos.filter(is_trashed=True).count()
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+
+        return request.build_absolute_uri('/media/users_images/default_avatar.png')
