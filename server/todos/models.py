@@ -1,7 +1,7 @@
 # from datetime import timedelta
 
 from django.db import models
-# from django.utils import timezone
+from django.utils import timezone
 from users.models import User
 
 
@@ -28,12 +28,14 @@ class Todo(models.Model):
     def __str__(self):
         return self.title
 
-    # def save(self, *args, **kwargs):
-    #     if self.is_trashed and not self.time_trashed:
-    #         self.time_trashed = timezone.now()
-    #     elif not self.is_trashed:
-    #         self.time_trashed = None
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.is_trashed and not self.time_trashed:
+            self.time_trashed = timezone.now()
+
+        elif not self.is_trashed:
+            self.time_trashed = None
+
+        super().save(*args, **kwargs)
 
     # @property
     # def time_in_trash(self):
