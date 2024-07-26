@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'todos.apps.TodosConfig',
     'users.apps.UsersConfig',
     'rest_framework_simplejwt.token_blacklist',
+    'django_celery_beat',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -160,3 +161,10 @@ SIMPLE_JWT = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Адрес брокера сообщений
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Адрес результата
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
