@@ -1,5 +1,3 @@
-# from datetime import timedelta
-
 from django.db import models
 from django.utils import timezone
 from users.models import User
@@ -36,17 +34,3 @@ class Todo(models.Model):
             self.time_trashed = None
 
         super().save(*args, **kwargs)
-
-    # @property
-    # def time_in_trash(self):
-    #     if self.is_trashed and self.time_trashed:
-    #         time_trash = timezone.now() - self.time_trashed
-    #         return time_trash
-    #     return None
-
-    # def delete_if_old_trash(self):
-    #     if self.is_trashed and self.time_in_trash and self.time_in_trash >= timedelta(seconds=7):
-    #         self.delete()
-
-    # def delete(self):
-    #     super().delete()
