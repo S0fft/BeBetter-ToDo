@@ -2,6 +2,7 @@ import { MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -27,13 +28,17 @@ const useMoveTrashNote = (noteId: number) => {
       viewTransition(() => setIsExpandNote(false));
     }
 
-    try {
-      await cb?.(e);
-      await updateNote({ id: noteId, body: { is_trashed: true } });
-      snackbar.msg(SNACKBAR_MESSAGE.TRASHED);
-    } catch (err) {
-      snackbar.err(err);
+    const [cbError] = await runAsync(async () => cb?.(e));
+    const [updateNoteError] = await runAsync(
+      updateNote({ id: noteId, body: { is_trashed: true } }).unwrap,
+    );
+
+    if (cbError !== null || updateNoteError !== null) {
+      snackbar.err(cbError ?? updateNoteError);
+      return;
     }
+
+    snackbar.msg(SNACKBAR_MESSAGE.TRASHED);
   };
 };
 

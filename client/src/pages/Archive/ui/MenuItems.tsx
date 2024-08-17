@@ -4,6 +4,7 @@ import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
 import { SNACKBAR_MESSAGE } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
@@ -21,12 +22,16 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
   const handleUnarchiveNote = async (e: MouseEvent) => {
     e.stopPropagation();
 
-    try {
-      await updateNote({ id: noteId, body: { is_done: false } });
-      snackbar.msg(SNACKBAR_MESSAGE.UNARCHIVED);
-    } catch (err) {
-      snackbar.err(err);
+    const [error] = await runAsync(
+      updateNote({ id: noteId, body: { is_done: false } }).unwrap,
+    );
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
+
+    snackbar.msg(SNACKBAR_MESSAGE.UNARCHIVED);
   };
 
   const handleMoveToTrashNote = (e: MouseEvent) => {

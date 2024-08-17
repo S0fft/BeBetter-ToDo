@@ -6,7 +6,7 @@ import {
 } from '@/entities/note/api/noteApi';
 import { menuItemStyles } from '@pages/Notes/lib/const';
 import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
-import viewTransition from '@shared/lib/helpers/viewTransition';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
@@ -39,26 +39,32 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     if (isActiveNote) {
       setUrl(urlParams.NOTE_ID);
-      viewTransition(() => setIsExpandNote(false));
+      setIsExpandNote(false);
     }
 
-    try {
-      await deleteNote(noteId);
-      snackbar.msg(SNACKBAR_MESSAGE.DELETED);
-    } catch (err) {
-      snackbar.err(err);
+    const [error] = await runAsync(deleteNote(noteId).unwrap);
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
+
+    snackbar.msg(SNACKBAR_MESSAGE.DELETED);
   };
 
   const handleRestoreNote = async (e: MouseEvent) => {
     e.stopPropagation();
 
-    try {
-      await updateNote({ id: noteId, body: { is_trashed: false } });
-      snackbar.msg(SNACKBAR_MESSAGE.RESTORED);
-    } catch (err) {
-      snackbar.err(err);
+    const [error] = await runAsync(
+      updateNote({ id: noteId, body: { is_trashed: false } }).unwrap,
+    );
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
+
+    snackbar.msg(SNACKBAR_MESSAGE.RESTORED);
   };
 
   return (

@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLoginMutation } from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
 import { cookie, routes } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
@@ -33,19 +34,19 @@ const Login = () => {
   const forgotUsernamePath = `/${routes.AUTH}/${routes.LOGIN}`;
 
   const onSubmit = async (fields: TLoginSchema) => {
-    try {
-      const data = await login(fields).unwrap();
+    const [error, data] = await runAsync(login(fields).unwrap);
 
+    if (error === null) {
       Cookies.set(cookie.ACCESS_TOKEN, data.access);
       Cookies.set(cookie.REFRESH_TOKEN, data.refresh);
 
       dispatch(loggedIn(data));
       navigate(`/${routes.NOTES}`);
-    } catch (e) {
-      snackbar.err(e);
-    } finally {
-      reset();
+    } else {
+      snackbar.err(error);
     }
+
+    reset();
   };
 
   if (isLoading) {

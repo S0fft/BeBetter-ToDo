@@ -44,6 +44,7 @@ const Trash = () => {
   }, [isSuccess]);
 
   const handleEmptyTrash = async () => {
+    // TODO: change to clear_trashed
     for await (const note of trashedNotes) {
       try {
         await deleteNote(note.id);
