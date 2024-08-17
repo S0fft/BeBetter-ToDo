@@ -1,5 +1,6 @@
 import { FC, ImgHTMLAttributes } from 'react';
 
+import { useProfileQuery } from '@/entities/user/api/userApi';
 import user from '@assets/user.png';
 import cn from '@shared/lib/helpers/cn';
 
@@ -7,7 +8,8 @@ const UserAvatar: FC<ImgHTMLAttributes<HTMLImageElement>> = ({
   className,
   ...props
 }) => {
-  // const { data } = useProfileQuery();
+  const { data } = useProfileQuery();
+  const userName = data?.username;
 
   return (
     <img
@@ -18,7 +20,7 @@ const UserAvatar: FC<ImgHTMLAttributes<HTMLImageElement>> = ({
         className,
       )}
       src={user}
-      alt=""
+      alt={userName ? `${userName}'s avatar` : 'User avatar'}
     />
   );
 };

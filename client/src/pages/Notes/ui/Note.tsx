@@ -11,7 +11,6 @@ import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import { pinButtonStyles } from '@pages/Notes/lib/const';
 import Body from '@pages/Notes/ui/Body';
 import Content from '@pages/Notes/ui/Content';
-import ContextMenu from '@pages/Notes/ui/ContextMenu';
 import Controls from '@pages/Notes/ui/Controls';
 import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
@@ -20,6 +19,7 @@ import cn from '@shared/lib/helpers/cn';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Label as TLabels } from '@shared/types';
+import ContextMenu from '@shared/ui/ContextMenu';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
@@ -112,7 +112,7 @@ const Note: FC<NoteProps> = ({
               keep
             </Icon>
           </FilledIconButton>
-          <ContextMenu noteId={id}>{children}</ContextMenu>
+          <ContextMenu id={id}>{children}</ContextMenu>
         </Controls>
       </Header>
       <Body>
