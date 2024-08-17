@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import {
-  useDeleteNoteMutation,
+  useDeleteAllNotesMutation,
   useNotesQuery,
 } from '@/entities/note/api/noteApi';
 import Note from '@pages/Notes/ui/Note';
@@ -12,6 +12,7 @@ import {
 } from '@pages/Trash/model/constants';
 import MenuItems from '@pages/Trash/ui/MenuItems';
 import { SNACKBAR_MESSAGE } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
 import Loader from '@shared/ui/Loader';
@@ -21,7 +22,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const Trash = () => {
   const { data: notes = [] } = useNotesQuery();
-  const [deleteNote, { isLoading, isSuccess }] = useDeleteNoteMutation();
+  const [deleteAllNotes, { isLoading, isSuccess }] =
+    useDeleteAllNotesMutation();
   const snackbar = useSnackbar();
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -44,13 +46,11 @@ const Trash = () => {
   }, [isSuccess]);
 
   const handleEmptyTrash = async () => {
-    // TODO: change to clear_trashed
-    for await (const note of trashedNotes) {
-      try {
-        await deleteNote(note.id);
-      } catch (err) {
-        snackbar.err(err);
-      }
+    const [error] = await runAsync(deleteAllNotes);
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
 
     snackbar.msg(SNACKBAR_MESSAGE.EMPTYED);

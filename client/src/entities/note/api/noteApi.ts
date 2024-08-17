@@ -47,6 +47,14 @@ export const noteApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['Note'],
     }),
+
+    deleteAllNotes: builder.mutation<void, void>({
+      query: () => ({
+        url: `/todos/clear_trashed/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Note'],
+    }),
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
   useCreateNoteMutation,
   useUpdateNoteMutation,
   useDeleteNoteMutation,
+  useDeleteAllNotesMutation,
 } = noteApi;
