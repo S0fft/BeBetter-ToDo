@@ -17,7 +17,6 @@ import Essentials from '@pages/Notes/ui/Essentials';
 import Header from '@pages/Notes/ui/Header';
 import { filledIconStyles, urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
-import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { Label as TLabels } from '@shared/types';
@@ -61,7 +60,7 @@ const Note: FC<NoteProps> = ({
   index,
   children,
 }) => {
-  const [isExpanded, setIsExpandNote] =
+  const [, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const containerRef = useRef<HTMLLIElement>(null);
   const { setUrl } = useUrl();
@@ -71,11 +70,7 @@ const Note: FC<NoteProps> = ({
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {
-    if (isExpanded) {
-      setIsExpandNote(true);
-    } else {
-      viewTransition(() => setIsExpandNote(true));
-    }
+    setIsExpandNote(true);
     setUrl(urlParams.NOTE_ID, id);
   };
 
