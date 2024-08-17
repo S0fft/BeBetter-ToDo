@@ -25,6 +25,9 @@ export const routes = {
   LOGIN: 'login',
   SIGN_UP: 'signup',
   AUTH: 'auth',
+  SETTINGS: 'settings',
+  ACCOUNT: 'account',
+  GENERAL: 'general',
 } as const;
 
 export const langs = {
