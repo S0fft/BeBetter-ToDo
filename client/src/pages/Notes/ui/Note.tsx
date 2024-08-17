@@ -61,7 +61,7 @@ const Note: FC<NoteProps> = ({
   index,
   children,
 }) => {
-  const [isExpanded, setIsExpandNote] =
+  const [, setIsExpandNote] =
     useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const containerRef = useRef<HTMLLIElement>(null);
   const { setUrl } = useUrl();
@@ -71,11 +71,8 @@ const Note: FC<NoteProps> = ({
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {
-    if (isExpanded) {
-      setIsExpandNote(true);
-    } else {
-      viewTransition(() => setIsExpandNote(true));
-    }
+    setIsExpandNote(true);
+    viewTransition(() => setIsExpandNote(true));
     setUrl(urlParams.NOTE_ID, id);
   };
 

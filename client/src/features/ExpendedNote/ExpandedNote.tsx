@@ -5,7 +5,6 @@ import Controls from '@features/ExpendedNote/ui/Controls';
 import Essentials from '@features/ExpendedNote/ui/Essentials';
 import Header from '@features/ExpendedNote/ui/Header';
 import { urlParams } from '@shared/lib/const';
-import viewTransition from '@shared/lib/helpers/viewTransition';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -20,7 +19,7 @@ const ExpandedNote: FC<ExpandedNoteProps> = ({ onExpand }) => {
 
   const handleCollapseNote = () => {
     setUrl(urlParams.NOTE_ID);
-    viewTransition(() => onExpand(false));
+    onExpand(false);
   };
 
   return (
