@@ -2,13 +2,13 @@ import { Dispatch, FC, SetStateAction } from 'react';
 
 import { useCreateNoteMutation } from '@/entities/note/api/noteApi';
 import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
-import NavItem from '@features/NavigationDrawer/ui/NavItem';
 import { routes, urlParams } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
+import NavItem from '@shared/ui/NavItem';
 import { useNavigate } from 'react-router-dom';
 
 import { mockLabels } from '../../../dev-data';

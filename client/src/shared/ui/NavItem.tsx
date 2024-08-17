@@ -8,7 +8,7 @@ import { NavLink, NavLinkProps, useLocation } from 'react-router-dom';
 type NavButtonProps = NavLinkProps & {
   to: string;
   children: ReactNode;
-  icon: string;
+  icon?: string;
   isExpand?: boolean;
 };
 

@@ -1,5 +1,5 @@
-import NavItem from '@features/NavigationDrawer/ui/NavItem';
 import { routes } from '@shared/lib/const';
+import NavItem from '@shared/ui/NavItem';
 
 import { mockLabels } from '../../../../dev-data';
 

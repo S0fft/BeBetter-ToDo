@@ -10,7 +10,6 @@ import { RouterProvider } from 'react-router-dom';
 const App = () => {
   const isDarkMode = useAppSelector(selectIsDarkMode);
 
-  // TODO: move useEffect to settings page when it's done
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add(DARK_MODE_CLASS);
