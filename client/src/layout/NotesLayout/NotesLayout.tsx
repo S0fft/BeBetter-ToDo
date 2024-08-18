@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
-import NavigationDrawer from '@features/NavigationDrawer';
+import NavigationDrawer from '@layout/NotesLayout/ui/NavigationDrawer';
 import { urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';

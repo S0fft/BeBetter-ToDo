@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 
 import { useCreateNoteMutation } from '@/entities/note/api/noteApi';
-import LabelsList from '@features/NavigationDrawer/ui/LabelsList';
+import LabelsList from '@layout/NotesLayout/ui/NavigationDrawer/ui/LabelsList';
 import { routes, urlParams } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -11,7 +11,7 @@ import Icon from '@shared/ui/Icon';
 import NavItem from '@shared/ui/NavItem';
 import { useNavigate } from 'react-router-dom';
 
-import { mockLabels } from '../../../dev-data';
+import { mockLabels } from '../../../../../dev-data';
 
 type NavigationDrawerProps = {
   onExpandNote: Dispatch<SetStateAction<boolean>>;

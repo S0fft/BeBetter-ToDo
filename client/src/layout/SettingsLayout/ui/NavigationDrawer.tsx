@@ -1,4 +1,4 @@
-import BackButton from '@features/NavigationDrawer/ui/BackButton';
+import BackButton from '@layout/NotesLayout/ui/NavigationDrawer/ui/BackButton';
 import { routes } from '@shared/lib/const';
 import NavItem from '@shared/ui/NavItem';
 
