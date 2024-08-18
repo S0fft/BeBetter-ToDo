@@ -49,61 +49,55 @@ const SettingsGeneral = () => {
         onCancel={handleToggleDialog}
         onConfirm={handleClearData}
       />
-      <div className="h-full w-full animate-fade-in-section overflow-y-scroll rounded-3xl bg-surface-container px-9 pb-10 pt-7">
-        <div className="max-w-3xl space-y-10">
-          <div>
-            <h1 className="text-2xl text-on-surface">General</h1>
-            <p className="mt-3 text-on-surface-variant">
-              Configure app by your liking
-            </p>
-          </div>
-
-          <SettingsItem
-            title="Dark mode"
-            subTitle="Adjust how the interface looks like">
-            <Switch selected={isDarkMode} onChange={handleThemeSwitch} />
-          </SettingsItem>
-
-          <SettingsItem title="Language" subTitle="Change app language.">
-            <SegmentedButton
-              value={i18n.language}
-              onChange={handleChangeLanguage}>
-              <SegmentedButton.Button id="en">English</SegmentedButton.Button>
-              <SegmentedButton.Button id="ru">Русский</SegmentedButton.Button>
-            </SegmentedButton>
-          </SettingsItem>
-
-          <SettingsItem
-            title="Trash auto-delete time"
-            subTitle="Change the trash auto-delete timeout in days.">
-            <div className="grid items-center gap-2">
-              <input
-                className="h-14 w-20 rounded border border-outline bg-transparent pl-4 text-on-surface"
-                type="number"
-                min={0}
-                max={30}
-                value={days}
-                onChange={(e) => {
-                  const value = Number(e.target.value);
-                  if (value >= 0 && value <= 30) {
-                    setDays(value);
-                  }
-                }}
-              />
-              <p className="text-xs text-outline">Max 30 days*</p>
-            </div>
-          </SettingsItem>
-
-          <SettingsItem
-            title="Clear storage"
-            subTitle="Remove all stored data."
-            border={false}>
-            <FilledTonalButton onClick={handleToggleDialog}>
-              Clear data
-            </FilledTonalButton>
-          </SettingsItem>
-        </div>
+      <div>
+        <h1 className="text-2xl text-on-surface">General</h1>
+        <p className="mt-3 text-on-surface-variant">
+          Configure app by your liking
+        </p>
       </div>
+
+      <SettingsItem
+        title="Dark mode"
+        subTitle="Adjust how the interface looks like">
+        <Switch selected={isDarkMode} onChange={handleThemeSwitch} />
+      </SettingsItem>
+
+      <SettingsItem title="Language" subTitle="Change app language.">
+        <SegmentedButton value={i18n.language} onChange={handleChangeLanguage}>
+          <SegmentedButton.Button id="en">English</SegmentedButton.Button>
+          <SegmentedButton.Button id="ru">Русский</SegmentedButton.Button>
+        </SegmentedButton>
+      </SettingsItem>
+
+      <SettingsItem
+        title="Trash auto-delete time"
+        subTitle="Change the trash auto-delete timeout in days.">
+        <div className="grid items-center gap-2">
+          <input
+            className="h-14 w-20 rounded border border-outline bg-transparent pl-4 text-on-surface"
+            type="number"
+            min={0}
+            max={30}
+            value={days}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 0 && value <= 30) {
+                setDays(value);
+              }
+            }}
+          />
+          <p className="text-xs text-outline">Max 30 days*</p>
+        </div>
+      </SettingsItem>
+
+      <SettingsItem
+        title="Clear storage"
+        subTitle="Remove all stored data."
+        border={false}>
+        <FilledTonalButton onClick={handleToggleDialog}>
+          Clear data
+        </FilledTonalButton>
+      </SettingsItem>
     </>
   );
 };
