@@ -34,6 +34,7 @@ const UserDataForm = () => {
   };
 
   const isDisabled = !isValid;
+  const isErrors = Object.keys(errors).length > 0;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -44,7 +45,8 @@ const UserDataForm = () => {
           name="First name">
           <OutlinedTextField
             {...(register('firstName') as TextInputProps)}
-            supportingText={errors.firstName && errors.firstName.message}
+            error={isErrors}
+            error-text={errors.firstName && errors.firstName.message}
             placeholder="Your first name..."
             value="Caroline"
             className="w-80"
@@ -55,7 +57,8 @@ const UserDataForm = () => {
           name="Last name">
           <OutlinedTextField
             {...(register('lastName') as TextInputProps)}
-            supportingText={errors.lastName && errors.lastName.message}
+            error={isErrors}
+            error-text={errors.lastName && errors.lastName.message}
             placeholder="Your last name..."
             value="Blacke"
             className="w-80"
@@ -66,7 +69,8 @@ const UserDataForm = () => {
           name="Email">
           <OutlinedTextField
             {...(register('email') as TextInputProps)}
-            supportingText={errors.email && errors.email.message}
+            error={isErrors}
+            error-text={errors.email && errors.email.message}
             placeholder="Your email..."
             value={profile?.email ?? ''}
             className="w-80"
@@ -75,7 +79,8 @@ const UserDataForm = () => {
         <InputBlock name="Username">
           <OutlinedTextField
             {...(register('username') as TextInputProps)}
-            supportingText={errors.username && errors.username.message}
+            error={isErrors}
+            error-text={errors.username && errors.username.message}
             placeholder="Your username..."
             value={profile?.username ?? ''}
             className="w-80"

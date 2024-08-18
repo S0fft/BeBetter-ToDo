@@ -40,6 +40,7 @@ const ChangePasswordForm = () => {
   };
 
   const isDisabled = !isValid;
+  const isErrors = Object.keys(errors).length > 0;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="gap-6">
@@ -51,7 +52,8 @@ const ChangePasswordForm = () => {
           <OutlinedTextField
             {...(register('oldPassword') as TextInputProps)}
             type="password"
-            supportingText={errors.oldPassword && errors.oldPassword.message}
+            error={isErrors}
+            error-text={errors.oldPassword ? errors.oldPassword.message : ' '}
             placeholder="Your old password..."
             className="w-80"
           />
@@ -62,7 +64,8 @@ const ChangePasswordForm = () => {
           <OutlinedTextField
             {...(register('newPassword') as TextInputProps)}
             type="password"
-            supportingText={errors.newPassword && errors.newPassword.message}
+            error={isErrors}
+            error-text={errors.newPassword && errors.newPassword.message}
             placeholder="Your new password..."
             className="w-80"
           />
@@ -71,7 +74,8 @@ const ChangePasswordForm = () => {
           <OutlinedTextField
             {...(register('confirmNewPassword') as TextInputProps)}
             type="password"
-            supportingText={
+            error={isErrors}
+            error-text={
               errors.confirmNewPassword && errors.confirmNewPassword.message
             }
             placeholder="Repeat your new password..."
