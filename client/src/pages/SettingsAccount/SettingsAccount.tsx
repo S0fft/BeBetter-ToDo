@@ -1,5 +1,5 @@
 import { useProfileQuery } from '@/entities/user/api/userApi';
-import InputBlock from '@pages/SettingsAccount/ui/InputBlock';
+import ChangePasswordForm from '@pages/SettingsAccount/ui/ChangePasswordForm';
 import UserDataForm from '@pages/SettingsAccount/ui/UserDataForm';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import UserAvatar from '@shared/ui/UserAvatar';
@@ -30,35 +30,8 @@ const SettingsAccount = () => {
         </div>
         <FilledTonalButton>Change image</FilledTonalButton>
       </div>
-
       <UserDataForm />
-
-      <div className="gap-6">
-        <h2 className="mb-6 text-2xl text-on-surface">Update password</h2>
-        <div className="grid gap-4">
-          <InputBlock
-            type="password"
-            className="border-b border-b-outline-variant pb-6"
-            name="Old password"
-            placeholder="Your old password..."
-          />
-          <InputBlock
-            type="password"
-            className="border-b border-b-outline-variant pb-6"
-            name="New password"
-            placeholder="Your new password..."
-          />
-          <InputBlock
-            type="password"
-            className="border-b border-b-outline-variant pb-6"
-            name="Confirm new password"
-            placeholder="Repeat your new password..."
-          />
-          <FilledTonalButton className="w-fit justify-self-end">
-            Save
-          </FilledTonalButton>
-        </div>
-      </div>
+      <ChangePasswordForm />
     </>
   );
 };
