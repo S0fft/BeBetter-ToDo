@@ -1,5 +1,6 @@
 import { useProfileQuery } from '@/entities/user/api/userApi';
 import InputBlock from '@pages/SettingsAccount/ui/InputBlock';
+import UserDataForm from '@pages/SettingsAccount/ui/UserDataForm';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import UserAvatar from '@shared/ui/UserAvatar';
 
@@ -30,37 +31,7 @@ const SettingsAccount = () => {
         <FilledTonalButton>Change image</FilledTonalButton>
       </div>
 
-      <div className="gap-6">
-        <h2 className="mb-6 text-2xl text-on-surface">Update User Data</h2>
-        <div className="grid gap-4">
-          <InputBlock
-            className="border-b border-b-outline-variant pb-6"
-            name="First name"
-            placeholder="Your first name..."
-            value="Caroline"
-          />
-          <InputBlock
-            className="border-b border-b-outline-variant pb-6"
-            name="Last name"
-            placeholder="Your last name..."
-            value="Blacke"
-          />
-          <InputBlock
-            className="border-b border-b-outline-variant pb-6"
-            name="Email"
-            placeholder="Your email..."
-            value={profile?.email}
-          />
-          <InputBlock
-            name="Username"
-            placeholder="Your username..."
-            value={profile?.username}
-          />
-          <FilledTonalButton className="w-fit justify-self-end">
-            Save
-          </FilledTonalButton>
-        </div>
-      </div>
+      <UserDataForm />
 
       <div className="gap-6">
         <h2 className="mb-6 text-2xl text-on-surface">Update password</h2>

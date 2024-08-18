@@ -8,7 +8,7 @@ const OutlinedTextField = createComponent({
   tagName: 'md-outlined-text-field',
   elementClass: MdOutlinedTextField,
   events: {
-    change: 'onChange',
+    onChange: 'change',
   },
 });
 
