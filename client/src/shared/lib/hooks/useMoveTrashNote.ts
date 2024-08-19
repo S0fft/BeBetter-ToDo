@@ -1,13 +1,14 @@
 import { MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
-import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { OutletContext } from '@shared/ui/NotesList/model/types';
+import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 
 const useMoveTrashNote = (noteId: number) => {
@@ -16,6 +17,7 @@ const useMoveTrashNote = (noteId: number) => {
   const { setUrl } = useUrl();
   const snackbar = useSnackbar();
   const isActiveNote = useActiveNote(noteId);
+  const { t } = useTranslation();
 
   return async (
     e: MouseEvent,
@@ -38,7 +40,7 @@ const useMoveTrashNote = (noteId: number) => {
       return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.TRASHED);
+    snackbar.msg(t('snackbar.trashed'));
   };
 };
 

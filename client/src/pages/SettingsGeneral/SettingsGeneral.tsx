@@ -15,7 +15,7 @@ const SettingsGeneral = () => {
   const [days, setDays] = useState(7);
   const isDarkMode = useAppSelector(selectIsDarkMode);
   const dispatch = useAppDispatch();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleThemeSwitch = () => {
@@ -43,26 +43,31 @@ const SettingsGeneral = () => {
       <ConfirmDialog
         setIsOpen={setIsDialogOpen}
         open={isDialogOpen}
-        title="Clear data?"
-        subtitle="Are you sure you want to permanently delete all your data."
-        confirmText="Clear"
+        title={t('settings.general.clearStorage.modal.title')}
+        subtitle={t('settings.general.clearStorage.modal.subtitle')}
+        confirmText={t('settings.general.clearStorage.modal.confirmText')}
+        cancelText={t('settings.general.clearStorage.modal.cancelText')}
         onCancel={handleToggleDialog}
         onConfirm={handleClearData}
       />
       <div>
-        <h1 className="text-2xl text-on-surface">General</h1>
+        <h1 className="text-2xl text-on-surface">
+          {t('settings.general.title')}
+        </h1>
         <p className="mt-3 text-on-surface-variant">
-          Configure app by your liking
+          {t('settings.general.subTitle')}
         </p>
       </div>
 
       <SettingsItem
-        title="Dark mode"
-        subTitle="Adjust how the interface looks like">
+        title={t('settings.general.darkMode.title')}
+        subTitle={t('settings.general.darkMode.subTitle')}>
         <Switch selected={isDarkMode} onChange={handleThemeSwitch} />
       </SettingsItem>
 
-      <SettingsItem title="Language" subTitle="Change app language.">
+      <SettingsItem
+        title={t('settings.general.language.title')}
+        subTitle={t('settings.general.language.subTitle')}>
         <SegmentedButton value={i18n.language} onChange={handleChangeLanguage}>
           <SegmentedButton.Button id="en">English</SegmentedButton.Button>
           <SegmentedButton.Button id="ru">Русский</SegmentedButton.Button>
@@ -70,8 +75,8 @@ const SettingsGeneral = () => {
       </SettingsItem>
 
       <SettingsItem
-        title="Trash auto-delete time"
-        subTitle="Change the trash auto-delete timeout in days.">
+        title={t('settings.general.trashAutoDeleteTime.title')}
+        subTitle={t('settings.general.trashAutoDeleteTime.subTitle')}>
         <div className="grid items-center gap-2">
           <input
             className="h-14 w-20 rounded border border-outline bg-transparent pl-4 text-on-surface"
@@ -86,16 +91,18 @@ const SettingsGeneral = () => {
               }
             }}
           />
-          <p className="text-xs text-outline">Max 30 days*</p>
+          <p className="text-xs text-outline">
+            {t('settings.general.trashAutoDeleteTime.hint')}
+          </p>
         </div>
       </SettingsItem>
 
       <SettingsItem
-        title="Clear storage"
-        subTitle="Remove all stored data."
+        title={t('settings.general.clearStorage.title')}
+        subTitle={t('settings.general.clearStorage.subTitle')}
         border={false}>
         <FilledTonalButton onClick={handleToggleDialog}>
-          Clear data
+          {t('settings.general.clearStorage.clearData')}
         </FilledTonalButton>
       </SettingsItem>
     </>

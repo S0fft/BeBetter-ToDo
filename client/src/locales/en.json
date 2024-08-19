@@ -2,6 +2,132 @@
   "translation": {
     "title": {
       "notes": "notes"
+    },
+    "sidebar": {
+      "compose": "Compose",
+      "notes": "Notes",
+      "archive": "Archive",
+      "Trash": "Trash",
+      "labels": "Labels"
+    },
+    "noteEditor": {
+      "cratedAt": "Created at",
+      "edited": {
+        "title": "Edited at",
+        "today": "today",
+        "yesterday": "yesterday"
+      }
+    },
+    "search": {
+      "placeholder": "Search notes..."
+    },
+    "settings": {
+      "title": "Settings",
+      "navigationDrawer": {
+        "general": "General",
+        "account": "Account"
+      },
+      "general": {
+        "title": "General",
+        "subTitle": "Configure app by your liking",
+        "darkMode": {
+          "title": "Dark mode",
+          "subTitle": "Adjust how the interface looks like"
+        },
+        "language": {
+          "title": "Language",
+          "subTitle": "Change the language of the app"
+        },
+        "trashAutoDeleteTime": {
+          "title": "Trash auto-delete time",
+          "subTitle": "Set the time after which the note will be auto-deleted from the trash",
+          "hint": "Max 30 days*"
+        },
+        "clearStorage": {
+          "title": "Clear storage",
+          "subTitle": "Clear all the data from the app",
+          "clearData": "Clear data",
+          "modal": {
+            "title": "Clear data?",
+            "subtitle": "Are you sure you want to permanently delete all your data?",
+            "confirmText": "Clear",
+            "cancelText": "Cancel"
+          }
+        }
+      },
+      "account": {
+        "title": "Account",
+        "subTitle": "Here you can edit public information about yourself",
+        "changeImage": "Change image",
+        "save": "Save",
+        "updateUserData": {
+          "title": "Update user data",
+          "firstName": {
+            "inputLabel": "First name",
+            "inputPlaceholder": "Your first name..."
+          },
+          "lastName": {
+            "inputLabel": "Last name",
+            "inputPlaceholder": "Your last name..."
+          },
+          "email": {
+            "inputLabel": "Email",
+            "inputPlaceholder": "Your email..."
+          },
+          "username": {
+            "inputLabel": "Username",
+            "inputPlaceholder": "Your username..."
+          }
+        },
+        "updatePassword": {
+          "title": "Update password",
+          "oldPassword": {
+            "inputLabel": "Old password",
+            "inputPlaceholder": "Your old password..."
+          },
+          "newPassword": {
+            "inputLabel": "New password",
+            "inputPlaceholder": "Your new password..."
+          },
+          "confirmNewPassword": {
+            "inputLabel": "Confirm new password",
+            "inputPlaceholder": "Repeat your new password..."
+          }
+        }
+      }
+    },
+    "noteActions": {
+      "delete": "Delete",
+      "deleteForever": "Delete forever",
+      "restore": "Restore",
+      "archive": "Archive",
+      "unarchive": "Unarchive",
+      "setLabel": "Set label"
+    },
+    "trash": {
+      "title": "Your notes in Trash are deleted after 7 days.",
+      "emptyTrash": "Empty Trash",
+      "emptyList": "No notes in Trash"
+    },
+    "snackbar": {
+      "trashed": "Moved to trash",
+      "archived": "Note archived",
+      "unarchived": "Note unarchived",
+      "deleted": "Note successfully deleted",
+      "restored": "Note restored",
+      "emptyed": "All notes has been successfully deleted"
+    },
+    "permanentDelete": {
+      "title": "Permanently delete?",
+      "subtitle": "You'll no longer see this note. This will also delete it from all labels.",
+      "confirmText": "Delete",
+      "cancelText": "Cancel"
+    },
+    "archive": {
+      "emptyList": "Your archived notes appear here"
+    },
+    "notes": {
+      "emptyList": "Your notes appear here"
     }
   }
 }

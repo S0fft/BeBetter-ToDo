@@ -5,7 +5,7 @@ import {
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { SNACKBAR_MESSAGE, urlParams } from '@shared/lib/const';
+import { urlParams } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useActiveNote from '@shared/lib/hooks/useActiveNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -14,6 +14,7 @@ import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
 import { OutletContext } from '@shared/ui/NotesList/model/types';
+import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 
 type MenuItemsProps = {
@@ -28,6 +29,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
   const snackbar = useSnackbar();
   const isActiveNote = useActiveNote(noteId);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggleDialog = (e: MouseEvent) => {
     e.stopPropagation();
@@ -49,7 +51,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
       return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.DELETED);
+    snackbar.msg(t('snackbar.deleted'));
   };
 
   const handleRestoreNote = async (e: MouseEvent) => {
@@ -64,7 +66,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
       return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.RESTORED);
+    snackbar.msg(t('snackbar.restored'));
   };
 
   return (
@@ -72,9 +74,10 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
       <ConfirmDialog
         setIsOpen={setIsDialogOpen}
         open={isDialogOpen}
-        title="Permanently delete?"
-        subtitle="You'll no longer see this note. This will also delete it from all labels."
-        confirmText="Delete"
+        title={t('permanentDelete.title')}
+        subtitle={t('permanentDelete.subtitle')}
+        confirmText={t('permanentDelete.confirmText')}
+        cancelText={t('permanentDelete.cancelText')}
         onCancel={handleToggleDialog}
         onConfirm={handleDeleteForeverNote}
       />
@@ -82,7 +85,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         onClick={handleToggleDialog}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        Delete forever
+        {t('noteActions.deleteForever')}
         <Icon slot="end" className="text-on-surface">
           delete_forever
         </Icon>
@@ -91,7 +94,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         onClick={handleRestoreNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        Restore
+        {t('noteActions.restore')}
         <Icon slot="end" className="text-on-surface">
           restore_from_trash
         </Icon>

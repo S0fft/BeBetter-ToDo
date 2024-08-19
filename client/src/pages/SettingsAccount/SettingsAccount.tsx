@@ -3,9 +3,11 @@ import ChangePasswordForm from '@pages/SettingsAccount/ui/ChangePasswordForm';
 import UserDataForm from '@pages/SettingsAccount/ui/UserDataForm';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import UserAvatar from '@shared/ui/UserAvatar';
+import { useTranslation } from 'react-i18next';
 
 const SettingsAccount = () => {
   const { data: profile } = useProfileQuery();
+  const { t } = useTranslation();
 
   const displayName = profile?.first_name
     ? `${profile?.first_name} ${profile?.last_name}`
@@ -14,9 +16,11 @@ const SettingsAccount = () => {
   return (
     <>
       <div>
-        <h1 className="text-2xl text-on-surface">Account</h1>
+        <h1 className="text-2xl text-on-surface">
+          {t('settings.account.title')}
+        </h1>
         <p className="mt-3 text-on-surface-variant">
-          Here you can edit public information about yourself
+          {t('settings.account.subTitle')}
         </p>
       </div>
 
@@ -28,7 +32,9 @@ const SettingsAccount = () => {
             <div className="text-on-surface-variant">{profile?.email}</div>
           </div>
         </div>
-        <FilledTonalButton>Change image</FilledTonalButton>
+        <FilledTonalButton>
+          {t('settings.account.changeImage')}
+        </FilledTonalButton>
       </div>
       <UserDataForm />
       <ChangePasswordForm />

@@ -5,7 +5,6 @@ import { Corner } from '@material/web/all';
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import trash from '@assets/trash.svg';
 import { menuItemStyles, subMenuItemStyles } from '@pages/Notes/lib/const';
-import { SNACKBAR_MESSAGE } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
@@ -14,6 +13,7 @@ import Icon from '@shared/ui/Icon';
 import LabelsMenu from '@shared/ui/labelMenu';
 import MenuItem from '@shared/ui/MenuItem';
 import SubMenu from '@shared/ui/SubMenu';
+import { useTranslation } from 'react-i18next';
 
 type MenuItemsProps = {
   noteId: number;
@@ -24,6 +24,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
   const [updateNote] = useUpdateNoteMutation();
   const snackbar = useSnackbar();
   const handleMoveTrashNote = useMoveTrashNote(noteId);
+  const { t } = useTranslation();
 
   const handleArchiveNote = async (e: MouseEvent) => {
     e.stopPropagation();
@@ -37,7 +38,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
       return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.ARCHIVED);
+    snackbar.msg(t('snackbar.archived'));
   };
 
   return (
@@ -46,7 +47,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
         onClick={handleMoveTrashNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        <span slot="headline">Delete</span>
+        <span slot="headline">{t('noteActions.delete')}</span>
         <Icon slot="end" className="text-on-surface">
           <img src={trash} alt="" />
         </Icon>
@@ -55,7 +56,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
         onClick={handleArchiveNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        <span slot="headline">Archive</span>
+        <span slot="headline">{t('noteActions.archive')}</span>
         <Icon slot="end" className="text-on-surface">
           collections_bookmark
         </Icon>
@@ -65,7 +66,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId, activeLabels }) => {
           slot="item"
           style={subMenuItemStyles}
           className="mx-2 rounded-md">
-          Set label
+          {t('noteActions.setLabel')}
           <Icon slot="end" className="text-on-surface">
             label
           </Icon>

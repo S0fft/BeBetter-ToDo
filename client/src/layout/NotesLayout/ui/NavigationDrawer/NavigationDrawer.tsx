@@ -9,6 +9,7 @@ import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
 import NavItem from '@shared/ui/NavItem';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { mockLabels } from '../../../../../dev-data';
@@ -22,6 +23,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
   const snackbar = useSnackbar();
   const { setUrl } = useUrl();
   const [createNote] = useCreateNoteMutation();
+  const { t } = useTranslation();
 
   const isLabelsExists = Boolean(mockLabels.length);
 
@@ -46,26 +48,26 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
       </h1>
       <Fab
         onClick={handleComposeNote}
-        label="Compose"
+        label={t('sidebar.compose')}
         className="mb-12 w-full"
         variant="tertiary">
         <Icon slot="icon">mode_edit</Icon>
       </Fab>
       <NavItem icon="lightbulb" to={`/${routes.NOTES}`}>
-        Notes
+        {t('sidebar.notes')}
       </NavItem>
       <NavItem icon="collections_bookmark" to={routes.ARCHIVE}>
-        Archive
+        {t('sidebar.archive')}
       </NavItem>
       <NavItem icon="delete" to={routes.TRASH}>
-        Trash
+        {t('sidebar.Trash')}
       </NavItem>
 
       {isLabelsExists && (
         <>
           <hr className="border-t border-outline-variant" />
           <h3 className="px-4 py-[18px] text-sm font-medium text-on-surface-variant">
-            Labels
+            {t('sidebar.labels')}
           </h3>
           <LabelsList />
         </>

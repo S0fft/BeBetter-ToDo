@@ -2,6 +2,132 @@
   "translation": {
     "title": {
       "notes": "Заметки"
+    },
+    "sidebar": {
+      "compose": "Создать заметку",
+      "notes": "Заметки",
+      "archive": "Архив",
+      "Trash": "Корзина",
+      "labels": "Лейблы"
+    },
+    "noteEditor": {
+      "cratedAt": "Создано",
+      "edited": {
+        "title": "Изменено",
+        "today": "сегодня",
+        "yesterday": "вчера"
+      }
+    },
+    "search": {
+      "placeholder": "Поиск заметок..."
+    },
+    "settings": {
+      "title": "Настройки",
+      "navigationDrawer": {
+        "general": "Общие",
+        "account": "Аккаунт"
+      },
+      "general": {
+        "title": "Общие настройки",
+        "subTitle": "Настройте приложения по своему вкусу.",
+        "darkMode": {
+          "title": "Темная тема",
+          "subTitle": "Настройка темы интерфейса."
+        },
+        "language": {
+          "title": "Язык",
+          "subTitle": "Изменить язык приложения"
+        },
+        "trashAutoDeleteTime": {
+          "title": "Время удаления заметок из корзины",
+          "subTitle": "Установите время после которого заметка будет автоматически удалена из корзины.",
+          "hint": "Макс. 30 дней*"
+        },
+        "clearStorage": {
+          "title": "Очистить хранилище",
+          "subTitle": "Очистить все данные из приложения.",
+          "clearData": "Очистить данные",
+          "modal": {
+            "title": "Очистить данные?",
+            "subtitle": "Вы уверены, что хотите удалить все свои данные?",
+            "confirmText": "Очистить",
+            "cancelText": "Отмена"
+          }
+        }
+      },
+      "account": {
+        "title": "Аккаунт",
+        "subTitle": "Здесь вы можете отредактировать публичную информацию о себе",
+        "changeImage": "Изменить изображение",
+        "save": "Сохранить",
+        "updateUserData": {
+          "title": "Обновить пользовательские данные",
+          "firstName": {
+            "inputLabel": "Имя",
+            "inputPlaceholder": "Ваше имя..."
+          },
+          "lastName": {
+            "inputLabel": "Фамилия",
+            "inputPlaceholder": "Ваша фамилия..."
+          },
+          "email": {
+            "inputLabel": "Электронная почта",
+            "inputPlaceholder": "Ваша электронная почта..."
+          },
+          "username": {
+            "inputLabel": "Имя пользователя",
+            "inputPlaceholder": "Ваше имя пользователя..."
+          }
+        },
+        "updatePassword": {
+          "title": "Обновить пароль",
+          "oldPassword": {
+            "inputLabel": "Старый пароль",
+            "inputPlaceholder": "Ваш старый пароль..."
+          },
+          "newPassword": {
+            "inputLabel": "Новый пароль",
+            "inputPlaceholder": "Ваш новый пароль..."
+          },
+          "confirmNewPassword": {
+            "inputLabel": "Подтвердите новый пароль",
+            "inputPlaceholder": "Повторите ваш новый пароль..."
+          }
+        }
+      }
+    },
+    "noteActions": {
+      "delete": "Удалить",
+      "deleteForever": "Удалить навсегда",
+      "restore": "Восстановить",
+      "archive": "Архивировать",
+      "unarchive": "Разархивировать",
+      "setLabel": "Добавить лейбл"
+    },
+    "trash": {
+      "title": "Ваши заметки в корзине удалены через 7 дней.",
+      "emptyTrash": "Очистить корзину",
+      "emptyList": "Корзина пуста"
+    },
+    "snackbar": {
+      "trashed": "Перемещено в корзину",
+      "archived": "Заметка архивирована",
+      "unarchived": "Заметка разархивирована",
+      "deleted": "Заметка успешно удалена",
+      "restored": "Заметка восстановлена",
+      "emptyed": "Все заметки успешно удалены"
+    },
+    "permanentDelete": {
+      "title": "Удалить навсегда?",
+      "subtitle": "Вы больше не увидите эту заметку. Это также удалит ее из всех лейблов.",
+      "confirmText": "Удалить",
+      "cancelText": "Отмена"
+    },
+    "archive": {
+      "emptyList": "Ваши архивированные заметки появятся здесь"
+    },
+    "notes": {
+      "emptyList": "Ваши заметки появятся здесь"
     }
   }
 }

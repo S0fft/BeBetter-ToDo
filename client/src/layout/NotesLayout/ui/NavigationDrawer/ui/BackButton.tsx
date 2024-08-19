@@ -1,10 +1,12 @@
 import { routes } from '@shared/lib/const';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const BackButton = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleBack = () => {
     navigate(`/${routes.NOTES}`);
@@ -23,7 +25,7 @@ const BackButton = () => {
         </IconButton>
       </button>
       <span className="animate-fade-in-settings text-on-surface-variant">
-        Settings
+        {t('settings.title')}
       </span>
     </h2>
   );

@@ -5,6 +5,7 @@ import { TextInputProps } from '@shared/ui/AuthBlock/model/types';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 const changePasswordSchema = z
@@ -26,6 +27,7 @@ const changePasswordSchema = z
 type TChangePasswordSchema = z.infer<typeof changePasswordSchema>;
 
 const ChangePasswordForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors, isValid },
@@ -44,33 +46,42 @@ const ChangePasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="gap-6">
-      <h2 className="mb-6 text-2xl text-on-surface">Update password</h2>
+      <h2 className="mb-6 text-2xl text-on-surface">
+        {t('settings.account.updatePassword.title')}
+      </h2>
       <div className="grid gap-4">
         <InputBlock
           className="border-b border-b-outline-variant pb-6"
-          name="Old password">
+          name={t('settings.account.updatePassword.oldPassword.inputLabel')}>
           <OutlinedTextField
             {...(register('oldPassword') as TextInputProps)}
             type="password"
             error={isErrors}
             error-text={errors.oldPassword ? errors.oldPassword.message : ' '}
-            placeholder="Your old password..."
+            placeholder={t(
+              'settings.account.updatePassword.oldPassword.inputPlaceholder',
+            )}
             className="w-80"
           />
         </InputBlock>
         <InputBlock
-          name="New password"
+          name={t('settings.account.updatePassword.newPassword.inputLabel')}
           className="border-b border-b-outline-variant pb-6">
           <OutlinedTextField
             {...(register('newPassword') as TextInputProps)}
             type="password"
             error={isErrors}
             error-text={errors.newPassword && errors.newPassword.message}
-            placeholder="Your new password..."
+            placeholder={t(
+              'settings.account.updatePassword.newPassword.inputPlaceholder',
+            )}
             className="w-80"
           />
         </InputBlock>
-        <InputBlock name="Confirm new password">
+        <InputBlock
+          name={t(
+            'settings.account.updatePassword.confirmNewPassword.inputLabel',
+          )}>
           <OutlinedTextField
             {...(register('confirmNewPassword') as TextInputProps)}
             type="password"
@@ -78,14 +89,16 @@ const ChangePasswordForm = () => {
             error-text={
               errors.confirmNewPassword && errors.confirmNewPassword.message
             }
-            placeholder="Repeat your new password..."
+            placeholder={t(
+              'settings.account.updatePassword.confirmNewPassword.inputPlaceholder',
+            )}
             className="w-80"
           />
         </InputBlock>
         <FilledTonalButton
           disabled={isDisabled}
           className="w-fit justify-self-end">
-          Save
+          {t('settings.account.save')}
         </FilledTonalButton>
       </div>
     </form>

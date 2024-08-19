@@ -2,9 +2,12 @@ import { useNoteQuery } from '@/entities/note/api/noteApi';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 const CreatedAt = () => {
   const { readUrl } = useUrl();
+  const { t } = useTranslation();
+
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
 
   const { data: note } = useNoteQuery(activeNote, {
@@ -19,7 +22,11 @@ const CreatedAt = () => {
 
   const formattedDate = format(new Date(createdAt), 'dd.MM.yy');
 
-  return <h3>Created at {formattedDate}</h3>;
+  return (
+    <h3>
+      {t('noteEditor.cratedAt')} {formattedDate}
+    </h3>
+  );
 };
 
 export default CreatedAt;

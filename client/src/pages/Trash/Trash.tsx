@@ -11,7 +11,6 @@ import {
   successAnimation,
 } from '@pages/Trash/model/constants';
 import MenuItems from '@pages/Trash/ui/MenuItems';
-import { SNACKBAR_MESSAGE } from '@shared/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
@@ -19,6 +18,7 @@ import Loader from '@shared/ui/Loader';
 import NotesList from '@shared/ui/NotesList';
 import TextButton from '@shared/ui/TextButton';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Trash = () => {
   const { data: notes = [] } = useNotesQuery();
@@ -26,6 +26,7 @@ const Trash = () => {
     useDeleteAllNotesMutation();
   const snackbar = useSnackbar();
   const [showSuccess, setShowSuccess] = useState(false);
+  const { t } = useTranslation();
 
   const trashedNotes = notes.filter(({ is_trashed }) => is_trashed);
   const isTrashNotEmpty = trashedNotes.length !== 0;
@@ -53,7 +54,7 @@ const Trash = () => {
       return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.EMPTYED);
+    snackbar.msg(t('snackbar.emptyed'));
   };
 
   return (
@@ -64,7 +65,7 @@ const Trash = () => {
             className="inline-block"
             transition={layoutTransition}
             layout>
-            Notes in Trash are deleted after 7 days.
+            {t('trash.title')}
           </motion.h4>
           <motion.div
             className="flex w-0 items-center transition-all duration-400 ease-bounce has-[div]:w-28"
@@ -98,7 +99,7 @@ const Trash = () => {
                   className="flex items-center justify-center"
                   layout>
                   <TextButton disabled={isLoading} onClick={handleEmptyTrash}>
-                    Empty Trash
+                    {t('trash.emptyTrash')}
                   </TextButton>
                 </motion.div>
               )}
