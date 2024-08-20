@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
-import Content from '@features/ExpendedNote/ui/Content';
-import Title from '@features/ExpendedNote/ui/Title';
+import Content from '@features/ExpandedNote/ui/Content';
+import Title from '@features/ExpandedNote/ui/Title';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 

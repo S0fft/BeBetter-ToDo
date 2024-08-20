@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ExpandedNote from '@features/ExpendedNote/ExpandedNote';
+import ExpandedNote from '@features/ExpandedNote/ExpandedNote';
 import NavigationDrawer from '@layout/NotesLayout/ui/NavigationDrawer';
 import { urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';

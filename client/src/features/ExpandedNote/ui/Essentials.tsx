@@ -1,4 +1,4 @@
-import CreatedAt from '@features/ExpendedNote/ui/CreatedAt';
+import CreatedAt from '@features/ExpandedNote/ui/CreatedAt';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Labels from '@shared/ui/Labels';

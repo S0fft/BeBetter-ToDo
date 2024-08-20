@@ -5,8 +5,8 @@ import {
   MAX_TITLE_LENGTH,
   TITLE_PADDING_Y,
   TITLE_TEXT_AREA_INITIAL_HEIGHT,
-} from '@features/ExpendedNote/lib/const';
-import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
+} from '@features/ExpandedNote/lib/const';
+import useUpdateNote from '@features/ExpandedNote/lib/hooks/useUpdateNote';
 import { BACKSPACE_KEY, urlParams } from '@shared/lib/const';
 import elementHasScrollbar from '@shared/lib/helpers/elementHasScroll';
 import useUrl from '@shared/lib/hooks/useUrl';

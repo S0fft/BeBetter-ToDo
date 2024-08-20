@@ -8,7 +8,7 @@ import {
 import {
   DEBOUNCE_TIME,
   DEFAULT_NOTE_VALUE,
-} from '@features/ExpendedNote/lib/const';
+} from '@features/ExpandedNote/lib/const';
 import { useDebounce } from 'use-debounce';
 
 const useUpdateNote = (id: number, field: 'title' | 'content') => {

@@ -1,4 +1,4 @@
-import useUpdateNote from '@features/ExpendedNote/lib/hooks/useUpdateNote';
+import useUpdateNote from '@features/ExpandedNote/lib/hooks/useUpdateNote';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 

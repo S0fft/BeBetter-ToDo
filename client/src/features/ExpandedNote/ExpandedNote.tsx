@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 
-import Body from '@features/ExpendedNote/ui/Body';
-import Controls from '@features/ExpendedNote/ui/Controls';
-import Essentials from '@features/ExpendedNote/ui/Essentials';
-import Header from '@features/ExpendedNote/ui/Header';
+import Body from '@features/ExpandedNote/ui/Body';
+import Controls from '@features/ExpandedNote/ui/Controls';
+import Essentials from '@features/ExpandedNote/ui/Essentials';
+import Header from '@features/ExpandedNote/ui/Header';
 import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
