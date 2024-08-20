@@ -49,13 +49,21 @@ const Button = ({ children, onClick, id }: ButtonProps) => {
       onClick={handleClick}
       type="button"
       className={cn(
-        'flex w-[104px] items-center justify-center gap-[10px] border-r border-r-outline text-on-surface transition-all duration-200 hover:bg-outline-variant',
+        'grid w-[104px] grid-cols-[0fr_1fr] items-center justify-center gap-2 border-r border-r-outline bg-surface-container px-3 py-2.5 text-on-surface transition-all last:border-none hover:brightness-95',
         {
-          'bg-secondary-container': isActive,
+          'grid-cols-[1fr_1fr] bg-secondary-container': isActive,
         },
       )}>
-      {isActive && <Icon>check</Icon>}
-      {children}
+      <div
+        className={cn(
+          'flex items-center justify-center overflow-hidden opacity-0 transition-all',
+          {
+            'opacity-100': isActive,
+          },
+        )}>
+        <Icon className="h-[18px] w-[18px]">check</Icon>
+      </div>
+      <span>{children}</span>
     </button>
   );
 };
