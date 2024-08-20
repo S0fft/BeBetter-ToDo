@@ -7,7 +7,7 @@ import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
-import SegmentedButton from '@shared/ui/SegmentedButton/SegmentedContainer';
+import SegmentedButton from '@shared/ui/SegmentedButton/SegmentedButton';
 import Switch from '@shared/ui/Switch';
 import { useTranslation } from 'react-i18next';
 
