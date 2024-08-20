@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
 import Search from '@features/Search/Search';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
@@ -26,12 +26,26 @@ const NotesList: FC<NotesListProps> = ({
 }) => {
   const [isNoteExpanded] = useOutletContext<OutletContext>();
   const { searchRef, notesListRef } = useHeaderScroll();
+  const [isContainerEnd, setIsContainerEnd] = useState(false);
 
   const listIsEmpty = notes.length === 0;
   const sortedNotes = [...notes].sort((note) => (note.is_pinned ? -1 : 1));
 
+  const handleScroll = () => {
+    const listContainer = notesListRef.current;
+
+    if (!listContainer) return;
+
+    const isContainerEnd =
+      listContainer.scrollHeight - listContainer.scrollTop ===
+      listContainer.clientHeight;
+
+    setIsContainerEnd(isContainerEnd);
+  };
+
   return (
     <article
+      onScroll={handleScroll}
       ref={notesListRef}
       className={cn(
         'relative h-dvh overflow-y-scroll px-2 pb-4 ease-emphasized-decelerate',
@@ -60,8 +74,8 @@ const NotesList: FC<NotesListProps> = ({
           )}
           {sortedNotes.map(renderNote)}
         </ul>
+        <Footer isContainerEnd={isContainerEnd} />
       </div>
-      <Footer containerRef={notesListRef} />
     </article>
   );
 };
