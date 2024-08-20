@@ -36,11 +36,11 @@ const NotesList: FC<NotesListProps> = ({
 
     if (!listContainer) return;
 
-    const isContainerEnd =
+    const isEnd =
       listContainer.scrollHeight - listContainer.scrollTop ===
       listContainer.clientHeight;
 
-    setIsContainerEnd(isContainerEnd);
+    setIsContainerEnd(isEnd);
   };
 
   return (
