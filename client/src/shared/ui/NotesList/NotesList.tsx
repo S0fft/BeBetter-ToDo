@@ -58,7 +58,13 @@ const NotesList: FC<NotesListProps> = ({
         className="absolute left-0 top-0 z-50 flex w-full justify-center px-2 pt-4">
         <Search ref={searchRef} />
       </header>
-      <div className="grid h-[calc(100%-92px)] pt-[92px]">
+      <div
+        className={cn(
+          'grid h-[calc(100%-92px)] grid-rows-[1fr_0fr] pt-[92px]',
+          {
+            'grid-rows-[1fr_1fr]': isContainerEnd,
+          },
+        )}>
         {preList}
         <ul
           className={cn(
