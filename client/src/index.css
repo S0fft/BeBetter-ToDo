@@ -105,6 +105,7 @@
   --md-sys-color-surface-container: rgb(31 32 25);
   --md-sys-color-surface-container-high: rgb(41 43 35);
   --md-sys-color-surface-container-highest: rgb(52 53 45);
+  --md-sys-color-high-contrast-inverse-primary: var(--md-sys-color-inverse-primary);
 }
 
 :root,
