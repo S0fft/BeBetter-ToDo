@@ -41,29 +41,39 @@ const Controls = () => {
     updateNote({ id: activeNote, body: { is_pinned: !note?.is_pinned } });
   };
 
+  const handleArchiveNote = (e: MouseEvent) => {
+    e.stopPropagation();
+    updateNote({ id: activeNote, body: { is_done: !note?.is_done } });
+  };
+
   return (
-    <article className="flex items-center">
-      <div
-        style={{
-          '--md-sys-color-primary': 'var(--md-sys-color-on-surface)',
-          '--md-sys-color-on-primary': 'var(--md-sys-color-on-surface-variant)',
-        }}>
-        <Tooltip
-          content={note?.is_pinned ? t('tooltips.unpin') : t('tooltips.pin')}>
-          <IconButton
-            onClick={handleTogglePinNote}
-            toggle
-            selected={note?.is_pinned}>
-            <Icon>keep</Icon>
-            <Icon style={filledIconStyles} slot="selected">
-              keep
-            </Icon>
-          </IconButton>
-        </Tooltip>
-      </div>
-      <Tooltip content={t('tooltips.bookmark')}>
-        <IconButton>
+    <article
+      className="flex items-center"
+      style={{
+        '--md-sys-color-primary': 'var(--md-sys-color-on-surface)',
+        '--md-sys-color-on-primary': 'var(--md-sys-color-on-surface-variant)',
+      }}>
+      <Tooltip
+        content={note?.is_pinned ? t('tooltips.unpin') : t('tooltips.pin')}>
+        <IconButton
+          onClick={handleTogglePinNote}
+          toggle
+          selected={note?.is_pinned}>
+          <Icon>keep</Icon>
+          <Icon style={filledIconStyles} slot="selected">
+            keep
+          </Icon>
+        </IconButton>
+      </Tooltip>
+      <Tooltip
+        content={
+          note?.is_done ? t('tooltips.unarchive') : t('tooltips.archive')
+        }>
+        <IconButton onClick={handleArchiveNote} toggle selected={note?.is_done}>
           <Icon>collections_bookmark</Icon>
+          <Icon style={filledIconStyles} slot="selected">
+            collections_bookmark
+          </Icon>
         </IconButton>
       </Tooltip>
       <div className="relative inline-block">
