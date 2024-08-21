@@ -170,13 +170,13 @@
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  transition:
+    color 200ms ease-in-out,
+    background-color 200ms ease-in-out;
 }
 
 body {
   background-color: var(--md-sys-color-surface-container-highest);
-  transition:
-    color 200ms ease-in-out,
-    background-color 200ms ease-in-out;
 }
 
 ::view-transition-old(root),
