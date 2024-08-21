@@ -2,9 +2,12 @@ import { cssTransition } from 'react-toastify';
 
 export const urlParams = {
   NOTE_ID: 'id',
+  SEARCH: 'query',
 } as const;
 
-export const queryParamsInit = {};
+export const queryParamsInit = {
+  [urlParams.SEARCH]: '',
+};
 
 export const localStorageKeys = {
   IS_DARK_MODE: 'isDarkMode',

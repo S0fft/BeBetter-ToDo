@@ -16,6 +16,7 @@ const UserAvatar = forwardRef<
       {...props}
       ref={ref}
       slot="trailing-icon"
+      draggable={false}
       className={cn(
         'rounded-full transition-transform ease-[inherit]',
         className,

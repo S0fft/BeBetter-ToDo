@@ -5,15 +5,16 @@ import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field
 
 import searchFieldStyles from '@features/Search/lib/const';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { routes } from '@shared/lib/const';
+import { routes, urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
+import useUrl from '@shared/lib/hooks/useUrl';
 import ContextMenu from '@shared/ui/ContextMenu';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type SearchProps = {
   className?: string;
@@ -23,9 +24,27 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
   ({ className }, ref) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const { setUrl, readUrl } = useUrl();
+    // const { data: notes } = useNotesQuery();
+    const location = useLocation();
+
+    const currentPath = location.pathname;
+    const searchQuery = readUrl(urlParams.SEARCH);
+    const isSettingsPage = currentPath.includes(routes.SETTINGS);
+
+    const handleInput = (e: Event) => {
+      if (isSettingsPage) {
+        navigate(`/${routes.NOTES}`);
+      }
+
+      const target = e.target as HTMLInputElement;
+      setUrl(urlParams.SEARCH, target.value);
+    };
 
     return (
       <OutlinedTextField
+        onInput={handleInput}
+        value={searchQuery}
         ref={ref}
         style={searchFieldStyles}
         placeholder={t('search.placeholder')}
