@@ -23,9 +23,11 @@ import ContextMenu from '@shared/ui/ContextMenu';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Labels from '@shared/ui/Labels';
+import Tooltip from '@shared/ui/Tooltip';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 
 type NoteProps = PropsWithChildren<{
@@ -66,6 +68,7 @@ const Note: FC<NoteProps> = ({
   const { setUrl } = useUrl();
   const [updateNote] = useUpdateNoteMutation();
   const isActiveNote = useActiveNote(id);
+  const { t } = useTranslation();
 
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
@@ -102,17 +105,21 @@ const Note: FC<NoteProps> = ({
         <UserAvatar className="size-10" />
         <Essentials createdAt={formatedCreatedAt} />
         <Controls>
-          <FilledIconButton
-            onClick={handleTogglePinNote}
-            selected={isPinned}
-            style={pinButtonStyles}
-            toggle>
-            <Icon>keep</Icon>
-            <Icon slot="selected" style={filledIconStyles}>
-              keep
-            </Icon>
-          </FilledIconButton>
-          <ContextMenu id={id}>{children}</ContextMenu>
+          <Tooltip content={isPinned ? t('tooltips.unpin') : t('tooltips.pin')}>
+            <FilledIconButton
+              onClick={handleTogglePinNote}
+              selected={isPinned}
+              style={pinButtonStyles}
+              toggle>
+              <Icon>keep</Icon>
+              <Icon slot="selected" style={filledIconStyles}>
+                keep
+              </Icon>
+            </FilledIconButton>
+          </Tooltip>
+          <ContextMenu tooltipContent={t('tooltips.options')} id={id}>
+            {children}
+          </ContextMenu>
         </Controls>
       </Header>
       <Body>

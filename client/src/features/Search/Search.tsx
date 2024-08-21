@@ -43,6 +43,7 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
           menuCorner={Corner.END_START}
           yOffset={5}
           slot="trailing-icon"
+          tooltipContent={t('tooltips.userOptions')}
           button={
             <UserAvatar
               slot="trailing-icon"

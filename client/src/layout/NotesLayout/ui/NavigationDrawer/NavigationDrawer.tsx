@@ -9,6 +9,7 @@ import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
 import NavItem from '@shared/ui/NavItem';
+import Tooltip from '@shared/ui/Tooltip';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,13 +47,15 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
       <h1 className="px-4 py-[18px] text-sm font-medium text-on-surface-variant">
         Todo
       </h1>
-      <Fab
-        onClick={handleComposeNote}
-        label={t('sidebar.compose')}
-        className="mb-12 w-full"
-        variant="tertiary">
-        <Icon slot="icon">mode_edit</Icon>
-      </Fab>
+      <Tooltip placement="bottom" content={t('tooltips.create')}>
+        <Fab
+          onClick={handleComposeNote}
+          label={t('sidebar.compose')}
+          className="mb-12 w-full"
+          variant="tertiary">
+          <Icon slot="icon">mode_edit</Icon>
+        </Fab>
+      </Tooltip>
       <NavItem icon="lightbulb" to={`/${routes.NOTES}`}>
         {t('sidebar.notes')}
       </NavItem>

@@ -3,9 +3,11 @@ import { cloneElement, FC, MouseEvent, PropsWithChildren, useRef } from 'react';
 import { Corner, MdMenu } from '@material/web/all';
 
 import { dotButtonStyles, menuStyles } from '@pages/Notes/lib/const';
+import cn from '@shared/lib/helpers/cn';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
+import Tooltip from '@shared/ui/Tooltip';
 
 type ContextMenuProps = PropsWithChildren<{
   id: number | string;
@@ -14,6 +16,7 @@ type ContextMenuProps = PropsWithChildren<{
   menuCorner?: Corner;
   anchorCorner?: Corner;
   yOffset?: number;
+  tooltipContent?: string;
 }>;
 
 const ContextMenu: FC<ContextMenuProps> = ({
@@ -23,10 +26,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
   menuCorner = Corner.START_END,
   anchorCorner = Corner.END_END,
   yOffset = 12,
+  tooltipContent,
   ...props
 }) => {
   const menuRef = useRef<MdMenu>(null);
   const anchorId = `context-menu-${id}`;
+  const isTooltipVisible = Boolean(tooltipContent);
 
   const handleMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
@@ -52,7 +57,11 @@ const ContextMenu: FC<ContextMenuProps> = ({
 
   return (
     <div {...props} className="relative">
-      {btn}
+      <Tooltip
+        className={cn({ hidden: !isTooltipVisible })}
+        content={tooltipContent}>
+        {btn}
+      </Tooltip>
       <Menu
         positioning="popover"
         has-overflow

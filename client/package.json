@@ -12,13 +12,14 @@
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "precommit": "cd client && pnpm lint-staged && pnpm type-check",
-    "prepare": "husky"
+    "prepare": "cd .. && husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@lit/react": "^1.0.5",
     "@material/web": "^2.0.0",
     "@reduxjs/toolkit": "^2.2.7",
+    "@tippyjs/react": "^4.2.6",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.3.28",
@@ -36,6 +37,7 @@
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
     "tinycolor2": "^1.6.0",
+    "tippy.js": "^6.3.7",
     "use-debounce": "^10.0.3",
     "zod": "^3.23.8"
   },
