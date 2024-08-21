@@ -47,7 +47,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
       <h1 className="px-4 py-[18px] text-sm font-medium text-on-surface-variant">
         Todo
       </h1>
-      <Tooltip placement="bottom" content={t('tooltips.create')}>
+      <Tooltip placement="bottom" content={t('tooltips.compose')}>
         <Fab
           onClick={handleComposeNote}
           label={t('sidebar.compose')}

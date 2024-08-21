@@ -2,8 +2,12 @@ import { MouseEvent, useRef } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
+import {
+  useNoteQuery,
+  useUpdateNoteMutation,
+} from '@/entities/note/api/noteApi';
 import EditedTime from '@pages/Notes/ui/EditedTime';
-import { urlParams } from '@shared/lib/const';
+import { filledIconStyles, urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -19,23 +23,44 @@ const Controls = () => {
   const { readUrl } = useUrl();
   const menuRef = useRef<MdMenu>(null);
   const { t } = useTranslation();
+  const [updateNote] = useUpdateNoteMutation();
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const labels = mockedNotes?.[activeNote]?.labels;
   const labelsMenuKey = `extendedNoteLabels-${activeNote}`;
+
+  const { data: note } = useNoteQuery(activeNote);
 
   const handleLabelMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
     if (menuRef.current) menuRef.current.show();
   };
 
+  const handleTogglePinNote = (e: MouseEvent) => {
+    e.stopPropagation();
+    updateNote({ id: activeNote, body: { is_pinned: !note?.is_pinned } });
+  };
+
   return (
     <article className="flex items-center">
-      <Tooltip content={t('tooltips.pin')}>
-        <IconButton>
-          <Icon>keep</Icon>
-        </IconButton>
-      </Tooltip>
+      <div
+        style={{
+          '--md-sys-color-primary': 'var(--md-sys-color-on-surface)',
+          '--md-sys-color-on-primary': 'var(--md-sys-color-on-surface-variant)',
+        }}>
+        <Tooltip
+          content={note?.is_pinned ? t('tooltips.unpin') : t('tooltips.pin')}>
+          <IconButton
+            onClick={handleTogglePinNote}
+            toggle
+            selected={note?.is_pinned}>
+            <Icon>keep</Icon>
+            <Icon style={filledIconStyles} slot="selected">
+              keep
+            </Icon>
+          </IconButton>
+        </Tooltip>
+      </div>
       <Tooltip content={t('tooltips.bookmark')}>
         <IconButton>
           <Icon>collections_bookmark</Icon>

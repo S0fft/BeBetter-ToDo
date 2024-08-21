@@ -138,7 +138,8 @@
       "undo": "Undo",
       "redo": "Redo",
       "userOptions": "User options",
-      "options": "Options"
+      "options": "Options",
+      "compose": "Compose a new note"
     }
   }
 }
