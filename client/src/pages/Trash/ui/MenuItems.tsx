@@ -13,16 +13,13 @@ import useUrl from '@shared/lib/hooks/useUrl';
 import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
-import { OutletContext } from '@shared/ui/NotesList/model/types';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router-dom';
 
 type MenuItemsProps = {
   noteId: number;
 };
 
 const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
-  const [, setIsExpandNote] = useOutletContext<OutletContext>();
   const [deleteNote] = useDeleteNoteMutation();
   const [updateNote] = useUpdateNoteMutation();
   const { setUrl } = useUrl();
@@ -41,7 +38,6 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
 
     if (isActiveNote) {
       setUrl(urlParams.NOTE_ID);
-      setIsExpandNote(false);
     }
 
     const [error] = await runAsync(deleteNote(noteId).unwrap);

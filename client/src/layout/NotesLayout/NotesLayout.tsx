@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ExpandedNote from '@features/ExpandedNote/ExpandedNote';
 import NavigationDrawer from '@layout/NotesLayout/ui/NavigationDrawer';
@@ -14,6 +14,10 @@ const NotesLayout = () => {
   );
   const [isNoteExpanded, setIsNoteExpanded] = useState(isNoteSelected);
 
+  useEffect(() => {
+    setIsNoteExpanded(isNoteSelected);
+  }, [isNoteSelected]);
+
   return (
     <main
       className={cn(
@@ -27,7 +31,7 @@ const NotesLayout = () => {
         <NavigationDrawer onExpandNote={setIsNoteExpanded} />
       </aside>
       <section className="relative h-full w-full gap-3">
-        <Outlet context={[isNoteExpanded, setIsNoteExpanded]} />
+        <Outlet />
       </section>
       <section
         className={cn(

@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  FC,
-  MouseEvent,
-  PropsWithChildren,
-  SetStateAction,
-  useRef,
-} from 'react';
+import { FC, MouseEvent, PropsWithChildren, useRef } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
 import { pinButtonStyles } from '@pages/Notes/lib/const';
@@ -28,7 +21,6 @@ import UserAvatar from '@shared/ui/UserAvatar';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router-dom';
 
 type NoteProps = PropsWithChildren<{
   id: number;
@@ -62,8 +54,6 @@ const Note: FC<NoteProps> = ({
   index,
   children,
 }) => {
-  const [, setIsExpandNote] =
-    useOutletContext<[boolean, Dispatch<SetStateAction<boolean>>]>();
   const containerRef = useRef<HTMLLIElement>(null);
   const { setUrl } = useUrl();
   const [updateNote] = useUpdateNoteMutation();
@@ -73,7 +63,6 @@ const Note: FC<NoteProps> = ({
   const formatedCreatedAt = format(new Date(createdAt), 'dd.MM.yy');
 
   const handleSelectNote = () => {
-    setIsExpandNote(true);
     setUrl(urlParams.NOTE_ID, id);
   };
 

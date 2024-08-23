@@ -2,12 +2,12 @@ import { FC, ReactNode, useState } from 'react';
 
 import Search from '@features/Search/Search';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
+import { urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
+import useUrl from '@shared/lib/hooks/useUrl';
 import { Note as TNote } from '@shared/types';
-import { OutletContext } from '@shared/ui/NotesList/model/types';
 import EmptyList from '@shared/ui/NotesList/ui/EmptyList';
 import Footer from '@shared/ui/NotesList/ui/Footer';
-import { useOutletContext } from 'react-router-dom';
 
 type NotesListProps = {
   notes: TNote[];
@@ -24,12 +24,13 @@ const NotesList: FC<NotesListProps> = ({
   emptyListSubText,
   renderNote,
 }) => {
-  const [isNoteExpanded] = useOutletContext<OutletContext>();
+  const { readUrl } = useUrl();
   const { searchRef, notesListRef } = useHeaderScroll();
   const [isContainerEnd, setIsContainerEnd] = useState(false);
 
   const listIsEmpty = notes.length === 0;
   const sortedNotes = [...notes].sort((note) => (note.is_pinned ? -1 : 1));
+  const isNoteExpanded = readUrl(urlParams.NOTE_ID);
 
   const handleScroll = () => {
     const listContainer = notesListRef.current;
