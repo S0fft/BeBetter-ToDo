@@ -1,17 +1,23 @@
 import { MouseEvent, useRef } from 'react';
 
-import { MdMenu } from '@material/web/all';
+import { Corner, MdMenu } from '@material/web/all';
 
 import {
   useNoteQuery,
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
+import trash from '@assets/trash.svg';
+import { menuItemStyles } from '@pages/Notes/lib/const';
 import EditedTime from '@pages/Notes/ui/EditedTime';
 import { filledIconStyles, urlParams } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import useUrl from '@shared/lib/hooks/useUrl';
+import ContextMenu from '@shared/ui/ContextMenu';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import LabelsMenu from '@shared/ui/labelMenu';
+import MenuItem from '@shared/ui/MenuItem';
 import Tooltip from '@shared/ui/Tooltip';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +30,7 @@ const Controls = () => {
   const menuRef = useRef<MdMenu>(null);
   const { t } = useTranslation();
   const [updateNote] = useUpdateNoteMutation();
+  const snackbar = useSnackbar();
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const labels = mockedNotes?.[activeNote]?.labels;
@@ -44,6 +51,19 @@ const Controls = () => {
   const handleArchiveNote = (e: MouseEvent) => {
     e.stopPropagation();
     updateNote({ id: activeNote, body: { is_done: !note?.is_done } });
+  };
+
+  const handleMoveTrashNote = async () => {
+    const [error] = await runAsync(
+      updateNote({ id: activeNote, body: { is_trashed: true } }).unwrap,
+    );
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
+    }
+
+    snackbar.msg(t('snackbar.trashed'));
   };
 
   return (
@@ -90,11 +110,35 @@ const Controls = () => {
           activeLabels={labels}
         />
       </div>
-      <Tooltip content={t('tooltips.options')}>
-        <IconButton>
-          <Icon>more_vert</Icon>
-        </IconButton>
-      </Tooltip>
+      <ContextMenu
+        tooltipContent={t('tooltips.options')}
+        id={`${activeNote}-expanded`}
+        button={
+          <IconButton>
+            <Icon>more_vert</Icon>
+          </IconButton>
+        }
+        anchorCorner={Corner.START_START}
+        menuCorner={Corner.END_START}>
+        <MenuItem
+          onClick={handleMoveTrashNote}
+          style={menuItemStyles}
+          className="mx-2 rounded-md">
+          <span slot="headline">{t('noteActions.delete')}</span>
+          <Icon slot="end" className="text-on-surface">
+            <img src={trash} alt="" />
+          </Icon>
+        </MenuItem>
+        <MenuItem
+          onClick={handleArchiveNote}
+          style={menuItemStyles}
+          className="mx-2 rounded-md">
+          <span slot="headline">{t('noteActions.archive')}</span>
+          <Icon slot="end" className="text-on-surface">
+            collections_bookmark
+          </Icon>
+        </MenuItem>
+      </ContextMenu>
       <Tooltip content={t('tooltips.undo')}>
         <IconButton>
           <Icon>undo</Icon>
