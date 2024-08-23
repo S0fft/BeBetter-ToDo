@@ -26,7 +26,7 @@ import { mockedNotes } from '../../../../dev-data';
 const menuAnchorId = 'extendedNoteLabelsMenu';
 
 const Controls = () => {
-  const { readUrl } = useUrl();
+  const { readUrl, setUrl } = useUrl();
   const menuRef = useRef<MdMenu>(null);
   const { t } = useTranslation();
   const [updateNote] = useUpdateNoteMutation();
@@ -48,12 +48,28 @@ const Controls = () => {
     updateNote({ id: activeNote, body: { is_pinned: !note?.is_pinned } });
   };
 
-  const handleArchiveNote = (e: MouseEvent) => {
+  const handleArchiveNote = async (e: MouseEvent, isArchive = true) => {
     e.stopPropagation();
-    updateNote({ id: activeNote, body: { is_done: !note?.is_done } });
+
+    const [error] = await runAsync(
+      updateNote({ id: activeNote, body: { is_done: isArchive } }).unwrap,
+    );
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
+    }
+
+    if (isArchive) {
+      snackbar.msg(t('snackbar.archived'));
+    } else {
+      snackbar.msg(t('snackbar.unarchived'));
+    }
   };
 
-  const handleMoveTrashNote = async () => {
+  const handleMoveTrashNote = async (e: MouseEvent) => {
+    e.stopPropagation();
+
     const [error] = await runAsync(
       updateNote({ id: activeNote, body: { is_trashed: true } }).unwrap,
     );
@@ -64,6 +80,7 @@ const Controls = () => {
     }
 
     snackbar.msg(t('snackbar.trashed'));
+    setUrl(urlParams.NOTE_ID);
   };
 
   return (
@@ -89,7 +106,14 @@ const Controls = () => {
         content={
           note?.is_done ? t('tooltips.unarchive') : t('tooltips.archive')
         }>
-        <IconButton onClick={handleArchiveNote} toggle selected={note?.is_done}>
+        <IconButton
+          onClick={
+            note?.is_done
+              ? (e) => handleArchiveNote(e, false)
+              : handleArchiveNote
+          }
+          toggle
+          selected={note?.is_done}>
           <Icon>collections_bookmark</Icon>
           <Icon style={filledIconStyles} slot="selected">
             collections_bookmark
@@ -127,15 +151,6 @@ const Controls = () => {
           <span slot="headline">{t('noteActions.delete')}</span>
           <Icon slot="end" className="text-on-surface">
             <img src={trash} alt="" />
-          </Icon>
-        </MenuItem>
-        <MenuItem
-          onClick={handleArchiveNote}
-          style={menuItemStyles}
-          className="mx-2 rounded-md">
-          <span slot="headline">{t('noteActions.archive')}</span>
-          <Icon slot="end" className="text-on-surface">
-            collections_bookmark
           </Icon>
         </MenuItem>
       </ContextMenu>
