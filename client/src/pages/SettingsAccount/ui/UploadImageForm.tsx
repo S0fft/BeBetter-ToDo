@@ -97,10 +97,10 @@ const UploadImageForm = () => {
       {...getRootProps()}
       onAnimationEnd={handleAnimationEnd}
       className={cn(
-        'relative flex items-center justify-between gap-2 rounded-2xl px-4 py-2',
+        'relative flex items-center justify-between gap-2 rounded-2xl transition-all',
         {
-          'bg-primary-fixed': isDragActive,
-          'bg-surface-variant': isDragging && !isDragActive,
+          'bg-primary-fixed px-6 py-4': isDragActive,
+          'bg-surface-variant px-6 py-4': isDragging && !isDragActive,
           'animate-shake': isRejected,
         },
       )}>
