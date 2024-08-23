@@ -37,10 +37,10 @@ const animations = {
   animate: { scale: 1 },
   transition: {
     type: 'spring',
-    stiffness: 240,
-    damping: 15,
+    stiffness: 200,
+    damping: 12,
     bounce: 0,
-    mass: 0.7,
+    mass: 0.4,
   },
 };
 
