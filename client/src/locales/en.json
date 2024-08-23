@@ -115,7 +115,9 @@
       "unarchived": "Note unarchived",
       "deleted": "Note successfully deleted",
       "restored": "Note restored",
-      "emptyed": "All notes has been successfully deleted"
+      "emptyed": "All notes has been successfully deleted",
+      "wrongFileType": "Only images of type jpeg, png, jpg, or webp are allowed",
+      "unknownError": "Something went wrong 😭"
     },
     "permanentDelete": {
       "title": "Permanently delete?",

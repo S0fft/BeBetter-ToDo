@@ -54,14 +54,3 @@ export const SnackBarTransition = cssTransition({
   enter: 'animate-fade-in-snackbar',
   exit: 'animate-fade-out-snackbar',
 });
-
-export const UNKNOWN_ERROR_MESSAGE = 'Something went wrong 😭';
-
-export const SNACKBAR_MESSAGE = {
-  TRASHED: 'Moved to trash',
-  ARCHIVED: 'Note archived',
-  UNARCHIVED: 'Note unarchived',
-  DELETED: 'Note successfully deleted',
-  RESTORED: 'Note restored',
-  EMPTYED: 'All notes has been successfully deleted',
-};
