@@ -52,10 +52,10 @@ const NavItem: FC<NavButtonProps> = ({
             )}
           />
           <span className="relative z-10 flex items-center gap-3">
-            {isActive ? (
-              <Icon style={filledIconStyles}>{icon}</Icon>
-            ) : (
-              <Icon>{icon}</Icon>
+            {icon && (
+              <Icon style={isActive ? filledIconStyles : undefined}>
+                {icon}
+              </Icon>
             )}
             {children}
           </span>
