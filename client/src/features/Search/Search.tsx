@@ -29,7 +29,7 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
     const location = useLocation();
 
     const currentPath = location.pathname;
-    const searchQuery = readUrl(urlParams.SEARCH);
+    const searchQuery = readUrl(urlParams.SEARCH) ?? '';
     const isSettingsPage = currentPath.includes(routes.SETTINGS);
 
     const handleInput = (e: Event) => {
@@ -38,7 +38,7 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
       }
 
       const target = e.target as HTMLInputElement;
-      setUrl(urlParams.SEARCH, target.value);
+      setUrl(urlParams.SEARCH, target.value || undefined);
     };
 
     return (
