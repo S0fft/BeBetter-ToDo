@@ -36,7 +36,9 @@ const Controls = () => {
   const labels = mockedNotes?.[activeNote]?.labels;
   const labelsMenuKey = `extendedNoteLabels-${activeNote}`;
 
-  const { data: note } = useNoteQuery(activeNote);
+  const { data: note } = useNoteQuery(activeNote, {
+    skip: Number.isNaN(activeNote),
+  });
 
   const handleLabelMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
