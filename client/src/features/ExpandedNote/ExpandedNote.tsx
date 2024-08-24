@@ -1,5 +1,3 @@
-import { Dispatch, FC, SetStateAction } from 'react';
-
 import Body from '@features/ExpandedNote/ui/Body';
 import Controls from '@features/ExpandedNote/ui/Controls';
 import Essentials from '@features/ExpandedNote/ui/Essentials';
@@ -12,17 +10,12 @@ import Tooltip from '@shared/ui/Tooltip';
 import UserAvatar from '@shared/ui/UserAvatar';
 import { useTranslation } from 'react-i18next';
 
-type ExpandedNoteProps = {
-  onExpand: Dispatch<SetStateAction<boolean>>;
-};
-
-const ExpandedNote: FC<ExpandedNoteProps> = ({ onExpand }) => {
+const ExpandedNote = () => {
   const { setUrl } = useUrl();
   const { t } = useTranslation();
 
   const handleCollapseNote = () => {
     setUrl(urlParams.NOTE_ID);
-    onExpand(false);
   };
 
   return (

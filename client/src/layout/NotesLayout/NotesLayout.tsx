@@ -28,7 +28,7 @@ const NotesLayout = () => {
         },
       )}>
       <aside className="h-full w-full overflow-scroll px-3 pt-3">
-        <NavigationDrawer onExpandNote={setIsNoteExpanded} />
+        <NavigationDrawer />
       </aside>
       <section className="relative h-full w-full gap-3">
         <Outlet />
@@ -40,7 +40,7 @@ const NotesLayout = () => {
             'scale-100 opacity-100 delay-0': isNoteExpanded,
           },
         )}>
-        <ExpandedNote onExpand={setIsNoteExpanded} />
+        <ExpandedNote />
       </section>
     </main>
   );

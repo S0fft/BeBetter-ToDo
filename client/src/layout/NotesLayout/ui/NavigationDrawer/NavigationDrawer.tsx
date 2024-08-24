@@ -1,5 +1,3 @@
-import { Dispatch, FC, SetStateAction } from 'react';
-
 import { useCreateNoteMutation } from '@/entities/note/api/noteApi';
 import LabelsList from '@layout/NotesLayout/ui/NavigationDrawer/ui/LabelsList';
 import { routes, urlParams } from '@shared/lib/const';
@@ -15,11 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { mockLabels } from '../../../../../dev-data';
 
-type NavigationDrawerProps = {
-  onExpandNote: Dispatch<SetStateAction<boolean>>;
-};
-
-const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
+const NavigationDrawer = () => {
   const navigate = useNavigate();
   const snackbar = useSnackbar();
   const { setUrl } = useUrl();
@@ -36,7 +30,6 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ onExpandNote }) => {
 
     if (error === null) {
       setUrl(urlParams.NOTE_ID, note.id);
-      onExpandNote(true);
     } else {
       snackbar.err(error);
     }
