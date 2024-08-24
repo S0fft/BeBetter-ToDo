@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
@@ -19,10 +19,40 @@ const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',
 };
 
-// FIXME: text field focus issue
-
 const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
   ({ activeLabels, ...props }, ref) => {
+    const [searchText, setSearchText] = useState('');
+
+    const handleInput = (e: Event) => {
+      e.stopPropagation();
+
+      const { value } = e.target as HTMLInputElement;
+      setSearchText(value.trim());
+    };
+
+    const handleFilterSearchText = ({ title }: Label) => {
+      if (searchText.length > 0) {
+        return title.toLowerCase().match(searchText.toLowerCase())?.[0] ?? '';
+      }
+
+      return true;
+    };
+
+    const handleRenderLabel = ({ title }: Label) => {
+      const isChecked = activeLabels?.some(
+        (activeLabel) => activeLabel.title === title,
+      );
+
+      return (
+        <LabelMenuItem
+          typeaheadText=""
+          key={title}
+          title={title}
+          isChecked={isChecked}
+        />
+      );
+    };
+
     return (
       <Menu
         {...props}
@@ -31,25 +61,14 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
         style={menuStyles}
         slot="menu">
         <OutlinedTextField
+          onInput={handleInput}
           style={textFieldStyles}
           label="label note"
           className="mx-2">
           <Icon slot="leading-icon">search</Icon>
           <Icon slot="trailing-icon">cancel</Icon>
         </OutlinedTextField>
-        {mockLabels.map((label) => {
-          const isChecked = activeLabels?.some(
-            (activeLabel) => activeLabel.title === label.title,
-          );
-
-          return (
-            <LabelMenuItem
-              key={label.title}
-              title={label.title}
-              isChecked={isChecked}
-            />
-          );
-        })}
+        {mockLabels.filter(handleFilterSearchText).map(handleRenderLabel)}
       </Menu>
     );
   },
