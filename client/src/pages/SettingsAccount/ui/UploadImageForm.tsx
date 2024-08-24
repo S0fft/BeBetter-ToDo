@@ -98,7 +98,7 @@ const UploadImageForm = () => {
         <p className="ml-3 animate-fade-in-screen text-xs text-primary opacity-50">
           Drag and drop
         </p>
-        <img src={arrow} alt="" />
+        <img draggable={false} src={arrow} alt="" />
       </div>
 
       <form
