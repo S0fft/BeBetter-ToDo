@@ -6,7 +6,6 @@ import {
   useNoteQuery,
   useUpdateNoteMutation,
 } from '@/entities/note/api/noteApi';
-import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
 import EditedTime from '@pages/Notes/ui/EditedTime';
 import { filledIconStyles, urlParams } from '@shared/lib/const';
@@ -19,6 +18,7 @@ import IconButton from '@shared/ui/IconButton';
 import LabelsMenu from '@shared/ui/labelMenu';
 import MenuItem from '@shared/ui/MenuItem';
 import Tooltip from '@shared/ui/Tooltip';
+import TrashIcon from '@shared/ui/TrashIcon';
 import { useTranslation } from 'react-i18next';
 
 import { mockedNotes } from '../../../../dev-data';
@@ -152,7 +152,7 @@ const Controls = () => {
           className="mx-2 rounded-md">
           <span slot="headline">{t('noteActions.delete')}</span>
           <Icon slot="end" className="text-on-surface">
-            <img src={trash} alt="" />
+            <TrashIcon />
           </Icon>
         </MenuItem>
       </ContextMenu>

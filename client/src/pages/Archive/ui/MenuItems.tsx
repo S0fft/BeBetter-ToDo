@@ -1,13 +1,13 @@
 import { FC, MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
-import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
 import runAsync from '@shared/lib/helpers/runAsync';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
+import TrashIcon from '@shared/ui/TrashIcon';
 import { useTranslation } from 'react-i18next';
 
 type MenuItemsProps = {
@@ -56,7 +56,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         className="mx-2 rounded-md">
         <span slot="headline">{t('noteActions.delete')}</span>
         <Icon slot="end" className="text-on-surface">
-          <img src={trash} alt="" />
+          <TrashIcon />
         </Icon>
       </MenuItem>
     </>
