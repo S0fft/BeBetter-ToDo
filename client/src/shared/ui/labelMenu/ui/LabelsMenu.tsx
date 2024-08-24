@@ -19,6 +19,14 @@ const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',
 };
 
+function findMatch(str: string, searchValue: string): string {
+  return str.toLowerCase().match(searchValue.toLowerCase())?.[0] ?? '';
+}
+
+function replaceMatch(str: string, searchValue: string): string {
+  return str.toLowerCase().replace(searchValue.toLowerCase(), '');
+}
+
 const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
   ({ activeLabels, ...props }, ref) => {
     const [searchText, setSearchText] = useState('');
@@ -31,11 +39,7 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
     };
 
     const handleFilterSearchText = ({ title }: Label) => {
-      if (searchText.length > 0) {
-        return title.toLowerCase().match(searchText.toLowerCase())?.[0] ?? '';
-      }
-
-      return true;
+      return title.toLowerCase().includes(searchText.toLowerCase());
     };
 
     const handleRenderLabel = ({ title }: Label) => {
@@ -47,7 +51,16 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
         <LabelMenuItem
           typeaheadText=""
           key={title}
-          title={title}
+          title={
+            <>
+              <span className="text-primary-fixed-dim">
+                {findMatch(title, searchText)}
+              </span>
+              <span className="text-on-surface">
+                {replaceMatch(title, searchText)}
+              </span>
+            </>
+          }
           isChecked={isChecked}
         />
       );
