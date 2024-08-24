@@ -1,0 +1,51 @@
+<svg width="50" height="44" viewBox="0 0 50 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M48.6674 1.52875C39.1083 11.5381 22.4103 3.53853 21.1426 18.1341C20.944 20.4214 18.5756 26.8384 25.7202 29.36C32.071 31.1027 34.4121 19.5112 23.6065 18.1339C12.801 16.7567 2.55585 33.0922 3.14149 40.3876"
+        stroke="#DAEB99"
+        stroke-width="2"
+        stroke-dasharray="150"
+        stroke-dashoffset="150">
+    <animate
+      attributeName="stroke-dashoffset"
+      from="150"
+      to="0"
+      dur="1.5s"
+      fill="freeze"
+      keyTimes="0; 1"
+      keySplines="0.42 0 1 1"
+      calcMode="spline"/>
+  </path>
+
+  <path d="M3.14149 40.3876C1.17335 35.862 1.11127 32.3493 2.70071 28.744"
+        stroke="#DAEB99"
+        stroke-width="2"
+        stroke-dasharray="30"
+        stroke-dashoffset="30">
+    <animate
+      attributeName="stroke-dashoffset"
+      from="30"
+      to="0"
+      dur="1s"
+      begin="1.2s"
+      fill="freeze"
+      keyTimes="0; 1"
+      keySplines="0.42 0 1 1"
+      calcMode="spline"/>
+  </path>
+
+  <path d="M3.14149 40.3876C3.14149 40.3876 4.07524 37.0885 5.31734 35.3362C6.54148 33.6092 9.29324 31.6518 9.29324 31.6518"
+        stroke="#DAEB99"
+        stroke-width="2"
+        stroke-dasharray="30"
+        stroke-dashoffset="30">
+    <animate
+      attributeName="stroke-dashoffset"
+      from="30"
+      to="0"
+      dur="1s"
+      begin="1.3s"
+      fill="freeze"
+      keyTimes="0; 1"
+      keySplines="0.42 0 1 1"
+      calcMode="spline"/>
+  </path>
+</svg>

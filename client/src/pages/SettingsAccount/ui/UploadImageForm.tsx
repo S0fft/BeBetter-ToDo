@@ -1,6 +1,7 @@
 import { AnimationEvent, useEffect, useState } from 'react';
 
 import { useProfileQuery } from '@/entities/user/api/userApi';
+import arrow from '@assets/arrow.svg';
 import cn from '@shared/lib/helpers/cn';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
@@ -92,36 +93,45 @@ const UploadImageForm = () => {
   }, []);
 
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      {...getRootProps()}
-      onAnimationEnd={handleAnimationEnd}
-      className={cn(
-        'relative flex items-center justify-between gap-2 rounded-2xl transition-all',
-        {
-          'bg-primary-fixed px-6 py-4': isDragActive,
-          'bg-surface-variant px-6 py-4': isDragging && !isDragActive,
-          'animate-shake': isRejected,
-        },
-      )}>
-      <div className="flex items-center gap-4">
-        <UserAvatar className="h-16 w-16" />
-        <div className="h-fit items-center space-y-1">
-          <div className="text-on-surface">{displayName}</div>
-          <div className="text-on-surface-variant">{profile?.email}</div>
-        </div>
+    <div className="relative">
+      <div className="absolute -top-8 left-3/4 -translate-x-1/2 -translate-y-1/2">
+        <p className="ml-3 animate-fade-in-screen text-xs text-primary opacity-50">
+          Drag and drop
+        </p>
+        <img src={arrow} alt="" />
       </div>
 
-      <input
-        {...getInputProps()}
-        className="absolute hidden h-full w-full"
-        type="file"
-      />
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        {...getRootProps()}
+        onAnimationEnd={handleAnimationEnd}
+        className={cn(
+          'relative flex items-center justify-between gap-2 rounded-2xl transition-all',
+          {
+            'bg-primary-fixed px-6 py-4': isDragActive,
+            'bg-surface-variant px-6 py-4': isDragging && !isDragActive,
+            'animate-shake': isRejected,
+          },
+        )}>
+        <div className="flex items-center gap-4">
+          <UserAvatar className="h-16 w-16" />
+          <div className="h-fit items-center space-y-1">
+            <div className="text-on-surface">{displayName}</div>
+            <div className="text-on-surface-variant">{profile?.email}</div>
+          </div>
+        </div>
 
-      <FilledTonalButton onClick={open}>
-        {t('settings.account.changeImage')}
-      </FilledTonalButton>
-    </form>
+        <input
+          {...getInputProps()}
+          className="absolute hidden h-full w-full"
+          type="file"
+        />
+
+        <FilledTonalButton onClick={open}>
+          {t('settings.account.changeImage')}
+        </FilledTonalButton>
+      </form>
+    </div>
   );
 };
 
