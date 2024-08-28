@@ -143,6 +143,18 @@
       "userOptions": "User options",
       "options": "Options",
       "compose": "Compose a new note"
+    },
+    "renameDialog": {
+      "title": "Rename this label",
+      "cancel": "Cancel",
+      "rename": "Rename"
+    },
+    "deleteDialog": {
+      "title": "Delete label?",
+      "content":
+      "You'll no longer see this label. This will also delete label from all the related notes.",
+      "cancel": "Cancel",
+      "delete": "Delete"
     }
   }
 }

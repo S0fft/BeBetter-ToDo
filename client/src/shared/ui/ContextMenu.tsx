@@ -17,6 +17,7 @@ type ContextMenuProps = PropsWithChildren<{
   anchorCorner?: Corner;
   yOffset?: number;
   tooltipContent?: string;
+  className?: string;
 }>;
 
 const ContextMenu: FC<ContextMenuProps> = ({
@@ -27,6 +28,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
   anchorCorner = Corner.END_END,
   yOffset = 12,
   tooltipContent,
+  className,
   ...props
 }) => {
   const menuRef = useRef<MdMenu>(null);
@@ -35,6 +37,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
 
   const handleMenuOpen = (e: MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
 
     if (menuRef.current?.open) {
       menuRef.current?.close();
@@ -56,7 +59,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
   );
 
   return (
-    <div {...props} className="relative">
+    <div {...props} className={cn('relative', className)}>
       <Tooltip
         className={cn({ hidden: !isTooltipVisible })}
         content={tooltipContent}>
