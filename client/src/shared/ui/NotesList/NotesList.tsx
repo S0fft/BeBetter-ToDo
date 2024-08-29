@@ -56,7 +56,7 @@ const NotesList: FC<NotesListProps> = ({
         style={{
           viewTransitionName: 'header',
         }}
-        className="absolute left-0 top-0 flex w-full justify-center px-2 pt-4">
+        className="absolute left-0 top-0 z-[1] flex w-full justify-center px-2 pt-4">
         <Search ref={searchRef} />
       </header>
       <div
