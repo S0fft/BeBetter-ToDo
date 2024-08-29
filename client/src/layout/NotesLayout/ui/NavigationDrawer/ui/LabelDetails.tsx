@@ -26,35 +26,29 @@ const Details: FC<DetailsProps> = ({ id }) => {
   function handleMenuToggle(e: MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
+
     if (menuRef.current) {
       menuRef.current.open = !menuRef.current.open;
-
       setIsContextMenuOpen(menuRef.current.open);
     }
   }
 
-  const handleToggleConfirmDialog = (e: MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log('confirm');
-
+  const handleToggleConfirmDialog = () => {
     setIsConfirmDialogOpen((prev) => !prev);
+  };
+
+  const handleToggleRenameDialog = () => {
+    setIsDialogRenameOpen((prev) => !prev);
   };
 
   const handleDeleteLabel = async (e: MouseEvent) => {
     e.stopPropagation();
-  };
-
-  const handleToggleDialogRename = (e: MouseEvent) => {
-    e.stopPropagation();
     e.preventDefault();
-
-    console.log('rename');
-    setIsDialogRenameOpen((prev) => !prev);
   };
 
   const handleRenameLabel = async (e: MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
   };
 
   return (
@@ -66,7 +60,6 @@ const Details: FC<DetailsProps> = ({ id }) => {
         subtitle={t('deleteDialog.content')}
         confirmText={t('deleteDialog.delete')}
         cancelText={t('deleteDialog.cancel')}
-        onCancel={handleToggleConfirmDialog}
         onConfirm={handleDeleteLabel}
       />
       <InputDialog
@@ -74,7 +67,6 @@ const Details: FC<DetailsProps> = ({ id }) => {
         setIsOpen={setIsDialogRenameOpen}
         title={t('renameDialog.title')}
         initialValue="label title"
-        onCancel={handleToggleDialogRename}
         onConfirm={handleRenameLabel}
       />
       <ContextMenu
@@ -93,7 +85,7 @@ const Details: FC<DetailsProps> = ({ id }) => {
         <MenuItem
           style={menuItemStyles}
           className="mx-2 rounded-md"
-          onClick={handleToggleDialogRename}>
+          onClick={handleToggleRenameDialog}>
           Rename
           <Icon className="text-on-surface" slot="end">
             edit

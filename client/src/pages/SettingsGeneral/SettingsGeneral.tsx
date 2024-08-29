@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import selectIsDarkMode from '@features/AppTheme/lib/selectors/selectIsDarkMode';
 import { toggleDarkMode } from '@features/AppTheme/slice';
@@ -29,8 +29,7 @@ const SettingsGeneral = () => {
     [i18n],
   );
 
-  const handleToggleDialog = (e: MouseEvent) => {
-    e.stopPropagation();
+  const handleToggleDialog = () => {
     setIsDialogOpen((prev) => !prev);
   };
 
@@ -47,7 +46,6 @@ const SettingsGeneral = () => {
         subtitle={t('settings.general.clearStorage.modal.subtitle')}
         confirmText={t('settings.general.clearStorage.modal.confirmText')}
         cancelText={t('settings.general.clearStorage.modal.cancelText')}
-        onCancel={handleToggleDialog}
         onConfirm={handleClearData}
       />
       <div>

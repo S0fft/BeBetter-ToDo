@@ -22,8 +22,8 @@ type ConfirmDialogProps = {
   cancelText?: string;
   confirmText?: string;
   initialValue?: string;
-  onCancel: (e: MouseEvent) => void | Promise<void>;
-  onConfirm: (e: MouseEvent) => void | Promise<void>;
+  onCancel?: (e: MouseEvent) => void | Promise<void>;
+  onConfirm?: (e: MouseEvent) => void | Promise<void>;
 };
 
 const InputDialog: FC<ConfirmDialogProps> = ({
@@ -42,13 +42,13 @@ const InputDialog: FC<ConfirmDialogProps> = ({
   const handleConfirm = async (e: MouseEvent) => {
     e.stopPropagation();
     await dialogRef.current?.close();
-    onConfirm(e);
+    onConfirm?.(e);
   };
 
   const handleCancel = async (e: MouseEvent) => {
     e.stopPropagation();
     await dialogRef.current?.close();
-    onCancel(e);
+    onCancel?.(e);
   };
 
   return (
