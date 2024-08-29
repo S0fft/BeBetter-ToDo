@@ -8,9 +8,12 @@ import type { Note } from '@shared/types';
 
 export const noteApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
-    notes: builder.query<NotesResponse, void>({
-      query: () => ({
+    notes: builder.query<NotesResponse, string | void>({
+      query: (search) => ({
         url: '/todos/',
+        params: {
+          search,
+        },
       }),
       providesTags: ['Note'],
     }),
@@ -60,6 +63,7 @@ export const noteApi = rootApi.injectEndpoints({
 
 export const {
   useNotesQuery,
+  useLazyNotesQuery,
   useNoteQuery,
   useCreateNoteMutation,
   useUpdateNoteMutation,

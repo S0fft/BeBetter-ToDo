@@ -25,7 +25,6 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { setUrl, readUrl } = useUrl();
-    // const { data: notes } = useNotesQuery();
     const location = useLocation();
 
     const currentPath = location.pathname;
