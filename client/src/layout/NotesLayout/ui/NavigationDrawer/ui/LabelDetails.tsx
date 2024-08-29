@@ -33,11 +33,15 @@ const Details: FC<DetailsProps> = ({ id }) => {
     }
   }
 
-  const handleToggleConfirmDialog = () => {
+  const handleToggleConfirmDialog = (e: MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
     setIsConfirmDialogOpen((prev) => !prev);
   };
 
-  const handleToggleRenameDialog = () => {
+  const handleToggleRenameDialog = (e: MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
     setIsDialogRenameOpen((prev) => !prev);
   };
 
