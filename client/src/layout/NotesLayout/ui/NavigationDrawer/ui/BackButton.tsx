@@ -13,13 +13,11 @@ const BackButton = () => {
   };
 
   return (
-    <h2
-      style={{ viewTransitionName: 'title' }}
-      className="mr-auto flex items-center pl-4">
+    <h2 className="mr-auto flex items-center pl-4">
       <button
         type="button"
         onClick={handleBack}
-        className="flex h-12 w-12 items-center justify-center">
+        className="flex h-14 w-12 items-center justify-center">
         <IconButton className="animate-fade-in-screen duration-500">
           <Icon>arrow_left_alt</Icon>
         </IconButton>
