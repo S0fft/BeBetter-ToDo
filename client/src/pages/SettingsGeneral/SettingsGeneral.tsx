@@ -39,8 +39,12 @@ const SettingsGeneral = () => {
     // TODO: delete all data
   };
 
+  const handleUndo = () => {
+    snackbar.msg(t('snackbar.dataRestored'));
+  };
+
   const handleDialogConfirm = () => {
-    snackbar.undo(t(`snackbar.cleared`), handleClearData);
+    snackbar.undo(t(`snackbar.cleared`), handleClearData, handleUndo);
   };
 
   return (

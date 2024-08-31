@@ -1,24 +1,28 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 
 import { SNACKBAR_AUTO_HIDE_DURATION } from '@shared/lib/const';
-import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import TextButton from '@shared/ui/TextButton';
 import { useTranslation } from 'react-i18next';
 
 type ClearUndoProps = {
   closeToast: () => void;
   title: string;
-  cb: () => void;
+  onClearData: () => void;
+  onUndo: () => void;
 };
 
-const ClearUndo: FC<ClearUndoProps> = ({ closeToast, title, cb }) => {
+const ClearUndo: FC<ClearUndoProps> = ({
+  closeToast,
+  title,
+  onClearData,
+  onUndo,
+}) => {
   const [deleteDataTimeout, setDeleteDataTimeout] = useState(
     null as unknown as ReturnType<typeof setTimeout>,
   );
-  const snackbar = useSnackbar();
   const { t } = useTranslation();
 
-  const handleClearData = useCallback(cb, [cb]);
+  const handleClearData = useCallback(onClearData, [onClearData]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -33,7 +37,7 @@ const ClearUndo: FC<ClearUndoProps> = ({ closeToast, title, cb }) => {
   const handleUndo = () => {
     clearTimeout(deleteDataTimeout);
     closeToast();
-    snackbar.msg(t('snackbar.dataRestored'));
+    onUndo();
   };
 
   return (

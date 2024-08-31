@@ -25,9 +25,20 @@ const useSnackbar = () => {
     toast(errorMessage);
   };
 
-  const handleUndoMessage = (m: string, cb: () => void) => {
+  const handleUndoMessage = (
+    m: string,
+    onClearData: () => void,
+    onUndo: () => void,
+  ) => {
     toast.dismiss();
-    toast(<ClearUndo title={m} closeToast={toast.dismiss} cb={cb} />);
+    toast(
+      <ClearUndo
+        title={m}
+        closeToast={toast.dismiss}
+        onClearData={onClearData}
+        onUndo={onUndo}
+      />,
+    );
   };
 
   return {
