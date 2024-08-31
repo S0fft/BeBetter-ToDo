@@ -9,7 +9,7 @@ import MenuItems from '@shared/ui/NotesList/ui/MenuItems';
 
 const Notes = () => {
   const { readUrl } = useUrl();
-  const searchQuery = readUrl(urlParams.SEARCH);
+  const searchQuery = readUrl(urlParams.SEARCH)?.trim();
 
   const [getNotes, { data: notes = [] }] = useLazyNotesQuery();
   const filteredNotes = notes

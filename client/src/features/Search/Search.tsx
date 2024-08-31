@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 
 import { Corner } from '@material/web/all';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field';
@@ -20,6 +20,9 @@ type SearchProps = {
   className?: string;
 };
 
+const ESCAPE_KEY = 'Escape';
+const ENTER_KEY = 'Enter';
+
 const Search = forwardRef<MdOutlinedTextField, SearchProps>(
   ({ className }, ref) => {
     const navigate = useNavigate();
@@ -39,6 +42,31 @@ const Search = forwardRef<MdOutlinedTextField, SearchProps>(
       const target = e.target as HTMLInputElement;
       setUrl(urlParams.SEARCH, target.value || undefined);
     };
+
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        const { key } = e;
+        const target =
+          ref && 'current' in ref && (ref?.current as MdOutlinedTextField);
+        const isInputFocused = document.activeElement === target;
+
+        if (!target) return;
+
+        if (isInputFocused && (key === ESCAPE_KEY || key === ENTER_KEY)) {
+          target.blur();
+        }
+
+        if (!isInputFocused && key === ENTER_KEY) {
+          target.focus();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [ref]);
 
     return (
       <OutlinedTextField
