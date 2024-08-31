@@ -18,7 +18,12 @@ const Notes = () => {
 
   useEffect(() => {
     const request = getNotes(searchQuery);
-    return () => request.abort();
+
+    return () => {
+      if (searchQuery) {
+        request.abort();
+      }
+    };
   }, [getNotes, searchQuery]);
 
   return (
