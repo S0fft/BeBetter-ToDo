@@ -14,7 +14,7 @@
     "noteEditor": {
       "cratedAt": "Created at",
       "edited": {
-        "title": "Edited at",
+        "title": "Edited",
         "today": "today",
         "yesterday": "yesterday"
       }
