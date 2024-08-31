@@ -1,3 +1,4 @@
+import AddLabel from '@layout/NotesLayout/ui/NavigationDrawer/ui/AddLabel';
 import Details from '@layout/NotesLayout/ui/NavigationDrawer/ui/LabelDetails';
 import LabelItem from '@layout/NotesLayout/ui/NavigationDrawer/ui/LabelItem';
 import { routes } from '@shared/lib/const';
@@ -15,6 +16,7 @@ const LabelsList = () => {
           <Details id={i} />
         </LabelItem>
       ))}
+      <AddLabel />
     </ul>
   );
 };

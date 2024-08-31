@@ -8,7 +8,8 @@
       "notes": "Notes",
       "archive": "Archive",
       "Trash": "Trash",
-      "labels": "Labels"
+      "labels": "Labels",
+      "addLabel": "Add label"
     },
     "noteEditor": {
       "cratedAt": "Created at",
