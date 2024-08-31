@@ -4,6 +4,7 @@ import { MdMenu } from '@material/web/all';
 
 import { menuItemStyles } from '@pages/Notes/lib/const';
 import cn from '@shared/lib/helpers/cn';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import ContextMenu from '@shared/ui/ContextMenu';
 import FilledTonalIconButton from '@shared/ui/FilledTonalIconButton';
@@ -22,6 +23,7 @@ const Details: FC<DetailsProps> = ({ id }) => {
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const { t } = useTranslation();
   const menuRef = useRef<MdMenu>(null);
+  const snackbar = useSnackbar();
 
   function handleMenuToggle(e: MouseEvent) {
     e.stopPropagation();
@@ -53,6 +55,10 @@ const Details: FC<DetailsProps> = ({ id }) => {
   const handleRenameLabel = async (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
+
+    // TODO: change to real label name
+    const mockedLabelName = 'mocked label name';
+    snackbar.msg(`${t('snackbar.labelRenamed')} ${mockedLabelName}`);
   };
 
   return (

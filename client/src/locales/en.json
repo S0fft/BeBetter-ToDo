@@ -121,7 +121,8 @@
       "unknownError": "Something went wrong 😭",
       "cleared": "All data has been successfully deleted",
       "dataRestored": "Data has been restored",
-      "undo": "Undo"
+      "undo": "Undo",
+      "labelRenamed": "Label renamed to"
     },
     "permanentDelete": {
       "title": "Permanently delete?",
