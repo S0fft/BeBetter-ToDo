@@ -5,6 +5,7 @@ import { toggleDarkMode } from '@features/AppTheme/slice';
 import SettingsItem from '@pages/SettingsGeneral/ui/SettingsItem';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
+import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import ConfirmDialog from '@shared/ui/ConfirmDialog';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import SegmentedButton from '@shared/ui/SegmentedButton/SegmentedButton';
@@ -17,6 +18,7 @@ const SettingsGeneral = () => {
   const dispatch = useAppDispatch();
   const { t, i18n } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const snackbar = useSnackbar();
 
   const handleThemeSwitch = () => {
     dispatch(toggleDarkMode());
@@ -37,6 +39,10 @@ const SettingsGeneral = () => {
     // TODO: delete all data
   };
 
+  const handleDialogConfirm = () => {
+    snackbar.undo(t(`snackbar.cleared`), handleClearData);
+  };
+
   return (
     <>
       <ConfirmDialog
@@ -46,7 +52,7 @@ const SettingsGeneral = () => {
         subtitle={t('settings.general.clearStorage.modal.subtitle')}
         confirmText={t('settings.general.clearStorage.modal.confirmText')}
         cancelText={t('settings.general.clearStorage.modal.cancelText')}
-        onConfirm={handleClearData}
+        onConfirm={handleDialogConfirm}
       />
       <div>
         <h1 className="text-2xl text-on-surface">

@@ -1,4 +1,5 @@
 import isApiError from '@shared/lib/helpers/isApiError';
+import ClearUndo from '@shared/ui/ClearUndo';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
@@ -24,9 +25,15 @@ const useSnackbar = () => {
     toast(errorMessage);
   };
 
+  const handleUndoMessage = (m: string, cb: () => void) => {
+    toast.dismiss();
+    toast(<ClearUndo title={m} closeToast={toast.dismiss} cb={cb} />);
+  };
+
   return {
     msg: handleUpdateMessage,
     err: handleErrorMessage,
+    undo: handleUndoMessage,
   };
 };
 
