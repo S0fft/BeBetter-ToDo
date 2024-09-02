@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'class',
+  darkMode: 'selector',
   theme: {
     extend: {
       fontFamily: {
@@ -95,6 +95,12 @@ export default {
             scale: '1',
           },
         },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-10px)' },
+          '50%': { transform: 'translateX(10px)' },
+          '75%': { transform: 'translateX(-10px)' },
+        },
       },
       animation: {
         'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
@@ -108,6 +114,7 @@ export default {
         'fade-in-title': 'fade-in-title 250ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
         'fade-in-section': 'fade-in-section 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
         'fade-in-aside': 'fade-in-aside 700ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        shake: 'shake 0.5s ease-in-out',
       },
     },
     colors: {

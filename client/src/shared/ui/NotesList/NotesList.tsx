@@ -1,13 +1,13 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
 import Search from '@features/Search/Search';
 import useHeaderScroll from '@layout/AppLayout/lib/hooks/useHeaderScroll';
+import { urlParams } from '@shared/lib/const';
 import cn from '@shared/lib/helpers/cn';
+import useUrl from '@shared/lib/hooks/useUrl';
 import { Note as TNote } from '@shared/types';
-import { OutletContext } from '@shared/ui/NotesList/model/types';
 import EmptyList from '@shared/ui/NotesList/ui/EmptyList';
 import Footer from '@shared/ui/NotesList/ui/Footer';
-import { useOutletContext } from 'react-router-dom';
 
 type NotesListProps = {
   notes: TNote[];
@@ -24,14 +24,29 @@ const NotesList: FC<NotesListProps> = ({
   emptyListSubText,
   renderNote,
 }) => {
-  const [isNoteExpanded] = useOutletContext<OutletContext>();
+  const { readUrl } = useUrl();
   const { searchRef, notesListRef } = useHeaderScroll();
+  const [isContainerEnd, setIsContainerEnd] = useState(false);
 
   const listIsEmpty = notes.length === 0;
   const sortedNotes = [...notes].sort((note) => (note.is_pinned ? -1 : 1));
+  const isNoteExpanded = readUrl(urlParams.NOTE_ID);
+
+  const handleScroll = () => {
+    const listContainer = notesListRef.current;
+
+    if (!listContainer) return;
+
+    const isEnd =
+      listContainer.scrollHeight - listContainer.scrollTop ===
+      listContainer.clientHeight;
+
+    setIsContainerEnd(isEnd);
+  };
 
   return (
     <article
+      onScroll={handleScroll}
       ref={notesListRef}
       className={cn(
         'relative h-dvh overflow-y-scroll px-2 pb-4 ease-emphasized-decelerate',
@@ -41,10 +56,16 @@ const NotesList: FC<NotesListProps> = ({
         style={{
           viewTransitionName: 'header',
         }}
-        className="absolute left-0 top-0 z-50 flex w-full justify-center px-2 pt-4">
+        className="absolute left-0 top-0 z-[1] flex w-full justify-center px-2 pt-4">
         <Search ref={searchRef} />
       </header>
-      <div className="grid h-[calc(100%-92px)] pt-[92px]">
+      <div
+        className={cn(
+          'grid h-[calc(100%-92px)] grid-rows-[1fr_0fr] pt-[92px]',
+          {
+            'grid-rows-[1fr_1fr]': isContainerEnd,
+          },
+        )}>
         {preList}
         <ul
           className={cn(
@@ -60,8 +81,8 @@ const NotesList: FC<NotesListProps> = ({
           )}
           {sortedNotes.map(renderNote)}
         </ul>
+        <Footer isContainerEnd={isContainerEnd} />
       </div>
-      <Footer containerRef={notesListRef} />
     </article>
   );
 };

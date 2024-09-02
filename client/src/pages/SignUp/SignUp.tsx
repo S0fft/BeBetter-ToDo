@@ -6,6 +6,7 @@ import {
 } from '@/entities/session/api/authApi';
 import { loggedIn } from '@/entities/session/model/slice';
 import { cookie, routes } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import AuthBlock from '@shared/ui/AuthBlock/AuthBlock';
@@ -40,19 +41,26 @@ const SignUp = () => {
   const isLoading = signUpIsLoading || loginIsLoading;
 
   const onSubmit = async (fields: TSignUpSchema) => {
-    try {
-      const signUpResponse = await signUp(fields).unwrap();
-      const loginData = { ...signUpResponse, password: fields.password };
-      const loginResponse = await login(loginData).unwrap();
+    const [signUpError, signUpResponse] = await runAsync(signUp(fields).unwrap);
 
-      Cookies.set(cookie.ACCESS_TOKEN, loginResponse.access);
-      Cookies.set(cookie.REFRESH_TOKEN, loginResponse.refresh);
-
-      dispatch(loggedIn(loginResponse));
-      navigate(`/${routes.NOTES}`);
-    } catch (e) {
-      snackbar.err(e);
+    if (signUpError !== null) {
+      snackbar.err(signUpError);
+      return;
     }
+
+    const loginData = { ...signUpResponse, password: fields.password };
+    const [loginError, loginResponse] = await runAsync(login(loginData).unwrap);
+
+    if (loginError !== null) {
+      snackbar.err(loginError);
+      return;
+    }
+
+    Cookies.set(cookie.ACCESS_TOKEN, loginResponse.access);
+    Cookies.set(cookie.REFRESH_TOKEN, loginResponse.refresh);
+
+    dispatch(loggedIn(loginResponse));
+    navigate(`/${routes.NOTES}`);
   };
 
   if (isLoading) {

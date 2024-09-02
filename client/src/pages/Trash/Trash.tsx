@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import {
-  useDeleteNoteMutation,
+  useDeleteAllNotesMutation,
   useNotesQuery,
 } from '@/entities/note/api/noteApi';
 import Note from '@pages/Notes/ui/Note';
@@ -11,19 +11,22 @@ import {
   successAnimation,
 } from '@pages/Trash/model/constants';
 import MenuItems from '@pages/Trash/ui/MenuItems';
-import { SNACKBAR_MESSAGE } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
 import Loader from '@shared/ui/Loader';
 import NotesList from '@shared/ui/NotesList';
 import TextButton from '@shared/ui/TextButton';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Trash = () => {
   const { data: notes = [] } = useNotesQuery();
-  const [deleteNote, { isLoading, isSuccess }] = useDeleteNoteMutation();
+  const [deleteAllNotes, { isLoading, isSuccess }] =
+    useDeleteAllNotesMutation();
   const snackbar = useSnackbar();
   const [showSuccess, setShowSuccess] = useState(false);
+  const { t } = useTranslation();
 
   const trashedNotes = notes.filter(({ is_trashed }) => is_trashed);
   const isTrashNotEmpty = trashedNotes.length !== 0;
@@ -44,15 +47,14 @@ const Trash = () => {
   }, [isSuccess]);
 
   const handleEmptyTrash = async () => {
-    for await (const note of trashedNotes) {
-      try {
-        await deleteNote(note.id);
-      } catch (err) {
-        snackbar.err(err);
-      }
+    const [error] = await runAsync(deleteAllNotes);
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
 
-    snackbar.msg(SNACKBAR_MESSAGE.EMPTYED);
+    snackbar.msg(t('snackbar.emptyed'));
   };
 
   return (
@@ -63,7 +65,7 @@ const Trash = () => {
             className="inline-block"
             transition={layoutTransition}
             layout>
-            Notes in Trash are deleted after 7 days.
+            {t('trash.title')}
           </motion.h4>
           <motion.div
             className="flex w-0 items-center transition-all duration-400 ease-bounce has-[div]:w-28"
@@ -97,7 +99,7 @@ const Trash = () => {
                   className="flex items-center justify-center"
                   layout>
                   <TextButton disabled={isLoading} onClick={handleEmptyTrash}>
-                    Empty Trash
+                    {t('trash.emptyTrash')}
                   </TextButton>
                 </motion.div>
               )}

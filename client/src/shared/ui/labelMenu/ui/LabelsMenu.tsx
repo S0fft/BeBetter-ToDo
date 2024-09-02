@@ -1,10 +1,13 @@
-import { forwardRef } from 'react';
+/* eslint-disable react/no-array-index-key */
+import { forwardRef, useState } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
 import { menuStyles } from '@pages/Notes/lib/const';
+import cn from '@shared/lib/helpers/cn';
 import { Label, MdProps } from '@shared/types';
 import Icon from '@shared/ui/Icon';
+import IconButton from '@shared/ui/IconButton';
 import LabelMenuItem from '@shared/ui/labelMenu/ui/LabelMenuItem';
 import Menu from '@shared/ui/Menu';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
@@ -19,10 +22,62 @@ const textFieldStyles = {
   '--md-sys-color-primary': 'var(--md-sys-color-primary-fixed-dim)',
 };
 
-// FIXME: text field focus issue
-
 const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
   ({ activeLabels, ...props }, ref) => {
+    const [searchText, setSearchText] = useState('');
+
+    const handleInput = (e: Event) => {
+      e.stopPropagation();
+
+      const { value } = e.target as HTMLInputElement;
+      setSearchText(value.trim());
+    };
+
+    const handleFilterSearchText = ({ title }: Label) => {
+      return title.toLowerCase().includes(searchText.toLowerCase());
+    };
+
+    const getHighlightedText = (text: string, highlight: string) => {
+      if (!highlight.trim()) {
+        return <span>{text}</span>;
+      }
+
+      const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+      return (
+        <span>
+          {parts.map((part, i) => (
+            <span
+              key={i}
+              className={cn('text-on-surface', {
+                'text-primary-fixed-dim':
+                  part.toLowerCase() === highlight.toLowerCase(),
+              })}>
+              {part}
+            </span>
+          ))}
+        </span>
+      );
+    };
+
+    const handleRenderLabel = ({ title }: Label) => {
+      const isChecked = activeLabels?.some(
+        (activeLabel) => activeLabel.title === title,
+      );
+
+      return (
+        <LabelMenuItem
+          typeaheadText=""
+          key={title}
+          title={getHighlightedText(title, searchText)}
+          isChecked={isChecked}
+        />
+      );
+    };
+
+    const handleClearSearchText = () => {
+      setSearchText('');
+    };
+
     return (
       <Menu
         {...props}
@@ -31,25 +86,17 @@ const LabelsMenu = forwardRef<MdMenu, LabelsMenuProps>(
         style={menuStyles}
         slot="menu">
         <OutlinedTextField
+          value={searchText}
+          onInput={handleInput}
           style={textFieldStyles}
           label="label note"
           className="mx-2">
           <Icon slot="leading-icon">search</Icon>
-          <Icon slot="trailing-icon">cancel</Icon>
+          <IconButton onClick={handleClearSearchText} slot="trailing-icon">
+            <Icon>cancel</Icon>
+          </IconButton>
         </OutlinedTextField>
-        {mockLabels.map((label) => {
-          const isChecked = activeLabels?.some(
-            (activeLabel) => activeLabel.title === label.title,
-          );
-
-          return (
-            <LabelMenuItem
-              key={label.title}
-              title={label.title}
-              isChecked={isChecked}
-            />
-          );
-        })}
+        {mockLabels.filter(handleFilterSearchText).map(handleRenderLabel)}
       </Menu>
     );
   },

@@ -8,9 +8,12 @@ import type { Note } from '@shared/types';
 
 export const noteApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
-    notes: builder.query<NotesResponse, void>({
-      query: () => ({
+    notes: builder.query<NotesResponse, string | void>({
+      query: (search) => ({
         url: '/todos/',
+        params: {
+          search,
+        },
       }),
       providesTags: ['Note'],
     }),
@@ -47,13 +50,23 @@ export const noteApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['Note'],
     }),
+
+    deleteAllNotes: builder.mutation<void, void>({
+      query: () => ({
+        url: `/todos/clear_trashed/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Note'],
+    }),
   }),
 });
 
 export const {
   useNotesQuery,
+  useLazyNotesQuery,
   useNoteQuery,
   useCreateNoteMutation,
   useUpdateNoteMutation,
   useDeleteNoteMutation,
+  useDeleteAllNotesMutation,
 } = noteApi;

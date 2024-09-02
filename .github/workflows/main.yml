@@ -7,29 +7,38 @@ on:
       - main
 
 env:
-  NODE_VERSION: 21.x
+  NODE_VERSION: 20.x
 
 jobs:
-  ci:
-    name: CI
+  linting:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Setup Continuous integration
-        uses: ./.github/actions/ci-setup
+        uses: actions/checkout@v4
 
       - name: Lint Application
-        run: cd client && pnpm lint
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm lint
+
+  type-check:
+    name: Types
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Check Application Types
-        run: cd client && pnpm type-check
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm type-check
+
+  prettify:
+    name: Prettier
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Check Application Types
-        run: cd client && pnpm prettier:fix
+        run: cd client && npm i -g pnpm@latest && pnpm i && pnpm prettier:fix

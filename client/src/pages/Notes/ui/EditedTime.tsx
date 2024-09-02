@@ -3,14 +3,17 @@ import { urlParams } from '@shared/lib/const';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Loader from '@shared/ui/Loader';
 import { format, isThisYear, isToday, isYesterday } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 const EditedTime = () => {
   const { readUrl } = useUrl();
+  const { t, i18n } = useTranslation();
 
   const activeNote = Number.parseInt(readUrl(urlParams.NOTE_ID), 10);
   const { data: note, isFetching } = useNoteQuery(activeNote, {
     skip: Number.isNaN(activeNote),
   });
+  const isEn = i18n.language === 'en';
 
   if (isFetching || !note) {
     return (
@@ -26,16 +29,18 @@ const EditedTime = () => {
   }
 
   const updatedAt = note?.time_updated;
-  const formattedDate = format(new Date(updatedAt), 'h:mm a');
+  const formattedDate = isEn
+    ? format(new Date(updatedAt), 'h:mm a')
+    : format(new Date(updatedAt), 'h:mm');
 
   let editedTime;
 
   if (isToday(updatedAt)) {
-    editedTime = `today, ${formattedDate}`;
+    editedTime = `${t('noteEditor.edited.today')}, ${formattedDate}`;
   }
 
   if (isYesterday(updatedAt)) {
-    editedTime = `yesterday, ${formattedDate}`;
+    editedTime = `${t('noteEditor.edited.yesterday')}, ${formattedDate}`;
   }
 
   if (isThisYear(updatedAt) && !isYesterday(updatedAt) && !isToday(updatedAt)) {
@@ -54,7 +59,7 @@ const EditedTime = () => {
     <time
       dateTime={updatedAt}
       className="ml-auto animate-fade-in-screen text-sm text-on-surface-variant ease-standard-decelerate">
-      Edited {editedTime}
+      {t('noteEditor.edited.title')} {editedTime}
     </time>
   );
 };

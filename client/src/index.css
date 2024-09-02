@@ -55,7 +55,7 @@
   --toastify-toast-width: fit-content;
 }
 
-:root.dark-mode {
+:root.dark {
   --md-sys-color-primary: rgb(190 206 127);
   --md-sys-color-surface-tint: rgb(190 206 127);
   --md-sys-color-on-primary: rgb(42 52 0);
@@ -105,10 +105,11 @@
   --md-sys-color-surface-container: rgb(31 32 25);
   --md-sys-color-surface-container-high: rgb(41 43 35);
   --md-sys-color-surface-container-highest: rgb(52 53 45);
+  --md-sys-color-high-contrast-inverse-primary: var(--md-sys-color-inverse-primary);
 }
 
 :root,
-:root.light-mode {
+:root.light {
   --md-sys-color-primary: rgb(86 100 34);
   --md-sys-color-surface-tint: rgb(86 100 34);
   --md-sys-color-on-primary: rgb(255 255 255);
@@ -169,13 +170,13 @@
 * {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  transition:
+    color 200ms ease-in-out,
+    background-color 200ms ease-in-out;
 }
 
 body {
   background-color: var(--md-sys-color-surface-container-highest);
-  transition:
-    color 200ms ease-in-out,
-    background-color 200ms ease-in-out;
 }
 
 ::view-transition-old(root),

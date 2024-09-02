@@ -1,13 +1,14 @@
 import { FC, MouseEvent } from 'react';
 
 import { useUpdateNoteMutation } from '@/entities/note/api/noteApi';
-import trash from '@assets/trash.svg';
 import { menuItemStyles } from '@pages/Notes/lib/const';
-import { SNACKBAR_MESSAGE } from '@shared/lib/const';
+import runAsync from '@shared/lib/helpers/runAsync';
 import useMoveTrashNote from '@shared/lib/hooks/useMoveTrashNote';
 import useSnackbar from '@shared/lib/hooks/useSnackbar';
 import Icon from '@shared/ui/Icon';
 import MenuItem from '@shared/ui/MenuItem';
+import TrashIcon from '@shared/ui/TrashIcon';
+import { useTranslation } from 'react-i18next';
 
 type MenuItemsProps = {
   noteId: number;
@@ -17,16 +18,21 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
   const [updateNote] = useUpdateNoteMutation();
   const snackbar = useSnackbar();
   const handleMoveTrashNote = useMoveTrashNote(noteId);
+  const { t } = useTranslation();
 
   const handleUnarchiveNote = async (e: MouseEvent) => {
     e.stopPropagation();
 
-    try {
-      await updateNote({ id: noteId, body: { is_done: false } });
-      snackbar.msg(SNACKBAR_MESSAGE.UNARCHIVED);
-    } catch (err) {
-      snackbar.err(err);
+    const [error] = await runAsync(
+      updateNote({ id: noteId, body: { is_done: false } }).unwrap,
+    );
+
+    if (error !== null) {
+      snackbar.err(error);
+      return;
     }
+
+    snackbar.msg(t('snackbar.unarchived'));
   };
 
   const handleMoveToTrashNote = (e: MouseEvent) => {
@@ -39,7 +45,7 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         onClick={handleUnarchiveNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        Unarchive
+        {t('noteActions.unarchive')}
         <Icon slot="end" className="text-on-surface">
           collections_bookmark
         </Icon>
@@ -48,9 +54,9 @@ const MenuItems: FC<MenuItemsProps> = ({ noteId }) => {
         onClick={handleMoveToTrashNote}
         style={menuItemStyles}
         className="mx-2 rounded-md">
-        <span slot="headline">Delete</span>
+        <span slot="headline">{t('noteActions.delete')}</span>
         <Icon slot="end" className="text-on-surface">
-          <img src={trash} alt="" />
+          <TrashIcon />
         </Icon>
       </MenuItem>
     </>

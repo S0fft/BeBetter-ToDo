@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
 import { MdMenuItem } from '@material/web/all';
 
@@ -8,7 +8,7 @@ import Checkbox from '@shared/ui/Checkbox';
 import MenuItem from '@shared/ui/MenuItem';
 
 type LabelMenuItemProps = MdProps<MdMenuItem> & {
-  title: string;
+  title: string | ReactNode;
   isChecked?: boolean;
 };
 
@@ -30,7 +30,9 @@ const LabelMenuItem: FC<LabelMenuItemProps> = ({
       keepOpen
       style={menuItemStyles}
       className="mx-2 rounded-md">
-      <span slot="headline">{title}</span>
+      <p className="first:capitalize" slot="headline">
+        {title}
+      </p>
       <Checkbox checked={checked} slot="end" />
     </MenuItem>
   );

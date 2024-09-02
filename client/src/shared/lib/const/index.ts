@@ -2,9 +2,12 @@ import { cssTransition } from 'react-toastify';
 
 export const urlParams = {
   NOTE_ID: 'id',
+  SEARCH: 'query',
 } as const;
 
-export const queryParamsInit = {};
+export const queryParamsInit = {
+  [urlParams.SEARCH]: '',
+};
 
 export const localStorageKeys = {
   IS_DARK_MODE: 'isDarkMode',
@@ -25,6 +28,9 @@ export const routes = {
   LOGIN: 'login',
   SIGN_UP: 'signup',
   AUTH: 'auth',
+  SETTINGS: 'settings',
+  ACCOUNT: 'account',
+  GENERAL: 'general',
 } as const;
 
 export const langs = {
@@ -48,14 +54,3 @@ export const SnackBarTransition = cssTransition({
   enter: 'animate-fade-in-snackbar',
   exit: 'animate-fade-out-snackbar',
 });
-
-export const UNKNOWN_ERROR_MESSAGE = 'Something went wrong 😭';
-
-export const SNACKBAR_MESSAGE = {
-  TRASHED: 'Moved to trash',
-  ARCHIVED: 'Note archived',
-  UNARCHIVED: 'Note unarchived',
-  DELETED: 'Note successfully deleted',
-  RESTORED: 'Note restored',
-  EMPTYED: 'All notes has been successfully deleted',
-};

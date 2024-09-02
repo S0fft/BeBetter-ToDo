@@ -1,27 +1,22 @@
-import { FC, RefObject, useEffect, useState } from 'react';
+import { FC } from 'react';
+
+import cn from '@shared/lib/helpers/cn';
 
 type FooterProps = {
-  containerRef: RefObject<HTMLElement>;
+  isContainerEnd: boolean;
 };
 
-const Footer: FC<FooterProps> = ({ containerRef }) => {
-  const [isScrolled, setIsScrolled] = useState(true);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const isScroll =
-      containerRef.current.offsetHeight < containerRef.current.scrollHeight;
-
-    setIsScrolled(isScroll);
-  }, [containerRef]);
-
+const Footer: FC<FooterProps> = ({ isContainerEnd }) => {
   return (
-    isScrolled && (
-      <span className="!mt-6 flex w-full items-center justify-center text-sm text-on-surface-variant">
-        You reached the end 🙂
-      </span>
-    )
+    <span
+      className={cn(
+        '!mt-6 flex w-full items-center justify-center pb-6 text-sm text-on-surface-variant transition-opacity',
+        {
+          'opacity-0': !isContainerEnd,
+        },
+      )}>
+      You reached the end 😎
+    </span>
   );
 };
 

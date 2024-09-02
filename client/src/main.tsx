@@ -8,6 +8,8 @@ import { setupStore } from '@/store';
 import { Provider } from 'react-redux';
 
 import 'react-toastify/dist/ReactToastify.css';
+import 'tippy.js/animations/scale.css';
+import 'tippy.js/dist/tippy.css';
 import './index.css';
 import './locales/i18n';
 
