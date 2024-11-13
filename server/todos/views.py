@@ -41,4 +41,4 @@ class TodoViewSet(viewsets.ModelViewSet):
         user = request.user
         deleted_count, _ = Todo.objects.filter(is_trashed=True, user=user).delete()
 
-        return Response({"message": f"Deleted {deleted_count} trashed todos"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": f"Deleted {deleted_count} trashed todos!"}, status=status.HTTP_204_NO_CONTENT)
