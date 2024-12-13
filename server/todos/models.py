@@ -14,7 +14,7 @@ class Label(models.Model):
 class Todo(models.Model):
     title = models.CharField(max_length=128)
     content = models.TextField()
-    label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True, related_name='todos')
+    label = models.CharField(max_length=128, default="No label")
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='todos')
     is_done = models.BooleanField(default=False)
     is_pinned = models.BooleanField(default=False)
