@@ -15,10 +15,13 @@ class Todo(models.Model):
     title = models.CharField(max_length=128)
     content = models.TextField()
     label = models.CharField(max_length=128, default="No label")
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='todos')
+
     is_done = models.BooleanField(default=False)
     is_pinned = models.BooleanField(default=False)
     is_trashed = models.BooleanField(default=False)
+
     time_created = models.DateTimeField(auto_now_add=True)
     time_updated = models.DateTimeField(auto_now=True)
     time_trashed = models.DateTimeField(null=True, blank=True)
