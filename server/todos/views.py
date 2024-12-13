@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -36,9 +37,14 @@ class TodoViewSet(viewsets.ModelViewSet):
 
         return Response({'label': label.title})
 
-    @action(methods=['delete'], detail=False, url_path='clear_trashed')
-    def clear_trashed(self, request):
+    @action(methods=['get'], detail=False)
+    def count_by_sections(self, request):
         user = request.user
-        deleted_count, _ = Todo.objects.filter(is_trashed=True, user=user).delete()
 
-        return Response({"message": f"Deleted {deleted_count} trashed todos!"}, status=status.HTTP_204_NO_CONTENT)
+        result = {
+            'done_count': Todo.objects.filter(user=user, is_done=True).count(),
+            'trashed_count': Todo.objects.filter(user=user, is_trashed=True).count(),
+            'total_count': Todo.objects.filter(user=user).count()
+        }
+
+        return Response(result)
