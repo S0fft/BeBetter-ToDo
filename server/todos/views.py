@@ -61,3 +61,13 @@ class TodoViewSet(viewsets.ModelViewSet):
         }
 
         return Response(result)
+
+    @action(methods=['delete'], detail=False, url_path='delete_all')
+    def delete_all_todos(self, request):
+        user = request.user
+        deleted_count, _ = Todo.objects.filter(user=user).delete()
+
+        return Response(
+            {"message": f"Successfully deleted {deleted_count} todos."},
+            status=status.HTTP_200_OK
+        )
