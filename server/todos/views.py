@@ -28,6 +28,19 @@ class TodoViewSet(viewsets.ModelViewSet):
         else:
             return qst
 
+        filters = self.request.query_params.get('filter')
+
+        if filters:
+            filter_params = filters.replace('/', '').split(',')
+
+            if 'is_trashed' in filter_params:
+                qst = qst.filter(is_trashed=True)
+
+            if 'is_done' in filter_params:
+                qst = qst.filter(is_done=True)
+
+        return qst
+
     @action(methods=['get'], detail=True)
     def label(self, request, pk=None):
         try:
