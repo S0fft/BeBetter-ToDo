@@ -2,8 +2,7 @@
 #### ToDo-App — Task Management Startup on Django REST Framework & React.js [Teamwork]
 
 ToDo API application made in a team. The client side is written on React, the server side on Django REST Framework.
-In application has created user registration/authorization (JWT), user-profile-settings. The user can create a list of tasks, give them labels, delete, change and much more.
-Added OAuth 2.0 (Google). For storage using MySQL.
+In application has created user registration/authorization (JWT), user-profile-settings. The user can create a list of tasks, give them labels, delete, change and much more. Added OAuth 2.0 (Google). For storage using MySQL.
 
 #### Stack:
 ##### Frontend:
